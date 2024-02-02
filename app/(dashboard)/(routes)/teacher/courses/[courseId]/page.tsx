@@ -63,10 +63,12 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
 
     const completionText = `(${completedFields}/${totalFields})`;
     const isCompleted = requiredFields.every(Boolean);
+    const isPublished = course.isPublished;
 
     return (
         <>
-            <Banner label="This course is unpublished. It will not be visible to the students." />
+            {' '}
+            {!isPublished && <Banner label="This course is unpublished. It will not be visible to the students." />}
             <div className="p-6">
                 <div className="flex items-center justify-between">
                     <div className="flex flex-col gap-y-2">

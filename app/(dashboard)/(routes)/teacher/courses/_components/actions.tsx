@@ -20,6 +20,7 @@ export const Actions = ({ disabled, courseId, isPublished }: ActionsProps) => {
     const router = useRouter();
     const confetti = useConfettiStore();
     const [isLoading, setIsLoading] = useState(false);
+    console.log(isPublished);
 
     const onClick = async () => {
         try {

@@ -31,18 +31,19 @@ export async function PATCH(
         courseId: params.courseId,
       }
     });
-    //handle Mux player================================================================
-    // const muxData = await db.muxData.findUnique({
-    //   where: {
-    //     chapterId: params.chapterId,
-    //   }
-    // });
+    // handle Mux player================================================================
+    const muxData = await db.muxData.findUnique({
+      where: {
+        chapterId: params.chapterId,
+      }
+    });
 
-    // if (!chapter || !muxData || !chapter.title || !chapter.description || !chapter.videoUrl) {
-    //   return new NextResponse("Missing required fields", { status: 400 });
-    // }
+    if (!chapter || !muxData || !chapter.title || !chapter.description || !chapter.videoUrl) {
+      return new NextResponse("Missing required fields", { status: 400 });
+    }
+
     //================================================================
-    if (!chapter  || !chapter.title || !chapter.description || !chapter.videoUrl) {
+    if (!chapter|| !muxData   || !chapter.title || !chapter.description || !chapter.videoUrl) {
         return new NextResponse("Missing required fields", { status: 400 });
       }
 

@@ -34,7 +34,7 @@ export const ChaptersForm = ({
 }: ChaptersFormProps) => {
     const [isCreating, setIsCreating] = useState(false);
     const [isUpdating, setIsUpdating] = useState(false);
-    console.log(initialData);
+    // console.log(initialData);
 
     const toggleCreating = () => {
         setIsCreating((current) => !current);
