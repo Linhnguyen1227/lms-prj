@@ -96,13 +96,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
                         />
                     </div>
                     <div className="space-y-6">
-                        <div>
-                            <div className="flex items-center gap-x-2">
-                                <IconBadge icon={ListChecks} />
-                                <h2 className="text-xl">Course chapters</h2>
-                            </div>
-                            <div>TODO: Chapters</div>
-                        </div>
+                        <div>{/* <div>TODO: Chapters</div> */}</div>
                         <div>
                             <div className="flex items-center gap-x-2">
                                 <IconBadge icon={CircleDollarSign} />
@@ -110,6 +104,10 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
                             </div>
                             <PriceForm initialData={course} courseId={course.id} />
                             <AttachmentForm initialData={course} courseId={course.id} />
+                            <div className=" pt-4 flex items-center gap-x-2">
+                                <IconBadge icon={ListChecks} />
+                                <h2 className="text-xl">Course chapters</h2>
+                            </div>
                             <ChaptersForm initialData={course} courseId={course.id} />
                         </div>
                     </div>

@@ -6,6 +6,8 @@ import { getProgress } from '@/actions/get-progress';
 
 import { CourseSidebar } from './_component/course-sidebar';
 import { CourseNavbar } from './_component/course-navbar';
+import { Suspense } from 'react';
+import Loading from '@/app/loading';
 
 const CourseLayout = async ({ children, params }: { children: React.ReactNode; params: { courseId: string } }) => {
     const { userId } = auth();
@@ -51,7 +53,9 @@ const CourseLayout = async ({ children, params }: { children: React.ReactNode; p
             <div className="hidden md:flex h-full w-80 flex-col fixed inset-y-0 z-50">
                 <CourseSidebar course={course} progressCount={progressCount} />
             </div>
-            <main className="md:pl-80 pt-[80px] h-full">{children}</main>
+            <main className="md:pl-80 pt-[80px] h-full">
+                <Suspense fallback={<Loading />}>{children}</Suspense>
+            </main>
         </div>
     );
 };

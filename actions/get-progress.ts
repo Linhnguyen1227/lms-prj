@@ -16,8 +16,8 @@ export const getProgress = async (
       }
     });
     //map qua các chương đã published
-    const publishedChapterIds = publishedChapters.map((chapter) => chapter.id);publishedChapterIds
-    //đếm số chương đã hoàn thành với người dùng hiệng tại với điiều kiện đã publishedChapterIds
+    const publishedChapterIds = publishedChapters.map((chapter) => chapter.id);
+    //đếm số chương đã hoàn thành với người dùng hiện tại với điều kiện đã publishedChapterIds
     const validCompletedChapters = await db.userProgress.count({
       where: {
         userId: userId,

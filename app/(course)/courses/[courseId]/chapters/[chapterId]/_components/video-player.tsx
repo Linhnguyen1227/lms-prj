@@ -34,7 +34,32 @@ export const VideoPlayer = ({
 }: VideoPlayerProps) => {
     const [isReady, setIsReady] = useState(false);
     const [client, setClient] = useState(false);
+    const router = useRouter();
+    const confetti = useConfettiStore();
     // const videoRef = useRef<ReactPlayer>(null);
+
+    const onEnd = async () => {
+        try {
+            if (completeOnEnd) {
+                await axios.put(`/api/courses/${courseId}/chapters/${chapterId}/progress`, {
+                    isCompleted: true,
+                });
+
+                if (!nextChapterId) {
+                    confetti.onOpen();
+                }
+
+                toast.success('Progress updated');
+                router.refresh();
+
+                if (nextChapterId) {
+                    router.push(`/courses/${courseId}/chapters/${nextChapterId}`);
+                }
+            }
+        } catch {
+            toast.error('Something went wrong');
+        }
+    };
 
     useEffect(() => {
         setClient(true);
@@ -59,17 +84,16 @@ export const VideoPlayer = ({
                     height={'100%'}
                     // ref={videoRef}
                     url={videoUrl}
-                    // url={'https://www.youtube.com/watch?v=sJt_i0hOugA&list=RDeA5S7E9nmLA&index=5'}
                     // className={cn(!isReady && 'hidden')}
                     controls
                     onReady={() => setIsReady(true)}
-                    onEnded={() => {}}
+                    onEnded={onEnd}
                 />
                 // <MuxPlayer
                 //     title={title}
                 //     className={cn(!isReady && 'hidden')}
                 //     onCanPlay={() => setIsReady(true)}
-                //     onEnded={() => {}}
+                //     onEnded={onEnd}
                 //     autoPlay
                 //     playbackId={playbackId}
                 // />
