@@ -9,12 +9,26 @@ datasource db {
 
 generator client {
   provider        = "prisma-client-js"
+  //tạo chỉ mục,tìm kiếm toàn văn bản -> cải thiện hiệu suất tìm kiếm.
   previewFeatures = ["fullTextSearch", "fullTextIndex"]
+}
+
+model Profile {
+  id         String     @id @default(uuid())
+  userId     String     @unique
+  attributes Json
+  role       String?
+  // courseId     String
+  courses    Course[]
+  purchases  Purchase[]
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+
+  // @@index([courseId])
 }
 
 model Course {
   id          String       @id @default(uuid())
-  userId      String
   title       String       @db.Text
   description String?      @db.Text
   imageUrl    String?      @db.Text
@@ -22,13 +36,17 @@ model Course {
   isPublished Boolean      @default(false)
   categoryId  String?
   category    Category?    @relation(fields: [categoryId], references: [id])
+  profileId   String       @unique
+  profile     Profile?     @relation(fields: [profileId], references: [id], onDelete: Cascade)
   attachments Attachment[]
   chapters    Chapter[]
   purchases   Purchase[]
+  // messages Message[]
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
 
   @@index([categoryId])
+  @@index([profileId])
   @@fulltext([title])
 }
 
@@ -62,6 +80,7 @@ model Chapter {
   courseId     String
   course       Course         @relation(fields: [courseId], references: [id], onDelete: Cascade)
   userProgress UserProgress[]
+  // messages Message[]
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
 
@@ -77,34 +96,52 @@ model MuxData {
 }
 
 model UserProgress {
-  id          String   @id @default(uuid())
-  userId      String
+  id String @id @default(uuid())
+
+  profileId   String   @unique
   chapterId   String
   chapter     Chapter  @relation(fields: [chapterId], references: [id], onDelete: Cascade)
   isCompleted Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  @@unique([userId, chapterId])
+  @@unique([profileId, chapterId])
   @@index([chapterId])
 }
 
 model Purchase {
-  id        String   @id @default(uuid())
-  userId    String
+  id        String  @id @default(uuid())
+  profileId String  @unique
+  profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
   courseId  String
   course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt()
 
-  @@unique([userId, courseId])
+  @@unique([profileId, courseId])
   @@index([courseId])
 }
 
 model StripeCustomer {
   id               String   @id @default(uuid())
   userId           String   @unique
+  profileId        String   @unique
   stripeCustomerId String   @unique
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
 }
+
+// model Message {
+//   id String @id @default(uuid())
+//   content String @db.Text
+//   courseId String
+//   course   Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+//   chapterId   String
+//   chapter Chapter  @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+//   deleted Boolean @default(false)
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+//   @@index([courseId])
+//   @@index([chapterId])
+// }

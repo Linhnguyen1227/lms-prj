@@ -1,4 +1,7 @@
-import { auth } from '@clerk/nextjs';
+import { auth, clerkClient } from '@clerk/nextjs';
+import { useEffect } from 'react';
+import { Clerk, getAuth } from '@clerk/nextjs/server';
+
 import { redirect } from 'next/navigation';
 import { CheckCircle, Clock } from 'lucide-react';
 
@@ -11,6 +14,15 @@ export default async function Dashboard() {
 
     if (!userId) {
         return redirect('/');
+    }
+    const user = await clerkClient.users.getUser(userId);
+
+    if (!user?.publicMetadata) {
+        clerkClient.users.updateUser(userId as string, {
+            publicMetadata: {
+                role: 'member',
+            },
+        });
     }
 
     const { completedCourses, coursesInProgress } = await getDashboardCourses(userId);
