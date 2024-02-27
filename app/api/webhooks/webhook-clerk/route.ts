@@ -29,11 +29,11 @@ async function handler(request: Request) {
   }
 
   const eventType: EventType = evt.type;
+  
   if (eventType === "user.created" || eventType === "user.updated") {
     const { id, ...attributes } = evt.data;
-    console.log(attributes)
-    
 
+    
     await db.profile.upsert({
       where: { userId: id as string },
       create: {

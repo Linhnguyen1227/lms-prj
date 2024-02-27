@@ -10,13 +10,13 @@ type CourseWithProgressWithCategory = Course & {
 };
 
 type GetCourses = {
-  userId: string;
+  profileId: string;
   title?: string;
   categoryId?: string;
 };
 
 export const getCourses = async ({
-  userId,
+  profileId,
   title,
   categoryId
 }: GetCourses): Promise<CourseWithProgressWithCategory[]> => {
@@ -41,7 +41,7 @@ export const getCourses = async ({
         },
         purchases: {
           where: {
-            userId,
+            profileId,
           }
         }
       },
@@ -59,7 +59,7 @@ export const getCourses = async ({
           }
         }
 
-        const progressPercentage = await getProgress(userId, course.id);
+        const progressPercentage = await getProgress(profileId, course.id);
 
         return {
           ...course,

@@ -8,11 +8,12 @@ import { CourseSidebar } from './_component/course-sidebar';
 import { CourseNavbar } from './_component/course-navbar';
 import { Suspense } from 'react';
 import Loading from '@/app/loading';
+import { currentProfile } from '@/lib/current-profile';
 
 const CourseLayout = async ({ children, params }: { children: React.ReactNode; params: { courseId: string } }) => {
     const { userId } = auth();
-
-    if (!userId) {
+    const profile = await currentProfile();
+    if (!profile) {
         return redirect('/');
     }
 
@@ -28,7 +29,7 @@ const CourseLayout = async ({ children, params }: { children: React.ReactNode; p
                 include: {
                     userProgress: {
                         where: {
-                            userId,
+                            profileId: profile.id,
                         },
                     },
                 },
@@ -43,7 +44,7 @@ const CourseLayout = async ({ children, params }: { children: React.ReactNode; p
         return redirect('/');
     }
 
-    const progressCount = await getProgress(userId, course.id);
+    const progressCount = await getProgress(profile.id, course.id);
 
     return (
         <div className="h-full">

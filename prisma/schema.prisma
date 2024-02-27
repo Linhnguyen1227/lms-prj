@@ -36,7 +36,7 @@ model Course {
   isPublished Boolean      @default(false)
   categoryId  String?
   category    Category?    @relation(fields: [categoryId], references: [id])
-  profileId   String       @unique
+  profileId   String
   profile     Profile?     @relation(fields: [profileId], references: [id], onDelete: Cascade)
   attachments Attachment[]
   chapters    Chapter[]
@@ -125,7 +125,6 @@ model Purchase {
 
 model StripeCustomer {
   id               String   @id @default(uuid())
-  userId           String   @unique
   profileId        String   @unique
   stripeCustomerId String   @unique
   createdAt        DateTime @default(now())

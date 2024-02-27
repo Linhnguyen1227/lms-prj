@@ -1,7 +1,8 @@
 import { db } from "@/lib/db";
 
+
 export const getProgress = async (
-  userId: string,
+  profileId: string,
   courseId: string,
 ): Promise<number> => {
   try {
@@ -16,11 +17,11 @@ export const getProgress = async (
       }
     });
     //map qua các chương đã published
-    const publishedChapterIds = publishedChapters.map((chapter) => chapter.id);
+    const publishedChapterIds = publishedChapters.map((chapter: { id: any; }) => chapter.id);
     //đếm số chương đã hoàn thành với người dùng hiện tại với điều kiện đã publishedChapterIds
     const validCompletedChapters = await db.userProgress.count({
       where: {
-        userId: userId,
+        profileId: profileId,
         chapterId: {
           in: publishedChapterIds,
         },

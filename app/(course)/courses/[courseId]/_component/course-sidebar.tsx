@@ -1,10 +1,10 @@
-import { auth } from '@clerk/nextjs';
 import { Chapter, Course, UserProgress } from '@prisma/client';
 import { redirect } from 'next/navigation';
 
 import { db } from '@/lib/db';
 import { CourseSidebarItem } from './course-sidebar-item';
 import { CourseProgress } from '@/components/course-progress';
+import { currentProfile } from '@/lib/current-profile';
 
 interface CourseSidebarProps {
     course: Course & {
@@ -16,16 +16,16 @@ interface CourseSidebarProps {
 }
 
 export const CourseSidebar = async ({ course, progressCount }: CourseSidebarProps) => {
-    const { userId } = auth();
+    const profile = await currentProfile();
 
-    if (!userId) {
+    if (!profile) {
         return redirect('/');
     }
 
     const purchase = await db.purchase.findUnique({
         where: {
-            userId_courseId: {
-                userId,
+            profileId_courseId: {
+                profileId: profile.id,
                 courseId: course.id,
             },
         },

@@ -10,16 +10,17 @@ import { Preview } from '@/components/preview';
 import { VideoPlayer } from './_components/video-player';
 import { CourseEnrollButton } from './_components/course-enroll-button';
 import { CourseProgressButton } from './_components/course-progress-button';
+import { currentProfile } from '@/lib/current-profile';
 
 const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId: string } }) => {
-    const { userId } = auth();
+    const profile = await currentProfile();
 
-    if (!userId) {
+    if (!profile) {
         return redirect('/');
     }
 
     const { chapter, course, muxData, attachments, nextChapter, userProgress, purchase } = await getChapter({
-        userId,
+        profileId: profile.id,
         chapterId: params.chapterId,
         courseId: params.courseId,
     });

@@ -3,6 +3,7 @@ import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
 import { db } from "@/lib/db";
+import { currentProfile } from "@/lib/current-profile";
 
 
 //handle Muxplayer
@@ -16,16 +17,17 @@ export async function DELETE(
   { params }: { params: { courseId: string } }
 ) {
   try {
-    const { userId } = auth();
+    const profile =  await currentProfile()
 
-    if (!userId) {
+
+    if (!profile) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
     const course = await db.course.findUnique({
       where: {
         id: params.courseId,
-        userId: userId,
+        profileId: profile.id,
       },
       include: {
         chapters: {
@@ -65,18 +67,18 @@ export async function PATCH(
   { params }: { params: { courseId: string } }
 ) {
   try {
-    const { userId } = auth();
+    const profile =  await currentProfile()
     const { courseId } = params;
     const values = await req.json();
 
-    if (!userId) {
+    if (!profile) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
     const course = await db.course.update({
       where: {
         id: courseId,
-        userId
+        profileId: profile.id
       },
       data: {
         ...values,

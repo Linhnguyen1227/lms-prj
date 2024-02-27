@@ -6,25 +6,28 @@ import { NextResponse } from 'next/server';
 import { columnsAdminPage } from './_components/columns-admin';
 import { TableUser } from './_components/table-user';
 import { db } from '@/lib/db';
-
-interface UserProps {
-    attributes: any;
-    userId: string;
-    role: 'admin' | 'member';
-}
+import { currentProfile } from '@/lib/current-profile';
 
 const AdminPage = async () => {
-    const { userId } = auth();
+    const profile = await currentProfile();
 
+    if (!profile) {
+        return new NextResponse('Unauthorized', { status: 401 });
+    }
+
+    const isAdmin = profile.role === 'admin';
+    if (!isAdmin) {
+        return redirect('/');
+    }
     const listUsers = await db.profile.findMany({
         orderBy: {
             userId: 'desc',
         },
     });
 
-    const users = listUsers.map((user: UserProps) => {
+    const users = listUsers.map((user: any) => {
         const attributes: any = user?.attributes;
-        //
+
         return {
             id: user.userId,
             name: attributes?.username,
@@ -32,16 +35,6 @@ const AdminPage = async () => {
             email: attributes?.email_addresses[0].email_address,
         };
     }, []);
-
-    const isAdmin = listUsers.some((user: UserProps) => user.role === 'admin');
-
-    if (!userId) {
-        return new NextResponse('Unauthorized', { status: 401 });
-    }
-
-    if (!isAdmin) {
-        return redirect('/');
-    }
 
     return (
         <div className=" p-6">

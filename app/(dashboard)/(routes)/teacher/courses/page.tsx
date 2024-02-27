@@ -3,17 +3,18 @@ import { redirect } from 'next/navigation';
 
 import { DataTable } from './_components/data-table';
 import { columns } from './_components/columns';
+import { currentProfile } from '@/lib/current-profile';
 import { db } from '@/lib/db';
 
 const CoursesPage = async () => {
-    const { userId } = auth();
-    if (!userId) {
+    const profile = await currentProfile();
+    if (!profile) {
         return redirect('/');
     }
 
     const courses = await db.course.findMany({
         where: {
-            userId,
+            profileId: profile.id,
         },
         orderBy: {
             createdAt: 'desc',

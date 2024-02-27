@@ -1,6 +1,6 @@
-import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
+import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
 
 export async function DELETE(
@@ -8,16 +8,17 @@ export async function DELETE(
   { params }: { params: { courseId: string, attachmentId: string } }
 ) {
   try {
-    const { userId } = auth();
+    const profile =  await currentProfile()
 
-    if (!userId) {
+
+    if (!profile) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
     const courseOwner = await db.course.findUnique({
       where: {
         id: params.courseId,
-        userId: userId
+        profileId: profile.id
       }
     });
 

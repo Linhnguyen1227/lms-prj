@@ -4,16 +4,22 @@ import { NextResponse } from "next/server";
 
 import { db } from "@/lib/db";
 import { stripe } from "@/lib/stripe";
+import { currentProfile } from "@/lib/current-profile";
 
 export async function POST(
   req: Request,
   { params }: { params: { courseId: string } }
-) {
-  try {
+  ) {
     
     const user = await currentUser();
+    if(!user) {
+      return new NextResponse("Unauthorized", { status: 401 });
+    }
+    try {
+    const profile = await currentProfile()
+    const attributes = profile?.attributes
 
-    if (!user || !user.id || !user.emailAddresses?.[0]?.emailAddress) {
+    if (!profile || !profile.id || !attributes) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
     //kiểm tra khóa học 
@@ -26,8 +32,8 @@ export async function POST(
     //trang thái mua kháo học của người dùng 
     const purchase = await db.purchase.findUnique({
       where: {
-        userId_courseId: {
-          userId: user.id,
+        profileId_courseId: {
+          profileId: profile.id,
           courseId: params.courseId
         }
       }
@@ -57,7 +63,7 @@ export async function POST(
 
     let stripeCustomer = await db.stripeCustomer.findUnique({
       where: {
-        userId: user.id,
+        profileId: profile.id,
       },
       select: {
         stripeCustomerId: true,
@@ -71,7 +77,7 @@ export async function POST(
 
       stripeCustomer = await db.stripeCustomer.create({
         data: {
-          userId: user.id,
+          profileId: profile.id,
           stripeCustomerId: customer.id,
         }
       });
@@ -85,7 +91,7 @@ export async function POST(
       cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/courses/${course.id}?canceled=1`,
       metadata: {
         courseId: course.id,
-        userId: user.id,
+        profileId: profile.id,
       }
     });
     console.log('đã xong bên tạo đơn hàng ');

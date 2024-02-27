@@ -34,18 +34,18 @@ export async function POST(req: Request) {
   }
   // lấy phiên thanh toán từ sự kiện 
   const session = event.data.object as Stripe.Checkout.Session;
-  const userId = session?.metadata?.userId;
+  const profileId = session?.metadata?.profileId;
   const courseId = session?.metadata?.courseId;
 
   if (event.type === "checkout.session.completed") {
-    if (!userId || !courseId) {
+    if (!profileId || !courseId) {
       return new NextResponse(`Webhook Error: Missing metadata`, { status: 400 });
     }
 
     await db.purchase.create({
       data: {
         courseId: courseId,
-        userId: userId,
+        profileId,
       }
     });
 

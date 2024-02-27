@@ -5,15 +5,16 @@ import { getAnalytics } from '@/actions/get-analytics';
 
 import { DataCard } from './_components/data-card';
 import { Chart } from './_components/chart';
+import { currentProfile } from '@/lib/current-profile';
 
 const AnalyticsPage = async () => {
-    const { userId } = auth();
+    const profile = await currentProfile();
 
-    if (!userId) {
+    if (!profile) {
         return redirect('/');
     }
 
-    const { data, totalRevenue, totalSales } = await getAnalytics(userId);
+    const { data, totalRevenue, totalSales } = await getAnalytics(profile?.id);
 
     return (
         <div className="p-6">

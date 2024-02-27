@@ -14,11 +14,12 @@ import { AttachmentForm } from '../_components/attachment-form';
 import { ChaptersForm } from '../_components/chapters-form';
 import { Banner } from '@/components/banner';
 import { Actions } from '../_components/actions';
+import { currentProfile } from '@/lib/current-profile';
 
 const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
-    const { userId } = auth();
+    const profile = await currentProfile();
 
-    if (!userId) {
+    if (!profile) {
         return redirect('/');
     }
 

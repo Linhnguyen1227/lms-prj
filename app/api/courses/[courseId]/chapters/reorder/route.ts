@@ -2,6 +2,7 @@ import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
 import { db } from "@/lib/db";
+import { currentProfile } from "@/lib/current-profile";
 
 export async function PUT(
   req: Request,
@@ -9,8 +10,9 @@ export async function PUT(
 ) {
   try {
     const { userId } = auth();
+    const profile = await currentProfile()
 
-    if (!userId) {
+    if (!profile) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
@@ -19,7 +21,7 @@ export async function PUT(
     const ownCourse = await db.course.findUnique({
       where: {
         id: params.courseId,
-        userId: userId
+        profileId: profile.id
       }
     });
 
