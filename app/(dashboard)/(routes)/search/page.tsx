@@ -8,6 +8,8 @@ import { CoursesList } from '@/components/courses-list';
 
 import { getCourses } from '@/actions/get-courses';
 
+import { currentProfile } from '@/lib/current-profile';
+
 interface SearchPageProps {
     searchParams: {
         categoryId: string;
@@ -16,8 +18,8 @@ interface SearchPageProps {
 }
 
 const SearchPage = async ({ searchParams }: SearchPageProps) => {
-    const { userId } = auth();
-    if (!userId) {
+    const profile = await currentProfile();
+    if (!profile) {
         return redirect('/');
     }
     const categories = await db.category.findMany({
@@ -27,7 +29,7 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
     });
 
     const courses = await getCourses({
-        userId,
+        profileId: profile?.id,
         ...searchParams,
     });
 

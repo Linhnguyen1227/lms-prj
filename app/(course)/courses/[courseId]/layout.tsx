@@ -11,7 +11,6 @@ import Loading from '@/app/loading';
 import { currentProfile } from '@/lib/current-profile';
 
 const CourseLayout = async ({ children, params }: { children: React.ReactNode; params: { courseId: string } }) => {
-    const { userId } = auth();
     const profile = await currentProfile();
     if (!profile) {
         return redirect('/');

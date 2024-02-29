@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Eye, LayoutDashboard, Video } from 'lucide-react';
 
+import { currentProfile } from '@/lib/current-profile';
 import { db } from '@/lib/db';
 import { IconBadge } from '@/components/icon-badge';
 
@@ -12,12 +13,11 @@ import { ChapterAccessForm } from '../../../_components/chapter-access-form';
 import { ChapterVideoForm } from '../../../_components/chapter-video-form';
 import { Banner } from '@/components/banner';
 import { ChapterActions } from '../../../_components/chapters-action';
-import { boolean } from 'zod';
 
 const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId: string } }) => {
-    const { userId } = auth();
+    const profile = await currentProfile();
 
-    if (!userId) {
+    if (!profile) {
         return redirect('/');
     }
 

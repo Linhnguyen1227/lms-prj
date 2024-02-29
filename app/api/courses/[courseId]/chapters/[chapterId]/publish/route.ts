@@ -9,7 +9,7 @@ export async function PATCH(
   { params }: { params: { courseId: string; chapterId: string } }
 ) {
   try {
-    const { userId } = auth();
+
     const profile = await currentProfile()
 
     if (!profile) {
