@@ -29,7 +29,7 @@ export async function POST(
         isPublished: true,
       }
     });
-    //trang thái mua kháo học của người dùng 
+    //trang thái mua khóa học của người dùng 
     const purchase = await db.purchase.findUnique({
       where: {
         profileId_courseId: {
