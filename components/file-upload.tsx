@@ -19,6 +19,11 @@ export const FileUpload = ({ onChange, endpoint }: FileUploadProps) => {
             }}
             onUploadError={(error: Error) => {
                 toast.error(`${error?.message}`);
+                console.log(error);
+            }}
+            onBeforeUploadBegin={(files) => {
+                // Preprocess files before uploading (e.g. rename them)
+                return files.map((f) => new File([f], 'renamed-' + f.name, { type: f.type }));
             }}
         />
     );
