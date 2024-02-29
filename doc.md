@@ -4,8 +4,4 @@ category
 node scripts/seed.ts
 
 
-### Local port :
-npx localtunnel --port 3000  -s lmseducation --host https://tunnel.giapdong.xyz  --sesstion-connection --session-timeout 10
-
-
 
