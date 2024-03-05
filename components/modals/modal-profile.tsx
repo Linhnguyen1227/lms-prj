@@ -59,15 +59,15 @@ const ModalProfile = () => {
   const onSubmit = async (values: any) => {
     console.log(values);
 
-    try {
-      await axios.patch(`/api/user/${id}`, values);
-      toast.success('User updated');
-      handleClose();
-      router.refresh();
-    } catch (error) {
-      toast.error('User updated failed');
-      console.log(error);
-    }
+    // try {
+    //   await axios.patch(`/api/user/${id}`, values);
+    //   toast.success('User updated');
+    //   handleClose();
+    //   router.refresh();
+    // } catch (error) {
+    //   toast.error('User updated failed');
+    //   console.log(error);
+    // }
   };
 
   return (

@@ -17,9 +17,9 @@ export async function POST(
     }
     try {
     const profile = await currentProfile()
-    const attributes = profile?.attributes
 
-    if (!profile || !profile.id || !attributes) {
+
+    if (!profile || !profile.id || !profile.userId||!profile.username) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
     //kiểm tra khóa học 
