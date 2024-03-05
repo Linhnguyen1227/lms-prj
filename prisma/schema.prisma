@@ -13,16 +13,22 @@ generator client {
   previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
+enum Role {
+  admin
+  member
+}
+
 model Profile {
-  id         String     @id @default(uuid())
-  userId     String     @unique
-  attributes Json
-  role       String?
+  id        String     @id @default(uuid())
+  userId    String?    @unique
+  email     String
+  username  String
+  role      Role       @default(member)
   // courseId     String
-  courses    Course[]
-  purchases  Purchase[]
-  createdAt  DateTime   @default(now())
-  updatedAt  DateTime   @updatedAt
+  courses   Course[]
+  purchases Purchase[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
 
   // @@index([courseId])
 }

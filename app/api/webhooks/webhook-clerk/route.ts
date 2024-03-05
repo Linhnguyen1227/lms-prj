@@ -1,4 +1,5 @@
 import { db } from "@/lib/db";
+import { v4 as uuidv4 } from "uuid";
 import { IncomingHttpHeaders } from "http";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
@@ -31,26 +32,27 @@ async function handler(request: Request) {
   
   if (eventType === "user.created" || eventType === "user.updated") {
     const { id, ...attributes } = evt.data;
+    const attribute = attributes as any;
+
+    const username = attribute?.username 
+    const email  = attribute?.email_addresses[0].email_address;
+    // console.log(attributes);
+
+    
 
     
     await db.profile.upsert({
       where: { userId: id as string },
       create: {
         userId: id as string,
-        attributes,
-        role:'member',
+        email:email as string,
+        username: username as string,
       },
-      update: { attributes },
-    });
-  }
-  
-  if( eventType === "user.deleted")  {
-    const { id ,role} = evt.data;
-    if(role === "admin"){
-      await db.profile.delete({
-        where: { userId: id as string },
-      });
-    }
+      update: {  
+        userId: id as string,
+        email:email as string,
+        username: username as string, 
+      }});
   }
   return new NextResponse(null,{status:200})
 }

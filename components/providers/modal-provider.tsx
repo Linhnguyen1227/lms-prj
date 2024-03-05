@@ -1,7 +1,10 @@
-import ModalProfile from '@/app/(dashboard)/_components/modal-profile';
+'use client';
 import { useEffect, useState } from 'react';
 
-const ModalProvider = () => {
+import ModalProfile from '../modals/modal-profile';
+import ModalUserCreate from '../modals/modal-user-create';
+
+export const ModalProvider = () => {
     const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
@@ -11,5 +14,10 @@ const ModalProvider = () => {
     if (!isMounted) {
         return null;
     }
-    return <ModalProfile />;
+    return (
+        <>
+            <ModalProfile />
+            <ModalUserCreate />
+        </>
+    );
 };

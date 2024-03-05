@@ -1,5 +1,3 @@
-import { auth } from '@clerk/nextjs';
-
 import { redirect } from 'next/navigation';
 import { NextResponse } from 'next/server';
 
@@ -9,38 +7,36 @@ import { db } from '@/lib/db';
 import { currentProfile } from '@/lib/current-profile';
 
 const AdminPage = async () => {
-    const profile = await currentProfile();
+  const profile = await currentProfile();
 
-    if (!profile) {
-        return new NextResponse('Unauthorized', { status: 401 });
-    }
+  if (!profile) {
+    return new NextResponse('Unauthorized', { status: 401 });
+  }
 
-    const isAdmin = profile.role === 'admin';
-    if (!isAdmin) {
-        return redirect('/');
-    }
-    const listUsers = await db.profile.findMany({
-        orderBy: {
-            userId: 'desc',
-        },
-    });
+  const isAdmin = profile.role === 'admin';
+  if (!isAdmin) {
+    return redirect('/');
+  }
+  const listUsers = await db.profile.findMany({
+    orderBy: {
+      userId: 'desc',
+    },
+  });
 
-    const users = listUsers.map((user: any) => {
-        const attributes: any = user?.attributes;
+  const users = listUsers.map((user: any) => {
+    return {
+      id: user.userId,
+      name: user?.username,
+      role: user?.role,
+      email: user?.email,
+    };
+  }, []);
 
-        return {
-            id: user.userId,
-            name: attributes?.username,
-            role: user?.role,
-            email: attributes?.email_addresses[0].email_address,
-        };
-    }, []);
-
-    return (
-        <div className=" p-6">
-            <TableUser data={users} columns={columnsAdminPage} />
-        </div>
-    );
+  return (
+    <div className=" p-6">
+      <TableUser data={users} columns={columnsAdminPage} />
+    </div>
+  );
 };
 
 export default AdminPage;

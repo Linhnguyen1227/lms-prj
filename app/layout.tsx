@@ -8,6 +8,7 @@ import Loading from './loading';
 
 import { ToastProvider } from '@/components/providers/toaster-provider';
 import { ConfettiProvider } from '@/components/providers/confetti-provider';
+import { ModalProvider } from '@/components/providers/modal-provider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <html lang="en">
                 <body className={inter.className}>
                     <ConfettiProvider />
+                    <ModalProvider />
                     <ToastProvider />
                     <Suspense fallback={<Loading />}>{children}</Suspense>
                 </body>
