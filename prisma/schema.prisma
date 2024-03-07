@@ -108,7 +108,7 @@ model UserProgress {
 
 model Purchase {
   id        String  @id @default(uuid())
-  profileId String  @unique
+  profileId String
   profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
 
   courseId  String

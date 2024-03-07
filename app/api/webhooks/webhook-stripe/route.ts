@@ -45,7 +45,7 @@ export async function POST(req: Request) {
     await db.purchase.create({
       data: {
         courseId: courseId,
-        profileId,
+        profileId:profileId,
       }
     });
   } else {
