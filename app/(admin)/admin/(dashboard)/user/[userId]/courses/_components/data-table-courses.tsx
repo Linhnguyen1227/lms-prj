@@ -22,10 +22,10 @@ import { Input } from '@/components/ui/input';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
-  data: TData[];
+  data: any;
 }
 
-export function DataTableAdmin<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) {
+export function DataTableCourses<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
 
@@ -53,22 +53,21 @@ export function DataTableAdmin<TData, TValue>({ columns, data }: DataTableProps<
     <div>
       <div className="flex items-center py-4 justify-between">
         <Input
-          placeholder="Filter name..."
-          value={(table.getColumn('name')?.getFilterValue() as string) ?? ''}
-          onChange={(event) => table.getColumn('name')?.setFilterValue(event.target.value)}
+          placeholder="Filter title..."
+          value={(table.getColumn('title')?.getFilterValue() as string) ?? ''}
+          onChange={(event) => table.getColumn('title')?.setFilterValue(event.target.value)}
           className="max-w-sm"
         />
 
-        <div className="space-x-3">
+        {/* <div className="space-x-3">
           <Button onClick={handlerefesh} variant={'ghost'} className="hover:bg-white/50 ">
             <RotateCw className="h-4 w-4 " />
           </Button>
           <Button onClick={() => onOpen('openUserCreate')}>
-            <PlusCircle className="h-4 w-4 mr-2" /> Create user
+            <PlusCircle className="h-4 w-4 mr-2" /> Create course
           </Button>
-        </div>
+        </div> */}
       </div>
-
       <div className="rounded-md border">
         <Table>
           <TableHeader>

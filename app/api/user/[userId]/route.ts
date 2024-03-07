@@ -32,28 +32,49 @@ export async function DELETE(
 }
 
 export async function PATCH(req: Request,
-    {params}:{params:{userId:string}}
+    { params} :{ params:{ userId:string } }
     ){
     try {
         const profile = await currentProfile();
         const userId = params.userId
-        console.log(userId);
         
-        const { values } = await req.json();
-    
+        const { name ,role} = await req.json();
+
         if(!profile) {
             return new NextResponse('Unauthorized',{status:401})
         }
 
         const user = await db.profile.update({
-           where:{ userId:userId},
-           data:{...values}
-        })
-        await clerkClient.users.updateUser({
+            where:{ userId },
+            data:{role}
+         })
+
+        await clerkClient.users.updateUser(
             userId,
-            ...values
-        })
+            {username:name}
+        )
+
         return NextResponse.json(user)
+    } catch (error) {
+        console.log("Error: ", error);
+        return new NextResponse("Internal Error", { status: 500 });
+    }
+}
+export async function GET(req: Request,
+    { params} :{ params:{ userId:string } }
+    ){
+    try {
+        const profile = await currentProfile();
+        if(!profile) {
+            return new NextResponse('Unauthorized',{status:401})
+        }
+
+        const listUser = await db.profile.findMany({
+            orderBy:{
+                userId:'desc'
+            }
+         })
+        return NextResponse.json(listUser)
     } catch (error) {
         console.log("Error: ", error);
         return new NextResponse("Internal Error", { status: 500 });

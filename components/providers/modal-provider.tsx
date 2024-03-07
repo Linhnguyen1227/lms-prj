@@ -3,21 +3,23 @@ import { useEffect, useState } from 'react';
 
 import ModalProfile from '../modals/modal-profile';
 import ModalUserCreate from '../modals/modal-user-create';
+import ModalEditCourse from '../modals/modal-edit-course';
 
 export const ModalProvider = () => {
-    const [isMounted, setIsMounted] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
-    useEffect(() => {
-        setIsMounted(true);
-    }, []);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
-    if (!isMounted) {
-        return null;
-    }
-    return (
-        <>
-            <ModalProfile />
-            <ModalUserCreate />
-        </>
-    );
+  if (!isMounted) {
+    return null;
+  }
+  return (
+    <>
+      <ModalProfile />
+      <ModalUserCreate />
+      <ModalEditCourse />
+    </>
+  );
 };

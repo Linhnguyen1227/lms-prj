@@ -1,16 +1,11 @@
-import Mux from "@mux/mux-node";
-import { auth } from "@clerk/nextjs";
+
 import { NextResponse } from "next/server";
 
 import { db } from "@/lib/db";
 import { currentProfile } from "@/lib/current-profile";
 
 
-//handle Muxplayer
-const { Video } = new Mux(
-  process.env.MUX_TOKEN_ID!,
-  process.env.MUX_TOKEN_SECRET!,
-);
+
 
 export async function DELETE(
   req: Request,
@@ -27,27 +22,19 @@ export async function DELETE(
     const course = await db.course.findUnique({
       where: {
         id: params.courseId,
-        profileId: profile.id,
+        // profileId: profile.id,
       },
       include: {
-        chapters: {
-          include: {
-            muxData: true,
-          }
-        }
+        chapters: true
       }
     });
+    console.log(course);
+    
 
     if (!course) {
       return new NextResponse("Not found", { status: 404 });
     }
 
-    for (const chapter of course.chapters) {
-      //xóa video nếu có trên Mux 
-      if (chapter.muxData?.assetId) {
-        await Video.Assets.del(chapter.muxData.assetId);
-      }
-    }
 
     const deletedCourse = await db.course.delete({
       where: {
@@ -78,7 +65,7 @@ export async function PATCH(
     const course = await db.course.update({
       where: {
         id: courseId,
-        profileId: profile.id
+        // profileId: profile.id
       },
       data: {
         ...values,

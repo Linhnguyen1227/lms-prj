@@ -1,6 +1,5 @@
 import * as z from 'zod';
 import axios from 'axios';
-import { Role } from '@prisma/client';
 import toast from 'react-hot-toast';
 import { useForm } from 'react-hook-form';
 import { useEffect } from 'react';
@@ -9,25 +8,26 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-
 import { useModal } from '@/hooks/use-modal-store';
+import { Textarea } from '../ui/textarea';
 
 const formSchema = z.object({
-  name: z.string().min(1, {
-    message: ' name is required.',
+  title: z.string().min(1, {
+    message: ' Name is required.',
   }),
-  role: z.nativeEnum(Role),
+  price: z.coerce.number(),
+  description: z.string().min(1, {
+    message: ' Name is required.',
+  }),
 });
 
-const ModalProfile = () => {
+const ModalEditCourse = () => {
   const { isOpen, onClose, type, data } = useModal();
-  const { name, id, email, role } = data;
+  const isOpenModal = isOpen && type === 'openEditCourse';
   const router = useRouter();
-  const isOpenModal = isOpen && type === 'openUserProfile';
-
+  const { id, title, price, description } = data;
   const handleClose = () => {
     onClose();
   };
@@ -35,29 +35,29 @@ const ModalProfile = () => {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: name,
-      email: email,
-      role: role,
+      title: title,
+      price: price,
+      description: description,
     },
   });
 
   const isLoading = form.formState.isSubmitting;
 
   useEffect(() => {
-    form.setValue('name', name);
-    form.setValue('email', email);
-    form.setValue('role', role);
-  }, [form, role, email, name]);
+    form.setValue('title', title);
+    form.setValue('price', price);
+    form.setValue('description', description);
+  }, [description, form, price, title]);
 
   const onSubmit = async (values: any) => {
     try {
-      await axios.patch(`/api/user/${id}`, values);
-      toast.success('User updated');
-      router.refresh();
+      await axios.patch(`/api/courses/${id}`, values);
+      toast.success('Course updated');
       handleClose();
+      router.refresh();
     } catch (error) {
-      toast.error('User updated failed');
-      console.log(error);
+      console.log('error', error);
+      toast.error('Course updated failed');
     }
   };
 
@@ -65,19 +65,19 @@ const ModalProfile = () => {
     <Dialog open={isOpenModal} onOpenChange={handleClose}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle className="text-xl font-bold">Edit profile {name}</DialogTitle>
+          <DialogTitle className="text-xl font-bold">Edit course {title}</DialogTitle>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <div className="space-y-8 p-6">
               <FormField
                 control={form.control}
-                name="name"
+                name="title"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>User Name</FormLabel>
+                    <FormLabel>Title</FormLabel>
                     <FormControl>
-                      <Input {...field} placeholder="Enter name" disabled={isLoading} />
+                      <Input {...field} placeholder="Enter title" disabled={isLoading} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -85,12 +85,18 @@ const ModalProfile = () => {
               />
               <FormField
                 control={form.control}
-                name="email"
+                name="price"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>Price</FormLabel>
                     <FormControl>
-                      <Input {...field} placeholder="Enter email" disabled={true} />
+                      <Input
+                        type="number"
+                        step="0.01"
+                        disabled={isLoading}
+                        placeholder="Set a price for your course"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -98,24 +104,13 @@ const ModalProfile = () => {
               />
               <FormField
                 control={form.control}
-                name="role"
+                name="description"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Role</FormLabel>
-                    <Select disabled={isLoading} onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger className="bg-zinc-300/50 border-0 focus:ring-0 text-black ring-offset-0 focus:ring-offset-0 capitalize outline-none">
-                          <SelectValue placeholder="Select a channel type" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {Object.values(Role).map((type) => (
-                          <SelectItem key={type} value={type} className="capitalize">
-                            {type.toUpperCase()}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+                    <FormLabel>Description</FormLabel>
+                    <FormControl>
+                      <Textarea disabled={isLoading} placeholder="e.g. 'This course is about...'" {...field} />
+                    </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -133,4 +128,4 @@ const ModalProfile = () => {
   );
 };
 
-export default ModalProfile;
+export default ModalEditCourse;

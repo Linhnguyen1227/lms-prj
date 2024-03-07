@@ -49,6 +49,7 @@ export const getCourses = async ({
         createdAt: "desc",
       }
     });
+   
 
     const coursesWithProgress: CourseWithProgressWithCategory[] = await Promise.all(
       courses.map(async course => {

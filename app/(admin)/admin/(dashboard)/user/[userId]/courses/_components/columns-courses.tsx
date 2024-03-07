@@ -1,28 +1,50 @@
 'use client';
 
-import { ArrowUpDown, MoreHorizontal, Pencil } from 'lucide-react';
+import axios from 'axios';
+import toast from 'react-hot-toast';
+import { ArrowUpDown, MoreHorizontal, Pencil, Trash2 } from 'lucide-react';
+
+import { useRouter } from 'next/navigation';
 
 import { cn } from '@/lib/utils';
-import { Course } from '@prisma/client';
 import { ColumnDef } from '@tanstack/react-table';
+import { useModal } from '@/hooks/use-modal-store';
 
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import Link from 'next/link';
 
-export const columns: ColumnDef<Course>[] = [
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+interface DataCourseProps {
+  id: string;
+  title: string;
+  price: number;
+  isPublished: boolean;
+  description: string;
+}
+
+export const ColumnsCoursesPage: ColumnDef<DataCourseProps>[] = [
   {
     accessorKey: 'title',
     header: ({ column }) => {
       return (
         <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
           Title
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: 'description',
+    header: ({ column }) => {
+      return (
+        <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+          Description
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -68,7 +90,24 @@ export const columns: ColumnDef<Course>[] = [
   {
     id: 'Action',
     cell: ({ row }) => {
-      const id = row.original.id;
+      const data = row.original;
+
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const router = useRouter();
+
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const { onOpen } = useModal();
+      const handleDelete = () => {
+        try {
+          axios.delete(`/api/courses/${data.id}`);
+          toast.success('Course deleted');
+          router.refresh();
+        } catch (error) {
+          console.error(error);
+          toast.error('Course deleted failed');
+        }
+      };
+
       return (
         <>
           <DropdownMenu>
@@ -78,12 +117,14 @@ export const columns: ColumnDef<Course>[] = [
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="center">
-              <Link href={`/teacher/courses/${id}`}>
-                <DropdownMenuItem>
-                  <Pencil className="h-4 w-4 mr-2" />
-                  Edit
-                </DropdownMenuItem>
-              </Link>
+              <DropdownMenuItem onClick={() => onOpen('openEditCourse', data)}>
+                <Pencil className="h-4 w-4 mr-2" />
+                Edit
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={handleDelete}>
+                <Trash2 className="h-4 w-4 mr-2" />
+                Delete
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </>

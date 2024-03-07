@@ -1,16 +1,24 @@
 
+import { Course } from "@prisma/client";
 import { create } from "zustand";
 
 export type ModalType =
   | "openUserProfile"
   | "openUserCreate"
+  | "openEditCourse"
 ;
 
 interface ModalData {
   id?: string;
+  title?: string;
   name?: string;
   role?: string;
   email?: string;
+  description?: string;
+  isPublished?: boolean;
+  price?: number;
+
+
 }
 
 interface ModalStore {
@@ -25,6 +33,7 @@ export const useModal = create<ModalStore>((set) => ({
   type: null,
   data: {},
   isOpen: false,
-  onOpen: (type, data = {}) => set({ isOpen: true, type, data }),
+  onOpen: (type, data = {}) => set({ isOpen: true, type, data
+   }),
   onClose: () => set({ type: null, isOpen: false }),
 }));

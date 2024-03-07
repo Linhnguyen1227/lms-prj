@@ -1,6 +1,9 @@
 'use client';
+import toast from 'react-hot-toast';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
-import { ArrowUpDown, MoreHorizontal, Pencil, Trash } from 'lucide-react';
+import { ArrowUpDown, BookOpen, MoreHorizontal, Pencil, Trash } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 import { ColumnDef } from '@tanstack/react-table';
@@ -14,10 +17,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useModal } from '@/hooks/use-modal-store';
-import toast from 'react-hot-toast';
-import axios from 'axios';
-import { useRouter } from 'next/navigation';
-import { ConfirmModal } from '@/components/modals/confirm-modal';
+import Link from 'next/link';
 
 interface DataTablesProps {
   id: string;
@@ -70,6 +70,9 @@ export const columnsAdminPage: ColumnDef<DataTablesProps>[] = [
     cell: ({ row }) => {
       const data = row.original;
       const userId: string = data?.id;
+      const isAdmin = data?.role === 'admin';
+      const isManager = data?.id === 'user_2d4To7URJrKYZ8pdlJOgPt9vkY1' && isAdmin;
+
       // eslint-disable-next-line react-hooks/rules-of-hooks
       const router = useRouter();
       // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -87,27 +90,38 @@ export const columnsAdminPage: ColumnDef<DataTablesProps>[] = [
 
       return (
         <>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost">
-                <MoreHorizontal className="h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="center">
-              <DropdownMenuItem
-                onClick={() => {
-                  onOpen('openUserProfile', data);
-                }}
-              >
-                <Pencil className="h-4 w-4 mr-2" />
-                Edit
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={handleDelete}>
-                <Trash className="h-4 w-4 mr-2" />
-                Delete
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          {isManager ? (
+            <></>
+          ) : (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost">
+                  <MoreHorizontal className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+
+              <DropdownMenuContent align="center">
+                <DropdownMenuItem
+                  onClick={() => {
+                    onOpen('openUserProfile', data);
+                  }}
+                >
+                  <Pencil className="h-4 w-4 mr-2" />
+                  Edit
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={handleDelete}>
+                  <Trash className="h-4 w-4 mr-2" />
+                  Delete
+                </DropdownMenuItem>
+                <Link href={`admin/user/${userId}/courses`}>
+                  <DropdownMenuItem>
+                    <BookOpen className="h-4 w-4 mr-2" />
+                    Courses
+                  </DropdownMenuItem>
+                </Link>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
         </>
       );
     },
