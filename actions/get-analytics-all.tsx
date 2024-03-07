@@ -1,7 +1,10 @@
 import { db } from '@/lib/db';
-import { Course, Purchase } from '@prisma/client';
+import { Course, Profile, Purchase } from '@prisma/client';
 
 type PurchaseWithCourse = Purchase & {
+  course: Course;
+};
+type UserWithCourse = Profile & {
   course: Course;
 };
 
@@ -21,7 +24,28 @@ const groupByCourse = (purchases: PurchaseWithCourse[]) => {
 
 export const getAnalyticsAll = async () => {
   try {
-    //lấy ra các khóa học đã mua.
+    //lấy ra tổng số người khóa học của từng người dùng
+    const listUser: any = await db.profile.findMany({
+      orderBy: {
+        username: 'asc',
+      },
+      include: { courses: true },
+    });
+    //lấy ra tổng số khóa học học từng username
+    const dataCourses = listUser.reduce((acc: Record<string, number>, profile: any) => {
+      const username = profile.username!;
+      acc[username] = (acc[username] || 0) + profile.courses.length;
+      return acc;
+    }, {});
+    //chuyển dataCourses thành 1 mảng theo [{name,total}]
+    const dataUsers = Object.entries(dataCourses).map(([name, total]) => ({
+      name: name,
+      total: total as number,
+    }));
+
+    const totalCourses = dataUsers.reduce((acc, curr) => acc + curr.total, 0);
+    const totalUsers = listUser.length;
+    //lấy ra các khóa học đã mua-----------------------------
     const purchases = await db.purchase.findMany({
       orderBy: {
         createdAt: 'asc',
@@ -41,6 +65,9 @@ export const getAnalyticsAll = async () => {
     const totalSales = purchases.length;
 
     return {
+      dataUsers,
+      totalCourses,
+      totalUsers,
       data,
       totalRevenue,
       totalSales,
@@ -51,6 +78,9 @@ export const getAnalyticsAll = async () => {
       data: [],
       totalRevenue: 0,
       totalSales: 0,
+      dataUsers: [],
+      totalCourses: 0,
+      totalUsers: 0,
     };
   }
 };
