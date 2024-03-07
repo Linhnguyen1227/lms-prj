@@ -95,7 +95,7 @@ model Chapter {
 model UserProgress {
   id String @id @default(uuid())
 
-  profileId   String   @unique
+  profileId   String
   chapterId   String
   chapter     Chapter  @relation(fields: [chapterId], references: [id], onDelete: Cascade)
   isCompleted Boolean  @default(false)
