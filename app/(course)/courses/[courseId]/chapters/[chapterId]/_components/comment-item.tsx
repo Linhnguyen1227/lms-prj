@@ -11,7 +11,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Chapter, Profile, Comment } from '@prisma/client';
+import { Profile, Comment } from '@prisma/client';
 import { cn } from '@/lib/utils';
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
@@ -19,6 +19,7 @@ import { Button } from '@/components/ui/button';
 import { useModal } from '@/hooks/use-modal-store';
 import { UserAvatar } from '@/components/user-avatar';
 import { ActionTooltip } from '@/components/action-tooltip';
+import toast from 'react-hot-toast';
 
 interface ChatItemProps {
   id: string;
@@ -85,20 +86,22 @@ export const CommentItem = ({
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     console.log(values);
 
-    // try {
-    //   const url = qs.stringifyUrl({
-    //     // socketUrl:/api/socket/messages
-    //     url: `${socketUrl}/${id}`,
-    //     query: socketQuery,
-    //   });
+    try {
+      const url = qs.stringifyUrl({
+        // socketUrl:/api/socket/comments
+        url: `${socketUrl}/${id}`,
+        query: socketQuery,
+      });
 
-    //   await axios.patch(url, values);
-
-    //   form.reset();
-    //   setIsEditing(false);
-    // } catch (error) {
-    //   console.log(error);
-    // }
+      await axios.patch(url, values);
+      toast.success('Edit comments successfully');
+      router.refresh();
+      form.reset();
+      setIsEditing(false);
+    } catch (error) {
+      console.log(error);
+      toast.error('Edit error');
+    }
   };
 
   useEffect(() => {
@@ -214,12 +217,11 @@ export const CommentItem = ({
           )}
           <ActionTooltip label="Delete">
             <Trash
-              onClick={
-                () => {}
-                // onOpen('deleteMessage', {
-                //   apiUrl: `${socketUrl}/${id}`,
-                //   query: socketQuery,
-                // })
+              onClick={() =>
+                onOpen('deleteComment', {
+                  apiUrl: `${socketUrl}/${id}`,
+                  query: socketQuery,
+                })
               }
               className="cursor-pointer ml-auto w-4 h-4 text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 transition"
             />

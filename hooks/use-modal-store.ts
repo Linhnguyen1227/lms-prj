@@ -6,6 +6,7 @@ export type ModalType =
   | "openUserProfile"
   | "openUserCreate"
   | "openEditCourse"
+  |"deleteComment"
 ;
 
 interface ModalData {
@@ -17,7 +18,8 @@ interface ModalData {
   description?: string;
   isPublished?: boolean;
   price?: number;
-
+  apiUrl?: string;
+  query?: Record<string, any>;
 
 }
 

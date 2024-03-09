@@ -55,6 +55,7 @@ export const useChatSocket = ({
 
     socket.on(addKey, (comment: CommentChapterWithProfile) => {
       queryClient.setQueryData([queryKey], (oldData: any) => {
+        
         if (!oldData || !oldData.pages || oldData.pages.length === 0) {
           return {
             pages: [
@@ -64,14 +65,20 @@ export const useChatSocket = ({
             ],
           };
         }
+        console.log("oldData",oldData);
+        
 
         const newData = [...oldData.pages];
+        console.log("newData chứa dữ liệu cũ",newData);
+
 
         newData[0] = {
+          //giữ nguyên các thuộc tính của trang
           ...newData[0],
+          //cập nhật lại trang với comment mới add vào đầu
           items: [comment, ...newData[0].items],
         };
-        console.log(newData);
+        console.log("newData chứa dữ liệu mới",newData);
 
         return {
           ...oldData,
