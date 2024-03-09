@@ -58,7 +58,7 @@ const ModalUserCreate = () => {
       form.reset();
     } catch (error) {
       console.log(error);
-      toast.error('User updated error');
+      toast.error('User created error');
       router.refresh();
       form.reset();
     }

@@ -1,5 +1,5 @@
 import { db } from "@/lib/db";
-import { v4 as uuidv4 } from "uuid";
+
 import { IncomingHttpHeaders } from "http";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
@@ -36,6 +36,7 @@ async function handler(request: Request) {
 
     const username = attribute?.username 
     const email  = attribute?.email_addresses[0].email_address;
+    const imageUrl = attribute?.image_url
     // console.log(attributes);
 
     
@@ -47,11 +48,14 @@ async function handler(request: Request) {
         userId: id as string,
         email:email as string,
         username: username as string,
+        imageUrl: imageUrl 
       },
       update: {  
         userId: id as string,
         email:email as string,
         username: username as string, 
+        imageUrl: imageUrl 
+
       }});
   }
   return new NextResponse(null,{status:200})

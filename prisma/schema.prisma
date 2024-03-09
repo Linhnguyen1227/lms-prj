@@ -24,9 +24,11 @@ model Profile {
   email     String
   username  String
   role      Role       @default(member)
+  imageUrl  String
   // courseId     String
   courses   Course[]
   purchases Purchase[]
+  comment   Comment[]
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
 
@@ -47,7 +49,6 @@ model Course {
   attachments Attachment[]
   chapters    Chapter[]
   purchases   Purchase[]
-  // messages Message[]
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
 
@@ -85,7 +86,7 @@ model Chapter {
   courseId     String
   course       Course         @relation(fields: [courseId], references: [id], onDelete: Cascade)
   userProgress UserProgress[]
-  // messages Message[]
+  comment      Comment[]
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
 
@@ -93,8 +94,7 @@ model Chapter {
 }
 
 model UserProgress {
-  id String @id @default(uuid())
-
+  id          String   @id @default(uuid())
   profileId   String
   chapterId   String
   chapter     Chapter  @relation(fields: [chapterId], references: [id], onDelete: Cascade)
@@ -107,14 +107,13 @@ model UserProgress {
 }
 
 model Purchase {
-  id        String  @id @default(uuid())
+  id        String   @id @default(uuid())
   profileId String
-  profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
-
+  profile   Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
   courseId  String
   course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt()
+  updatedAt DateTime @updatedAt
 
   @@unique([profileId, courseId])
   @@index([courseId])
@@ -128,16 +127,17 @@ model StripeCustomer {
   updatedAt        DateTime @updatedAt
 }
 
-// model Message {
-//   id String @id @default(uuid())
-//   content String @db.Text
-//   courseId String
-//   course   Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
-//   chapterId   String
-//   chapter Chapter  @relation(fields: [chapterId], references: [id], onDelete: Cascade)
-//   deleted Boolean @default(false)
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
-//   @@index([courseId])
-//   @@index([chapterId])
-// }
+model Comment {
+  id        String   @id @default(uuid())
+  content   String   @db.Text
+  profileId String
+  profile   Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  chapterId String
+  chapter   Chapter  @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  deleted   Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([profileId])
+  @@index([chapterId])
+}

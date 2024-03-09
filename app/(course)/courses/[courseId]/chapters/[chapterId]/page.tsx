@@ -1,16 +1,18 @@
-import { auth } from '@clerk/nextjs';
-import { redirect } from 'next/navigation';
-import { Separator } from '@/components/ui/separator';
 import { File } from 'lucide-react';
+import { redirect } from 'next/navigation';
 
 import { getChapter } from '@/actions/get-chapters';
+import { currentProfile } from '@/lib/current-profile';
+
+import { Separator } from '@/components/ui/separator';
 import { Banner } from '@/components/banner';
 import { Preview } from '@/components/preview';
 
 import { VideoPlayer } from './_components/video-player';
 import { CourseEnrollButton } from './_components/course-enroll-button';
 import { CourseProgressButton } from './_components/course-progress-button';
-import { currentProfile } from '@/lib/current-profile';
+import { CommentInput } from './_components/comment-input';
+import { CommentList } from './_components/comment-list';
 
 const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId: string } }) => {
   const profile = await currentProfile();
@@ -59,7 +61,7 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
                 isCompleted={!!userProgress?.isCompleted}
               />
             ) : (
-              // price! chuyển đổi gía trị price từ null hoặc undefined sang chuỗi rỗng
+              // price! chuyển đổi giá trị price từ null hoặc undefined sang chuỗi rỗng
               <CourseEnrollButton courseId={params.courseId} price={course.price!} />
             )}
           </div>
@@ -85,6 +87,26 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
               </div>
             </>
           )}
+          <Separator />
+          <div className="p-3 space-y-3">
+            <h1 className="text-xl font-bold">Comments</h1>
+            <div className="  border border-slate-300 rounded h-[600px]">
+              <div>
+                <CommentInput query={{ chapterId: params.chapterId }} apiUrl="/api/socket/comments" />
+              </div>
+              <div className="h-[510px] overflow-y-scroll">
+                <CommentList
+                  profile={profile}
+                  chapterId={params.chapterId}
+                  apiUrl="/api/comments"
+                  socketUrl="/api/socket/comments"
+                  socketQuery={{ chapterId: params.chapterId }}
+                  paramKey="chapterId"
+                  paramValue={params.chapterId}
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

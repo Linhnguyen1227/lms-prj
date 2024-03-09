@@ -41,7 +41,9 @@ const AnalyticsAdminPage = async () => {
           <DataCard label="Total Revenue" value={totalRevenue} shouldFormat />
           <DataCard label="Total Sales" value={totalSales} />
         </div>
-        <Chart data={data} isPrice />
+        <div>
+          <Chart data={data} isPrice />
+        </div>
       </div>
       <div>
         <h1 className="text-xl font-bold mb-4"> Users chart</h1>
