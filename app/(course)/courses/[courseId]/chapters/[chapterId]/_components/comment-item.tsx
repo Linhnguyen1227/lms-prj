@@ -11,7 +11,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Profile, Comment } from '@prisma/client';
+import { Profile, Comment, Role } from '@prisma/client';
 import { cn } from '@/lib/utils';
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
@@ -47,6 +47,7 @@ const formSchema = z.object({
 
 export const CommentItem = ({
   id,
+
   content,
   message,
   timestamp,
@@ -59,7 +60,6 @@ export const CommentItem = ({
 }: ChatItemProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const { onOpen } = useModal();
-  const params = useParams();
   const router = useRouter();
 
   useEffect(() => {
@@ -112,7 +112,7 @@ export const CommentItem = ({
   }, [content]);
 
   // const fileType = fileUrl?.split('.').pop();
-  const isAdmin = message?.profile?.role;
+  const isAdmin = profile?.role === Role.admin;
   const isOwner = message?.profile?.id === profile.id;
   const canDeleteMessage = !deleted && (isAdmin || isOwner);
   const canEditMessage = !deleted && isOwner;
@@ -205,29 +205,30 @@ export const CommentItem = ({
           }
         </div>
       </div>
-      {canDeleteMessage && (
-        <div className="hidden group-hover:flex items-center gap-x-2 absolute p-1 -top-2 right-5 bg-white dark:bg-zinc-800 border rounded-sm">
-          {canEditMessage && (
-            <ActionTooltip label="Edit">
-              <Edit
-                onClick={() => setIsEditing(true)}
-                className="cursor-pointer ml-auto w-4 h-4 text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 transition"
-              />
-            </ActionTooltip>
-          )}
-          <ActionTooltip label="Delete">
-            <Trash
-              onClick={() =>
-                onOpen('deleteComment', {
-                  apiUrl: `${socketUrl}/${id}`,
-                  query: socketQuery,
-                })
-              }
+
+      <div className="hidden group-hover:flex items-center gap-x-2 absolute p-1 -top-2 right-5 bg-white dark:bg-zinc-800 border rounded-sm">
+        {canEditMessage && canDeleteMessage && (
+          <ActionTooltip label="Edit">
+            <Edit
+              onClick={() => setIsEditing(true)}
               className="cursor-pointer ml-auto w-4 h-4 text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 transition"
             />
           </ActionTooltip>
-        </div>
-      )}
+        )}
+        {canDeleteMessage && (
+          <ActionTooltip label="Delete">
+            <Trash
+              onClick={() => {
+                onOpen('deleteComment', {
+                  apiUrl: `${socketUrl}/${id}`,
+                  query: socketQuery,
+                });
+              }}
+              className="cursor-pointer ml-auto w-4 h-4 text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 transition"
+            />
+          </ActionTooltip>
+        )}
+      </div>
     </div>
   );
 };

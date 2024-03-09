@@ -86,19 +86,22 @@ export const CommentList = ({
         {data?.pages?.map((group: any, i: number) => (
           <Fragment key={i}>
             {group.items.map((message: CommentWithChapterWithProfile) => (
-              <CommentItem
-                key={message.id}
-                id={message.id}
-                profile={profile}
-                content={message.content}
-                deleted={message.deleted}
-                timestamp={format(new Date(message.createdAt), DATE_FORMAT)}
-                isUpdated={message.updatedAt !== message.createdAt}
-                socketUrl={socketUrl}
-                socketQuery={socketQuery}
-                message={message}
-                // fileUrl={null}
-              />
+              <>
+                {console.log(data)}
+                <CommentItem
+                  key={message.id}
+                  id={message.id}
+                  profile={profile}
+                  content={message.content}
+                  deleted={message.deleted}
+                  timestamp={format(new Date(message.createdAt), DATE_FORMAT)}
+                  isUpdated={message.updatedAt !== message.createdAt}
+                  socketUrl={socketUrl}
+                  socketQuery={socketQuery}
+                  message={message}
+                  // fileUrl={null}
+                />
+              </>
             ))}
           </Fragment>
         ))}
