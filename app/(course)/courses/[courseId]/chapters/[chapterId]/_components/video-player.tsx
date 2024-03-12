@@ -6,18 +6,18 @@ import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import { Loader2, Lock } from 'lucide-react';
 
-import { cn } from '@/lib/utils';
+// import { cn } from '@/lib/utils';
 import { useConfettiStore } from '@/hooks/use-confetti-store';
-import ReactPlayer from 'react-player';
+// import ReactPlayer from 'react-player';
+import YouTubePlayer from 'react-player/youtube';
 
 interface VideoPlayerProps {
-  videoUrl: string;
-  courseId: string;
-  chapterId: string;
+  videoUrl?: string;
+  courseId?: string;
+  chapterId?: string;
   nextChapterId?: string;
-  isLocked: boolean;
-  completeOnEnd: boolean;
-  title: string;
+  isLocked?: boolean;
+  completeOnEnd?: boolean;
 }
 
 export const VideoPlayer = ({
@@ -75,7 +75,7 @@ export const VideoPlayer = ({
         </div>
       )}
       {!isLocked && client && (
-        <ReactPlayer
+        <YouTubePlayer
           width={'100%'}
           height={'100%'}
           // ref={videoRef}

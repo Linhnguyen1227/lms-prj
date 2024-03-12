@@ -11,6 +11,12 @@ import { Chapter } from '@prisma/client';
 
 import { Button } from '@/components/ui/button';
 import { FileUpload } from '@/components/file-upload';
+import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Input } from '@/components/ui/input';
+import YouTubePlayer from 'react-player/youtube';
+import { VideoPlayer } from '@/app/(course)/courses/[courseId]/chapters/[chapterId]/_components/video-player';
 
 interface ChapterVideoFormProps {
   initialData: Chapter;
@@ -33,6 +39,12 @@ export const ChapterVideoForm = ({ initialData, courseId, chapterId }: ChapterVi
   const toggleEdit = () => setIsEditing((current) => !current);
 
   const router = useRouter();
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      videoUrl: initialData?.videoUrl || '',
+    },
+  });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
@@ -72,25 +84,45 @@ export const ChapterVideoForm = ({ initialData, courseId, chapterId }: ChapterVi
           </div>
         ) : (
           <div className="relative aspect-video mt-2">
-            {client && <ReactPlayer width={'100%'} height={'100%'} url={initialData.videoUrl} controls />}
+            {/* {client && <ReactPlayer width={'100%'} height={'100%'} url={initialData.videoUrl} controls />} */}
+
+            {client && <VideoPlayer videoUrl={initialData?.videoUrl} />}
           </div>
         ))}
       {isEditing && (
         <div>
-          <FileUpload
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+              <FormField
+                control={form.control}
+                name="videoUrl"
+                render={({ field }) => (
+                  <FormItem>
+                    {/* <FormLabel>Username</FormLabel> */}
+                    <FormControl>
+                      <Input placeholder="Enter video url" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button type="submit">Add</Button>
+            </form>
+          </Form>
+          {/* <FileUpload
             endpoint="chapterVideo"
             onChange={(url) => {
               if (url) {
                 onSubmit({ videoUrl: url });
               }
             }}
-          />
+          /> */}
           <div className="text-xs text-muted-foreground mt-4">Upload this chapter&apos;s video</div>
         </div>
       )}
       {initialData.videoUrl && !isEditing && (
         <div className="text-xs text-muted-foreground mt-2">
-          Videos can take a few minutes to process. Refresh the page if video does not appear.
+          If your video is not displayed, please refresh the page or re-enter the link
         </div>
       )}
     </div>

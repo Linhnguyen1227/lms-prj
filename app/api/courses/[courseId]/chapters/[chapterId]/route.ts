@@ -37,10 +37,7 @@ export async function DELETE(
     if (!chapter) {
       return new NextResponse("Not Found", { status: 404 });
     }
-
-
-
-
+    
     const deletedChapter = await db.chapter.delete({
       where: {
         id: params.chapterId
