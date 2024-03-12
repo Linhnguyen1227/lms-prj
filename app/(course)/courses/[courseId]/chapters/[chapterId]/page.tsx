@@ -43,7 +43,6 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
           <VideoPlayer
             chapterId={params.chapterId}
             videoUrl={chapter.videoUrl!}
-            title={chapter.title}
             courseId={params.courseId}
             nextChapterId={nextChapter?.id}
             isLocked={isLocked}
