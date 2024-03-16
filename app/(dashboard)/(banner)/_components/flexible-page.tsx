@@ -13,7 +13,7 @@ export const FlexiblePage = () => {
         <div className="pt-8">
           <Button
             size={'lg'}
-            className="rounded-full text-white bg-transparent border-[2px] border-white font-bold text-center leading-6 hover:bg-leadingcolor hover:text-homecolor h-12 text-xl"
+            className="rounded-full text-white bg-transparent border-[2px] border-white font-bold text-center leading-6 hover:bg-leadingcolor hover:text-landingpage h-12 text-xl"
           >
             Enroll Now
           </Button>

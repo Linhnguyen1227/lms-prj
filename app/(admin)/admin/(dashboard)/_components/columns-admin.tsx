@@ -71,7 +71,7 @@ export const columnsAdminPage: ColumnDef<DataTablesProps>[] = [
       const data = row.original;
       const userId: string = data?.id;
       const isAdmin = data?.role === 'admin';
-      const isManager = data?.id === 'user_2dcO3598yxZSxenaGXjtHbQiZ0u' || isAdmin;
+      const isManager = data?.id === 'user_2dcO3598yxZSxenaGXjtHbQiZ0u' && isAdmin;
 
       // eslint-disable-next-line react-hooks/rules-of-hooks
       const router = useRouter();

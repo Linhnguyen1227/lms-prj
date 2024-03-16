@@ -2,7 +2,7 @@
 export const FeedbackPage = () => {
   return (
     <div className="text-white text-center">
-      <h2 className=" font-bold sm:text-[29px] md:text-[44px]">We love our customers</h2>
+      <h2 className=" font-bold  text-[29px] md:text-[44px]">We love our customers</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 pt-10">
         <div className=" flex flex-col md:flex-row rounded-md max-w-[800px] bg-[#0e2d58] border-[#7291f9] border-[1px] p-6 gap-5">
           <img

@@ -21,7 +21,7 @@ module.exports =withUt( {
       colors: {
         borderline:'rgba(247, 250, 252, 0.3)',
         leadingcolor: "#0369a1",
-        homecolor: "#0c2445",
+        landingpage: "#0c2445",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

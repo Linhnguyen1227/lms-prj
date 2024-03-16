@@ -6,16 +6,16 @@ export const FirstPage = () => {
     <>
       <div>
         <div className="text-leadingcolor text-lg font-bold">COURSE BUILDING AND LEARNING</div>
-        <div className="text-[76px] font-bold text-white leading-snug">Build an audience with Umy</div>
+        <div className=" text-[44px] sm:text-[76px] font-bold text-white leading-snug">Build an audience with Umy</div>
         <div className="text-xl text-white">
           Umy is a flexible learning management system (LMS) template with everything you need to sell video content.
           Create an entire catalog or just a single course and sell subscriptions with ease!
         </div>
-        <div className="pt-6 space-x-6 ">
+        <div className="pt-6 space-y-6 sm:space-x-6">
           <Button className="rounded-full text-white bg-leadingcolor border-[2px] border-leadingcolor font-bold text-center leading-6 hover:bg-leadingcolor/50 h-12 text-xl">
             Explore Course
           </Button>
-          <Button className="rounded-full  text-white bg-transparent border-[2px] border-white font-bold text-center leading-6 hover:bg-leadingcolor hover:text-homecolor h-12 text-xl">
+          <Button className="rounded-full  text-white bg-transparent border-[2px] border-white font-bold text-center leading-6 hover:bg-leadingcolor hover:text-landingpage h-12 text-xl">
             Enroll Now
           </Button>
         </div>

@@ -40,7 +40,7 @@ export const DesignPage = () => {
         />
       </div>
       <div className="space-y-8">
-        <div className="text-white text-[44px] font-bold leading-tight pt-6 ">
+        <div className="text-white text-[44px] font-bold leading-tight pt-10 md:pt-6 ">
           Courses designed to get you from point A to&nbsp;point&nbsp;B
         </div>
         <div className="flex flex-col space-y-8">

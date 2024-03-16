@@ -58,7 +58,7 @@ export const FooterPage = () => {
   return (
     <div className="text-center space-y-8">
       <h2 className="text-[#ffc2c0] font-bold text-[24px]">Umy</h2>
-      <div className="flex items-center justify-center  gap-x-4 px-4 py-4">
+      <div className="flex flex-col items-center justify-center  gap-x-4 px-4 py-4 md:flex-row">
         {router.map((item) => (
           <Button
             key={item.id}
@@ -68,13 +68,13 @@ export const FooterPage = () => {
           </Button>
         ))}
       </div>
-      <div className="flex items-center text-base justify-between">
+      <div className="flex flex-col items-center text-base justify-between md:flex-row">
         <div>
           Powered by <span className="font-bold hover:underline cursor-pointer">@NVLinh</span>,built by{' '}
           <span className="font-bold hover:underline cursor-pointer">Linh Nguyen</span> |{' '}
           <span className="font-bold hover:underline cursor-pointer">Licensing</span>
         </div>
-        <div className="flex gap-x-4">
+        <div className="flex gap-x-4 p-6 md:pt-0">
           {socialList.map((item) => (
             <div key={item.id}>
               <Link href={'#'}>
