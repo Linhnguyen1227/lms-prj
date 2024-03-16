@@ -1,23 +1,23 @@
 'use client';
 import toast from 'react-hot-toast';
 import axios from 'axios';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-
 import { ArrowUpDown, BookOpen, MoreHorizontal, Pencil, Trash } from 'lucide-react';
 
-import { cn } from '@/lib/utils';
-import { ColumnDef } from '@tanstack/react-table';
-
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+
+import { cn } from '@/lib/utils';
+import { ColumnDef } from '@tanstack/react-table';
 import { useModal } from '@/hooks/use-modal-store';
-import Link from 'next/link';
+
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 
 interface DataTablesProps {
   id: string;
@@ -71,7 +71,7 @@ export const columnsAdminPage: ColumnDef<DataTablesProps>[] = [
       const data = row.original;
       const userId: string = data?.id;
       const isAdmin = data?.role === 'admin';
-      const isManager = data?.id === 'user_2d4To7URJrKYZ8pdlJOgPt9vkY1' && isAdmin;
+      const isManager = data?.id === 'user_2dcO3598yxZSxenaGXjtHbQiZ0u' || isAdmin;
 
       // eslint-disable-next-line react-hooks/rules-of-hooks
       const router = useRouter();
@@ -87,7 +87,6 @@ export const columnsAdminPage: ColumnDef<DataTablesProps>[] = [
           toast.error('Delete failed');
         }
       };
-
       return (
         <>
           {isManager ? (

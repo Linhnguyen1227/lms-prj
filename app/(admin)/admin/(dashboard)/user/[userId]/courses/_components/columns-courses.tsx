@@ -19,6 +19,7 @@ import {
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Role } from '@prisma/client';
 interface DataCourseProps {
   id: string;
   title: string;
@@ -91,6 +92,7 @@ export const ColumnsCoursesPage: ColumnDef<DataCourseProps>[] = [
     id: 'Action',
     cell: ({ row }) => {
       const data = row.original;
+      console.log(data);
 
       // eslint-disable-next-line react-hooks/rules-of-hooks
       const router = useRouter();

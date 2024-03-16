@@ -7,8 +7,10 @@ const nextConfig = {
             hostname: 'utfs.io',
             port: '',
             pathname: '/f/**',
+          }, {
+            protocol: 'https',
+            hostname: 'assets.website-files.com',
           },
-          
         ],
       },
     }
