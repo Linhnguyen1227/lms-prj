@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 import { UserButton } from '@clerk/nextjs';
 import { NavbarMobile } from './navbar-mobile';
 interface NavbarHomeProps {
