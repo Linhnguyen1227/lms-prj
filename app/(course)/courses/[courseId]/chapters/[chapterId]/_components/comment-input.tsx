@@ -30,7 +30,6 @@ export const CommentInput = ({ query, apiUrl }: CommentInputProps) => {
   });
   const isLoading = form.formState.isSubmitting;
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
     try {
       const url = qs.stringifyUrl({
         url: apiUrl,

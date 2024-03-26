@@ -1,9 +1,6 @@
 import { NextResponse } from "next/server";
-
 import { db } from "@/lib/db";
 import { currentProfile } from "@/lib/current-profile";
-
-
 
 export async function DELETE(
   req: Request,
@@ -111,3 +108,4 @@ export async function PATCH(
     return new NextResponse("Internal Error", { status: 500 }); 
   }
 }
+

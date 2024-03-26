@@ -87,6 +87,7 @@ model Chapter {
   course       Course         @relation(fields: [courseId], references: [id], onDelete: Cascade)
   userProgress UserProgress[]
   comment      Comment[]
+  question     Question[]
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
 
@@ -139,5 +140,23 @@ model Comment {
   updatedAt DateTime @updatedAt
 
   @@index([profileId])
+  @@index([chapterId])
+}
+
+model Question {
+  id        String   @id @default(uuid())
+  question  String   @db.Text
+  option_a  String   @db.Text
+  option_b  String   @db.Text
+  option_c  String   @db.Text
+  option_d  String   @db.Text
+  answer    String
+  chapterId String
+  chapter   Chapter  @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  profileId String
+  courseId  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   @@index([chapterId])
 }

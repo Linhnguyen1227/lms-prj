@@ -7,6 +7,6 @@ export const Discord = () => {
 };
 export const Twitter = () => {
   return (
-    <Image src={'/twitter.svg'} alt="twitter_logo" width={'80'} height={'80'} className="group-hover:scale-[1.2] " />
+    <Image src={'/twitter.svg'} alt="twitter_logo" width={'80'} height={'80'} className="group-hover:scale-[1.2]" />
   );
 };

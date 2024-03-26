@@ -1,5 +1,5 @@
 
-import { Course } from "@prisma/client";
+import { Course, Question } from "@prisma/client";
 import { create } from "zustand";
 
 export type ModalType =
@@ -7,6 +7,8 @@ export type ModalType =
   | "openUserCreate"
   | "openEditCourse"
   |"deleteComment"
+  |"openQuestionModal"
+  |"openEditQuestionModal"
 ;
 
 interface ModalData {
@@ -19,8 +21,16 @@ interface ModalData {
   isPublished?: boolean;
   price?: number;
   apiUrl?: string;
+  courseId?:string,
+  chapterId?:string,
+  initialData?: Question[],
+  question?:string,
+  option_a?:string,
+  option_b?:string,
+  option_c?:string,
+  option_d?:string,
+  answer?:string,
   query?: Record<string, any>;
-
 }
 
 interface ModalStore {

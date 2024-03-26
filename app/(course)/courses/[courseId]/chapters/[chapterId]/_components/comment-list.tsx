@@ -84,10 +84,9 @@ export const CommentList = ({
 
       <div className="flex flex-col mt-auto">
         {data?.pages?.map((group: any, i: number) => (
-          <Fragment key={i}>
+          <div key={i}>
             {group.items.map((message: CommentWithChapterWithProfile) => (
               <>
-                {console.log(data)}
                 <CommentItem
                   key={message.id}
                   id={message.id}
@@ -103,7 +102,7 @@ export const CommentList = ({
                 />
               </>
             ))}
-          </Fragment>
+          </div>
         ))}
       </div>
       {hasNextPage && (

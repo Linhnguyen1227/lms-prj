@@ -73,7 +73,15 @@ export const getChapter = async ({ profileId, courseId, chapterId }: GetChapterP
       },
     });
 
+    const questions = await db.question.findMany({
+      where: {
+        chapterId: chapterId,
+        courseId: courseId,
+      },
+    });
+
     return {
+      questions,
       chapter,
       course,
       attachments,
@@ -84,6 +92,7 @@ export const getChapter = async ({ profileId, courseId, chapterId }: GetChapterP
   } catch (error) {
     console.log('[GET_CHAPTER]', error);
     return {
+      questions: null,
       chapter: null,
       course: null,
       attachments: [],

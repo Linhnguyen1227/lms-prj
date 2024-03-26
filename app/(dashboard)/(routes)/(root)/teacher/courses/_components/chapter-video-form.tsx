@@ -2,7 +2,6 @@
 
 import * as z from 'zod';
 import axios from 'axios';
-import ReactPlayer from 'react-player';
 import { Pencil, PlusCircle, Video } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
@@ -10,12 +9,10 @@ import { useRouter } from 'next/navigation';
 import { Chapter } from '@prisma/client';
 
 import { Button } from '@/components/ui/button';
-import { FileUpload } from '@/components/file-upload';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '@/components/ui/input';
-import YouTubePlayer from 'react-player/youtube';
 import { VideoPlayer } from '@/app/(course)/courses/[courseId]/chapters/[chapterId]/_components/video-player';
 
 interface ChapterVideoFormProps {

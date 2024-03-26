@@ -1,10 +1,10 @@
 'use client';
 
 import axios from 'axios';
+import toast from 'react-hot-toast';
+import { useState } from 'react';
 import { CheckCircle, XCircle } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import toast from 'react-hot-toast';
 
 import { Button } from '@/components/ui/button';
 import { useConfettiStore } from '@/hooks/use-confetti-store';
@@ -14,13 +14,17 @@ interface CourseProgressButtonProps {
   courseId: string;
   isCompleted?: boolean;
   nextChapterId?: string;
+  isQuestions?: boolean;
+  disabled?: boolean;
 }
 
 export const CourseProgressButton = ({
+  disabled,
   chapterId,
   courseId,
   isCompleted,
   nextChapterId,
+  isQuestions,
 }: CourseProgressButtonProps) => {
   const router = useRouter();
   const confetti = useConfettiStore();
@@ -34,11 +38,16 @@ export const CourseProgressButton = ({
         isCompleted: !isCompleted,
       });
 
-      if (!isCompleted && !nextChapterId) {
+      if (!isCompleted && !nextChapterId && !isQuestions) {
         confetti.onOpen();
+      } else if (!isCompleted && !nextChapterId && isQuestions) {
+        router.push(`/courses/${courseId}/chapters/${chapterId}`);
       }
 
-      if (!isCompleted && nextChapterId) {
+      if (!isCompleted && !isQuestions && nextChapterId) {
+        router.push(`/courses/${courseId}/chapters/${nextChapterId}`);
+      }
+      if (!isCompleted && isQuestions && nextChapterId) {
         router.push(`/courses/${courseId}/chapters/${nextChapterId}`);
       }
 
@@ -56,7 +65,7 @@ export const CourseProgressButton = ({
   return (
     <Button
       onClick={onClick}
-      disabled={isLoading}
+      disabled={isLoading || (disabled === true && isCompleted === false)}
       type="button"
       variant={isCompleted ? 'outline' : 'success'}
       className="w-full md:w-auto"

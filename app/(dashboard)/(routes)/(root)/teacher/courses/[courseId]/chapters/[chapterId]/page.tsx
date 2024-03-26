@@ -1,18 +1,18 @@
-import { auth } from '@clerk/nextjs';
-import { redirect } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, Eye, LayoutDashboard, Video } from 'lucide-react';
+import { redirect } from 'next/navigation';
+import { ArrowLeft, Eye, HelpCircle, LayoutDashboard, Video } from 'lucide-react';
 
 import { currentProfile } from '@/lib/current-profile';
 import { db } from '@/lib/db';
 import { IconBadge } from '@/components/icon-badge';
+import { Banner } from '@/components/banner';
 
 import { ChapterTitleForm } from './_components/chapter-title-form';
 import { ChapterDescriptionForm } from './_components/chapter-description-form';
 import { ChapterAccessForm } from '../../../_components/chapter-access-form';
 import { ChapterVideoForm } from '../../../_components/chapter-video-form';
-import { Banner } from '@/components/banner';
 import { ChapterActions } from '../../../_components/chapters-action';
+import { QuestionsForm } from '../../../_components/question-form';
 
 const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId: string } }) => {
   const profile = await currentProfile();
@@ -25,6 +25,15 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
     where: {
       id: params.chapterId,
       courseId: params.courseId,
+    },
+  });
+
+  const question = await db.question.findMany({
+    where: {
+      chapterId: params.chapterId,
+    },
+    orderBy: {
+      createdAt: 'desc',
     },
   });
 
@@ -94,6 +103,15 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
               <h2 className="text-xl">Add a video</h2>
             </div>
             <ChapterVideoForm initialData={chapter} courseId={params.courseId} chapterId={params.chapterId} />
+          </div>
+          <div>
+            <div className="flex items-center justify-between gap-x-2 ">
+              <div className="flex items-center gap-x-2">
+                <IconBadge icon={HelpCircle} />
+                <h2 className="text-xl">Questions</h2>
+              </div>
+            </div>
+            <QuestionsForm initialData={question} courseId={params.courseId} chapterId={params.chapterId} />
           </div>
         </div>
       </div>

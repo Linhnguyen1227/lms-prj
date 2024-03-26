@@ -5,6 +5,8 @@ import ModalProfile from '../modals/modal-profile';
 import ModalUserCreate from '../modals/modal-user-create';
 import ModalEditCourse from '../modals/modal-edit-course';
 import { ModalDeleteComment } from '../modals/modal-delete-comment';
+import ModalQuestion from '../modals/modal-question';
+import ModalEditQuestion from '../modals/modal-edit-question';
 
 export const ModalProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -22,6 +24,8 @@ export const ModalProvider = () => {
       <ModalUserCreate />
       <ModalEditCourse />
       <ModalDeleteComment />
+      <ModalQuestion />
+      <ModalEditQuestion />
     </>
   );
 };

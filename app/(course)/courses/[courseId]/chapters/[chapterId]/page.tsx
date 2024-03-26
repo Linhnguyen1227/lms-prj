@@ -13,6 +13,7 @@ import { CourseEnrollButton } from './_components/course-enroll-button';
 import { CourseProgressButton } from './_components/course-progress-button';
 import { CommentInput } from './_components/comment-input';
 import { CommentList } from './_components/comment-list';
+import { ExamButton } from './question/_components/exam-button';
 
 const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId: string } }) => {
   const profile = await currentProfile();
@@ -21,18 +22,18 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
     return redirect('/');
   }
 
-  const { chapter, course, attachments, nextChapter, userProgress, purchase } = await getChapter({
+  const { chapter, course, attachments, nextChapter, userProgress, purchase, questions } = await getChapter({
     profileId: profile.id,
     chapterId: params.chapterId,
     courseId: params.courseId,
   });
-
   if (!chapter || !course) {
     return redirect('/');
   }
 
   const isLocked = !chapter.isFree && !purchase;
   const completeOnEnd = !!purchase && !userProgress?.isCompleted;
+  const isQuestions = !!questions.length;
 
   return (
     <div>
@@ -50,15 +51,18 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
           />
         </div>
         <div>
-          <div className="p-4 text-center md:flex justify-between items-center">
-            <h2 className="text-2xl font-semibold mb-2">{chapter.title}</h2>
-            {purchase ? (
+          <div className="p-4 text-center md:flex justify-between items-center group">
+            <h2 className="text-2xl font-semibold mb-2 ">{chapter.title}</h2>
+            {purchase && !isQuestions ? (
               <CourseProgressButton
                 chapterId={params.chapterId}
                 courseId={params.courseId}
                 nextChapterId={nextChapter?.id}
                 isCompleted={!!userProgress?.isCompleted}
+                isQuestions={isQuestions}
               />
+            ) : purchase && isQuestions ? (
+              <ExamButton chapterId={params.chapterId} courseId={params.courseId} />
             ) : (
               // price! chuyển đổi giá trị price từ null hoặc undefined sang chuỗi rỗng
               <CourseEnrollButton courseId={params.courseId} price={course.price!} />
@@ -71,7 +75,7 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
           {!!attachments.length && (
             <>
               <Separator />
-              <div className="p-4">
+              <div className="p-4 space-y-2">
                 {attachments.map((attachment) => (
                   <a
                     href={attachment.url}
