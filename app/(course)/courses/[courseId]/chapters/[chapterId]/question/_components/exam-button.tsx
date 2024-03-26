@@ -12,7 +12,7 @@ export const ExamButton = ({ chapterId, courseId }: ExamButtonProps) => {
   return (
     <Link href={`/courses/${courseId}/chapters/${chapterId}/question`}>
       <Button variant={'success'}>
-        <span className=" flex items-center justify-center hover:scale-110 transition-all">
+        <span className=" flex items-center justify-center hover:scale-110 transition-all h-full">
           Exam <MoveRight className=" h-6 w-6 ml-2" />
         </span>
       </Button>

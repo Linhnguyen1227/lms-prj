@@ -86,9 +86,8 @@ export const CommentList = ({
         {data?.pages?.map((group: any, i: number) => (
           <div key={i}>
             {group.items.map((message: CommentWithChapterWithProfile) => (
-              <>
+              <div key={message.id}>
                 <CommentItem
-                  key={message.id}
                   id={message.id}
                   profile={profile}
                   content={message.content}
@@ -100,7 +99,7 @@ export const CommentList = ({
                   message={message}
                   // fileUrl={null}
                 />
-              </>
+              </div>
             ))}
           </div>
         ))}

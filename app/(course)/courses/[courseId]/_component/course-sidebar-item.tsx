@@ -15,7 +15,7 @@ interface CourseSidebarItemProps {
   profileId: string;
 }
 
-export const CourseSidebarItem = async ({
+export const CourseSidebarItem = ({
   label,
   id,
   isCompleted,
@@ -28,14 +28,6 @@ export const CourseSidebarItem = async ({
 
   const Icon = isLocked ? Lock : isCompleted ? CheckCircle : PlayCircle;
   const isActive = pathname?.includes(id);
-
-  //   const { questions } = await getChapter({
-  //     chapterId: id,
-  //     courseId: courseId,
-  //     profileId,
-  //   });
-
-  //   console.log(questions);
 
   const onClick = () => {
     router.push(`/courses/${courseId}/chapters/${id}`);
