@@ -153,7 +153,7 @@ const ModalQuestion = () => {
                       <FormControl>
                         <RadioGroup onValueChange={field.onChange} defaultValue={field.value}>
                           <FormItem className="flex items-center space-x-3 space-y-0">
-                            <FormLabel className="font-normal">Answer A</FormLabel>
+                            <FormLabel className="font-normal accent-primary ">Answer A</FormLabel>
                             <FormControl>
                               <RadioGroupItem value={form.getValues('option_a')} />
                             </FormControl>
