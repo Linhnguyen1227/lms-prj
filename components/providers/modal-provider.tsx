@@ -7,6 +7,7 @@ import ModalEditCourse from '../modals/modal-edit-course';
 import { ModalDeleteComment } from '../modals/modal-delete-comment';
 import ModalQuestion from '../modals/modal-question';
 import ModalEditQuestion from '../modals/modal-edit-question';
+import { CheckAnswerModal } from '../modals/checkAnswer-modal';
 
 export const ModalProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -26,6 +27,7 @@ export const ModalProvider = () => {
       <ModalDeleteComment />
       <ModalQuestion />
       <ModalEditQuestion />
+      <CheckAnswerModal />
     </>
   );
 };

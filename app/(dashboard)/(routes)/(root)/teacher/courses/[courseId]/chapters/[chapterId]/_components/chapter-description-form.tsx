@@ -56,14 +56,14 @@ export const ChapterDescriptionForm = ({ initialData, courseId, chapterId }: Cha
   return (
     <div className="mt-6 border bg-slate-100 rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
-        Chapter description
+        Mô tả bài học
         <Button onClick={toggleEdit} variant="ghost">
           {isEditing ? (
-            <>Cancel</>
+            <>Hủy</>
           ) : (
             <>
               <Pencil className="h-4 w-4 mr-2" />
-              Edit description
+              Chỉnh sửa
             </>
           )}
         </Button>
@@ -91,7 +91,7 @@ export const ChapterDescriptionForm = ({ initialData, courseId, chapterId }: Cha
             />
             <div className="flex items-center gap-x-2">
               <Button disabled={!isValid || isSubmitting} type="submit">
-                Save
+                Lưu
               </Button>
             </div>
           </form>

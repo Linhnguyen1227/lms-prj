@@ -66,7 +66,7 @@ export default async function handler(
         },
         data: {
         //   fileUrl: null,
-          content: "This message has been deleted.",
+          content: "Bình luận đã bị xóa.",
           deleted: true,
         },
         include: {

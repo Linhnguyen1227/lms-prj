@@ -13,7 +13,8 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from '@/component
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '@/components/ui/input';
-import { VideoPlayer } from '@/app/(course)/courses/[courseId]/chapters/[chapterId]/_components/video-player';
+import { VideoPlayer } from '@/app/(course)/courses/[courseId]/(wrapChapter)/chapters/[chapterId]/_components/video-player';
+import { FileUpload } from '@/components/file-upload';
 
 interface ChapterVideoFormProps {
   initialData: Chapter;
@@ -57,19 +58,19 @@ export const ChapterVideoForm = ({ initialData, courseId, chapterId }: ChapterVi
   return (
     <div className="mt-6 border bg-slate-100 rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
-        Chapter video
+        Video bài học
         <Button onClick={toggleEdit} variant="ghost">
           {isEditing && <>Cancel</>}
           {!isEditing && !initialData.videoUrl && (
             <>
               <PlusCircle className="h-4 w-4 mr-2" />
-              Add a video
+              Thêm video
             </>
           )}
           {!isEditing && initialData.videoUrl && (
             <>
               <Pencil className="h-4 w-4 mr-2" />
-              Edit video
+              Chỉnh sửa
             </>
           )}
         </Button>
@@ -88,14 +89,13 @@ export const ChapterVideoForm = ({ initialData, courseId, chapterId }: ChapterVi
         ))}
       {isEditing && (
         <div>
-          <Form {...form}>
+          {/*  <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
               <FormField
                 control={form.control}
                 name="videoUrl"
                 render={({ field }) => (
                   <FormItem>
-                    {/* <FormLabel>Username</FormLabel> */}
                     <FormControl>
                       <Input placeholder="Enter video url" {...field} />
                     </FormControl>
@@ -103,23 +103,23 @@ export const ChapterVideoForm = ({ initialData, courseId, chapterId }: ChapterVi
                   </FormItem>
                 )}
               />
-              <Button type="submit">Add</Button>
+              <Button type="submit">Thêm</Button>
             </form>
-          </Form>
-          {/* <FileUpload
+          </Form> */}
+          <FileUpload
             endpoint="chapterVideo"
             onChange={(url) => {
               if (url) {
                 onSubmit({ videoUrl: url });
               }
             }}
-          /> */}
-          <div className="text-xs text-muted-foreground mt-4">Upload this chapter&apos;s video</div>
+          />
+          <div className="text-xs text-muted-foreground mt-4">Tải lên video của bài này</div>
         </div>
       )}
       {initialData.videoUrl && !isEditing && (
         <div className="text-xs text-muted-foreground mt-2">
-          If your video is not displayed, please refresh the page or re-enter the link
+          Nếu video của bạn không hiển thị vui lòng tải lại trang.
         </div>
       )}
     </div>

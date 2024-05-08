@@ -24,7 +24,8 @@ export default function ListQuestionPage({
 }: QuestionItemProps) {
   let index = 1;
   const [listAnswer, setListAnswer] = useState<string[]>([]);
-  console.log(listAnswer);
+
+  /*   console.log('list đáp án đúng', listAnswer); */
 
   const handleAnswerChange = (answer: string, correctAnswer: string) => {
     if (answer === correctAnswer && listAnswer.includes(answer)) {
@@ -44,9 +45,9 @@ export default function ListQuestionPage({
       setListAnswer(newListAnswer);
     }
   };
+  console.log('listAnswer', listAnswer);
 
   const isAllAnswersCorrect = questions.every((question) => listAnswer.includes(question.answer));
-  console.log(isAllAnswersCorrect);
 
   return (
     <>
@@ -69,7 +70,7 @@ export default function ListQuestionPage({
 
       <div className="text-center md:flex justify-end items-center">
         <CourseProgressButton
-          disabled={!isAllAnswersCorrect}
+          isAllAnswersCorrect={isAllAnswersCorrect}
           chapterId={chapterId}
           courseId={courseId}
           nextChapterId={nextChapterId}

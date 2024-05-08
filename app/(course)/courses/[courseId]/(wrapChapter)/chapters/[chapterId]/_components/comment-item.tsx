@@ -122,9 +122,11 @@ export const CommentItem = ({
   return (
     <div className="relative group flex items-center hover:bg-black/5 p-4 transition w-full">
       <div className="group flex gap-x-2 items-start w-full">
-        <div className="cursor-pointer hover:drop-shadow-md transition">
-          <UserAvatar src={message.profile?.imageUrl} />
-        </div>
+        <ActionTooltip label={message.profile?.username}>
+          <div className="cursor-pointer hover:drop-shadow-md transition">
+            <UserAvatar src={message.profile?.imageUrl} />
+          </div>
+        </ActionTooltip>
         <div className="flex flex-col w-full">
           <div className="flex items-center gap-x-2">
             <div className="flex items-center">
@@ -142,7 +144,7 @@ export const CommentItem = ({
             >
               {content}
               {isUpdated && !deleted && (
-                <span className="text-[10px] mx-2 text-zinc-500 dark:text-zinc-400">(edited)</span>
+                <span className="text-[10px] mx-2 text-zinc-500 dark:text-zinc-400">(đã chỉnh sửa)</span>
               )}
             </p>
           )}
@@ -168,10 +170,10 @@ export const CommentItem = ({
                   )}
                 />
                 <Button disabled={isLoading} size="sm" variant="primary">
-                  Save
+                  Lưu
                 </Button>
               </form>
-              <span className="text-[10px] mt-1 text-zinc-400">Press escape to cancel, enter to save</span>
+              <span className="text-[10px] mt-1 text-zinc-400">Nhấn thoát để hủy, nhập để lưu</span>
             </Form>
           )}
         </div>
@@ -179,7 +181,7 @@ export const CommentItem = ({
 
       <div className="hidden group-hover:flex items-center gap-x-2 absolute p-1 -top-2 right-5 bg-white dark:bg-zinc-800 border rounded-sm">
         {canEditMessage && canDeleteMessage && (
-          <ActionTooltip label="Edit">
+          <ActionTooltip label="Chỉnh sửa">
             <Edit
               onClick={() => setIsEditing(true)}
               className="cursor-pointer ml-auto w-4 h-4 text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 transition"
@@ -187,7 +189,7 @@ export const CommentItem = ({
           </ActionTooltip>
         )}
         {canDeleteMessage && (
-          <ActionTooltip label="Delete">
+          <ActionTooltip label="Xóa">
             <Trash
               onClick={() => {
                 onOpen('deleteComment', {

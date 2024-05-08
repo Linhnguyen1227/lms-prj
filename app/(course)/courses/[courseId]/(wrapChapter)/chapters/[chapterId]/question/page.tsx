@@ -33,7 +33,7 @@ const QuestionPage = async ({ params }: { params: { courseId: string; chapterId:
       {/* {userProgress?.isCompleted && <Banner variant="success" label="You already completed this chapter." />} */}
       <div className="flex flex-col max-w-4xl space-y-4 ">
         <h2 className="text-2xl font-semibold mb-2">{chapter.title}</h2>
-        <div className="text-base font-semibold">Multiple-choice questions </div>
+        <div className="text-base font-semibold">Câu hỏi trắc nghiệm </div>
         <Separator />
       </div>
       <div>

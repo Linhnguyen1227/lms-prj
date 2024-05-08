@@ -23,13 +23,13 @@ export const ConfirmModal = ({ children, onConfirm }: ConfirmModalProps) => {
       <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-          <AlertDialogDescription>This action cannot be undone.</AlertDialogDescription>
+          <AlertDialogTitle>Bạn chắc chắn muốn thực hiện hành động này?</AlertDialogTitle>
+          <AlertDialogDescription>Hành động này không thể được hoàn tác.</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogCancel>Hủy</AlertDialogCancel>
           <AlertDialogAction onClick={onConfirm} className="bg-leadingcolor hover:bg-landingpage">
-            Continue
+            Tiếp tục
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

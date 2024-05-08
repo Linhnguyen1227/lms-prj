@@ -52,7 +52,7 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
   return (
     <>
       {!chapter.isPublished && (
-        <Banner variant="warning" label="This chapter is unpublished. It will not be visible in the course" />
+        <Banner variant="warning" label="Chương này chưa được xuất bản. Nó sẽ không được hiển thị trong khóa học" />
       )}
 
       <div className="p-6">
@@ -63,12 +63,12 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
               className="flex items-center text-sm hover:opacity-75 transition mb-6"
             >
               <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to course setup
+              Quay lại thiết lập khóa học
             </Link>
             <div className="flex items-center justify-between w-full">
               <div className="flex flex-col gap-y-2">
-                <h1 className="text-2xl font-medium">Chapter Creation</h1>
-                <span className="text-sm text-slate-700">Complete all fields {completionText}</span>
+                <h1 className="text-2xl font-medium">Tạo bài học</h1>
+                <span className="text-sm text-slate-700">Hoàn thành tất cả các trường {completionText}</span>
               </div>
               <ChapterActions
                 disabled={!isCompleted}
@@ -84,7 +84,7 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
             <div>
               <div className="flex items-center gap-x-2">
                 <IconBadge icon={LayoutDashboard} />
-                <h2 className="text-xl">Customize your chapter</h2>
+                <h2 className="text-xl">Tùy chỉnh bài học của bạn</h2>
               </div>
               <ChapterTitleForm initialData={chapter} courseId={params.courseId} chapterId={params.chapterId} />
               <ChapterDescriptionForm initialData={chapter} courseId={params.courseId} chapterId={params.chapterId} />
@@ -92,7 +92,7 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
             <div>
               <div className="flex items-center gap-x-2">
                 <IconBadge icon={Eye} />
-                <h2 className="text-xl">Access Settings</h2>
+                <h2 className="text-xl">Cài đặt truy cập</h2>
               </div>
               <ChapterAccessForm initialData={chapter} courseId={params.courseId} chapterId={params.chapterId} />
             </div>
@@ -100,7 +100,7 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
           <div>
             <div className="flex items-center gap-x-2">
               <IconBadge icon={Video} />
-              <h2 className="text-xl">Add a video</h2>
+              <h2 className="text-xl">Thêm video</h2>
             </div>
             <ChapterVideoForm initialData={chapter} courseId={params.courseId} chapterId={params.chapterId} />
           </div>
@@ -108,7 +108,7 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
             <div className="flex items-center justify-between gap-x-2 ">
               <div className="flex items-center gap-x-2">
                 <IconBadge icon={HelpCircle} />
-                <h2 className="text-xl">Questions</h2>
+                <h2 className="text-xl">Các câu hỏi</h2>
               </div>
             </div>
             <QuestionsForm initialData={question} courseId={params.courseId} chapterId={params.chapterId} />

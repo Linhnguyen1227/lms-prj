@@ -43,19 +43,19 @@ export const ModalDeleteComment = () => {
     <Dialog open={isModalOpen} onOpenChange={onClose}>
       <DialogContent className="bg-white text-black p-0 overflow-hidden">
         <DialogHeader className="pt-8 px-6">
-          <DialogTitle className="text-2xl text-center font-bold">Delete Message</DialogTitle>
+          <DialogTitle className="text-2xl text-center font-bold">Xóa bình luận</DialogTitle>
           <DialogDescription className="text-center text-zinc-500">
-            Are you sure you want to do this? <br />
-            The message will be permanently deleted.
+            Bạn có chắc chắn muốn làm điều này? <br />
+            Tin nhắn sẽ bị xóa vĩnh viễn.
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className="bg-gray-100 px-6 py-4">
           <div className="flex items-center justify-between w-full">
             <Button disabled={isLoading} onClick={onClose} variant="ghost">
-              Cancel
+              Hủy
             </Button>
             <Button disabled={isLoading} variant="primary" onClick={onClick}>
-              Confirm
+              Xác nhận
             </Button>
           </div>
         </DialogFooter>

@@ -8,22 +8,22 @@ import { Chart } from './_components/chart';
 import { currentProfile } from '@/lib/current-profile';
 
 const AnalyticsPage = async () => {
-    const profile = await currentProfile();
+  const profile = await currentProfile();
 
-    if (!profile) {
-        return redirect('/');
-    }
+  if (!profile) {
+    return redirect('/');
+  }
 
-    const { data, totalRevenue, totalSales } = await getAnalytics(profile?.id);
+  const { data, totalRevenue, totalSales } = await getAnalytics(profile?.id);
 
-    return (
-        <div className="p-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                <DataCard label="Total Revenue" value={totalRevenue} shouldFormat />
-                <DataCard label="Total Sales" value={totalSales} />
-            </div>
-            <Chart data={data} />
-        </div>
-    );
+  return (
+    <div className="p-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <DataCard label="Tổng doanh thu" value={totalRevenue} shouldFormat />
+        <DataCard label="Tổng các khóa học đã bán " value={totalSales} />
+      </div>
+      <Chart data={data} />
+    </div>
+  );
 };
 export default AnalyticsPage;

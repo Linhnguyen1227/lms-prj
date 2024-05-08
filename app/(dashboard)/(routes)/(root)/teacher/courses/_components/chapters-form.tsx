@@ -58,13 +58,13 @@ export const ChaptersForm = ({
     try {
       await axios.post(`/api/courses/${courseId}/chapters`, values);
 
-      toast.success('Chapter created');
+      toast.success('Tạo khóa học thành công');
 
       toggleCreating();
       router.refresh();
       form.reset();
     } catch {
-      toast.error('Something went wrong');
+      toast.error('Có lỗi xảy ra');
     }
   };
 
@@ -78,7 +78,7 @@ export const ChaptersForm = ({
       toast.success('Chapters reordered');
       router.refresh();
     } catch {
-      toast.error('Something went wrong');
+      toast.error('Có lỗi xảy ra');
     } finally {
       setIsUpdating(false);
     }
@@ -96,14 +96,14 @@ export const ChaptersForm = ({
         </div>
       )}
       <div className="font-medium flex items-center justify-between ">
-        Course chapters
+        Các bài học
         <Button onClick={toggleCreating} variant="ghost">
           {isCreating ? (
-            <>Cancel</>
+            <>Hủy</>
           ) : (
             <>
               <PlusCircle className="h-4 w-4 mr-2" />
-              Add a chapter
+              Thêm
             </>
           )}
         </Button>
@@ -118,7 +118,7 @@ export const ChaptersForm = ({
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input disabled={isSubmitting} placeholder="e.g. 'Introduction to the course'" {...field} />
+                    <Input disabled={isSubmitting} placeholder="Thêm bài học của bạn" {...field} />
                   </FormControl>
 
                   <FormMessage />
@@ -127,7 +127,7 @@ export const ChaptersForm = ({
             />
 
             <Button disabled={!isValid || isSubmitting} type="submit">
-              Create
+              Tạo
             </Button>
           </form>
         </Form>
@@ -148,7 +148,7 @@ export const ChaptersForm = ({
         </div>
       )}
 
-      {!isCreating && <p className="text-xs text-muted-foreground mt-4">Drag and drop to reorder the chapters</p>}
+      {!isCreating && <p className="text-xs text-muted-foreground mt-4">Kéo và thả để sắp xếp lại các chương</p>}
     </div>
   );
 };

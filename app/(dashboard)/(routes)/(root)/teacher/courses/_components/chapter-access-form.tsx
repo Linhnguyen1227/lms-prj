@@ -57,21 +57,21 @@ export const ChapterAccessForm = ({ initialData, courseId, chapterId }: ChapterA
   return (
     <div className="mt-6 border bg-slate-100 rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
-        Chapter access
+        Khả năng truy cập
         <Button onClick={toggleEdit} variant="ghost">
           {isEditing ? (
-            <>Cancel</>
+            <>Hủy</>
           ) : (
             <>
               <Pencil className="h-4 w-4 mr-2" />
-              Edit access
+              Chỉnh sửa
             </>
           )}
         </Button>
       </div>
       {!isEditing && (
         <p className={cn('text-sm mt-2', !initialData.isFree && 'text-slate-500 italic')}>
-          {initialData.isFree ? <>This chapter is free for preview.</> : <>This chapter is not free.</>}
+          {initialData.isFree ? <>Chương này được xem trước miễn phí.</> : <>Chương này không miễn phí.</>}
         </p>
       )}
       {isEditing && (
@@ -86,7 +86,7 @@ export const ChapterAccessForm = ({ initialData, courseId, chapterId }: ChapterA
                     <Checkbox checked={field.value} onCheckedChange={field.onChange} />
                   </FormControl>
                   <div className="space-y-1 leading-none">
-                    <FormDescription>Check this box if you want to make this chapter free for preview</FormDescription>
+                    <FormDescription>Chọn vào đây nếu bạn muốn chương này được xem trước miễn phí</FormDescription>
                   </div>
                 </FormItem>
               )}

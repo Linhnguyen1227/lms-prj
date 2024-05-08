@@ -5,17 +5,19 @@ export const FlexiblePage = () => {
   return (
     <>
       <div className="space-y-8 text-white">
-        <div className="text-white text-[44px] font-bold leading-tight">Learn in-depth topics at your own speed.</div>
+        <div className="text-white text-[44px] font-bold leading-tight">
+          Tìm hiểu các chủ đề chuyên sâu theo tốc độ của riêng bạn.
+        </div>
         <div className="">
-          Umy is a flexible learning management system (LMS) template with everything you need to sell video content.
-          Create an entire catalog or just a single course and sell subscriptions with ease!
+          Umy là mẫu hệ thống quản lý học tập (LMS) linh hoạt có mọi thứ bạn cần để bán nội dung video. Tạo toàn bộ danh
+          mục hoặc chỉ một khóa học duy nhất và bán đăng ký một cách dễ dàng!
         </div>
         <div className="pt-8">
           <Button
             size={'lg'}
             className="rounded-full text-white bg-transparent border-[2px] border-white font-bold text-center leading-6 hover:bg-leadingcolor hover:text-landingpage h-12 text-xl"
           >
-            Enroll Now
+            Mua ngay
           </Button>
         </div>
       </div>

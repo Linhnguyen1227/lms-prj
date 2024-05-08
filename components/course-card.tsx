@@ -43,9 +43,7 @@ export const CourseCard = async ({
           <div className="my-3 flex items-center justify-between gap-x-2 text-sm md:text-xs">
             <div className="flex items-center  gap-x-1 text-slate-500">
               <IconBadge size="sm" icon={BookOpen} />
-              <span>
-                {chaptersLength} {chaptersLength === 1 ? 'Chapter' : 'Chapters'}
-              </span>
+              <span>{chaptersLength} Bài học</span>
             </div>
             <div className="flex items-center  gap-x-1 text-slate-500">
               <IconBadge size="sm" icon={Users} />

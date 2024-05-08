@@ -38,8 +38,8 @@ const AnalyticsAdminPage = async () => {
       <div>
         <h1 className="text-xl font-bold mb-4"> Courses</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-          <DataCard label="Total Revenue" value={totalRevenue} shouldFormat />
-          <DataCard label="Total Sales" value={totalSales} />
+          <DataCard label="Tổng doanh thu" value={totalRevenue} shouldFormat />
+          <DataCard label="Tổng các khóa học đã bán " value={totalSales} />
         </div>
         <div>
           <Chart data={data} isPrice />
@@ -48,8 +48,8 @@ const AnalyticsAdminPage = async () => {
       <div>
         <h1 className="text-xl font-bold mb-4"> Users chart</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-          <DataCard label="Total User" value={totalUsers} />
-          <DataCard label="Total Courses" value={totalCourses} />
+          <DataCard label="Tổng số người dùng" value={totalUsers} />
+          <DataCard label="Tổng số các khóa học" value={totalCourses} />
         </div>
         <Chart data={dataUsers} />
       </div>

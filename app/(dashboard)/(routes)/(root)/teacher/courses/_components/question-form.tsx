@@ -38,7 +38,7 @@ export const QuestionsForm = ({ initialData, courseId, chapterId }: QuestionsFor
     <>
       <div className=" bg-slate-100 rounded-md p-4 mt-6">
         <div className="flex items-center justify-between ">
-          <h2 className="text-base font-medium">Question chapter</h2>
+          <h2 className="text-base font-medium">Các câu hỏi</h2>
           <div>
             <Button
               onClick={() => {
@@ -63,7 +63,7 @@ export const QuestionsForm = ({ initialData, courseId, chapterId }: QuestionsFor
               }
             >
               <PlusCircle className="h-4 w-4 mr-2" />
-              Add a question
+              Thêm câu hỏi
             </Button>
           </div>
         </div>
@@ -78,7 +78,7 @@ export const QuestionsForm = ({ initialData, courseId, chapterId }: QuestionsFor
                   <h3 className="line-clamp-1 group-hover:text-leadingcolor">{item?.question}</h3>
 
                   <div className="flex items-center gap-x-2  p-1 -top-2 right-5 bg-white rounded-sm">
-                    <ActionTooltip label="Edit">
+                    <ActionTooltip label="Chỉnh sửa">
                       <Edit
                         onClick={() => {
                           onOpen('openEditQuestionModal', item);
@@ -86,7 +86,7 @@ export const QuestionsForm = ({ initialData, courseId, chapterId }: QuestionsFor
                         className="cursor-pointer ml-auto w-4 h-4 text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 transition"
                       />
                     </ActionTooltip>
-                    <ActionTooltip label="Delete">
+                    <ActionTooltip label="Xóa">
                       <ConfirmModal
                         onConfirm={() => {
                           handleDelete(item?.id);

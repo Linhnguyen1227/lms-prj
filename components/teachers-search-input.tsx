@@ -8,7 +8,7 @@ import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { Input } from '@/components/ui/input';
 import { useDebounce } from '@/hooks/use-debounce';
 
-export const SearchInput = () => {
+export const SearchTeacherInput = () => {
   const [value, setValue] = useState('');
 
   const debouncedValue = useDebounce(value);
@@ -17,21 +17,18 @@ export const SearchInput = () => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const currentCategoryId = searchParams?.get('categoryId');
-
   useEffect(() => {
     const url = qs.stringifyUrl(
       {
         url: pathname as string,
         query: {
-          categoryId: currentCategoryId,
           title: debouncedValue,
         },
       },
       { skipEmptyString: true, skipNull: true },
     );
     router.push(url);
-  }, [debouncedValue, currentCategoryId, router, pathname]);
+  }, [debouncedValue, router, pathname]);
 
   return (
     <div className="relative">
@@ -40,7 +37,7 @@ export const SearchInput = () => {
         onChange={(e) => setValue(e.target.value)}
         value={value}
         className="w-full md:w-[300px] pl-9 rounded-full bg-slate-100 focus-visible:ring-slate-200"
-        placeholder="Tìm kiếm khóa học"
+        placeholder="Tìm kiếm giáo viên"
       />
     </div>
   );

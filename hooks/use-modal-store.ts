@@ -9,6 +9,7 @@ export type ModalType =
   |"deleteComment"
   |"openQuestionModal"
   |"openEditQuestionModal"
+  |"checkAnswer"
 ;
 
 interface ModalData {
@@ -31,6 +32,10 @@ interface ModalData {
   option_d?:string,
   answer?:string,
   query?: Record<string, any>;
+  isCompleted?:boolean;
+  nextChapterId?:string;
+  isQuestions?:boolean;
+  isAllAnswersCorrect?:boolean;
 }
 
 interface ModalStore {

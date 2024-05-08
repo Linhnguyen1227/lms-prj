@@ -2,7 +2,7 @@
 export const FeedbackPage = () => {
   return (
     <div className="text-white text-center">
-      <h2 className=" font-bold  text-[29px] md:text-[44px]">We love our customers</h2>
+      <h2 className=" font-bold  text-[29px] md:text-[44px]">Chúng tôi yêu quý khách hàng của mình</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 pt-10">
         <div className=" flex flex-col md:flex-row rounded-md max-w-[800px] bg-[#0e2d58] border-[#7291f9] border-[1px] p-6 gap-5">
           <img
@@ -13,8 +13,8 @@ export const FeedbackPage = () => {
 
           <div className="text-start text-lg leading-snug font-light">
             <p className="">
-              “Using Umy was the best decision I made for our video coursewebsite. It saved hundreds of design and dev
-              hours – and it looks amazing.”
+              Sử dụng Umy là quyết định đúng đắn nhất mà tôi đã đưa ra cho trang web khóa học video của mình. Nó đã tiết
+              kiệm hàng trăm giờ thiết kế và phát triển – và nó trông thật tuyệt vời.
             </p>
             <div className="pt-4">
               <h2 className="font-bold">Sam Juliens</h2>
@@ -31,8 +31,8 @@ export const FeedbackPage = () => {
 
           <div className="text-start text-lg leading-snug font-light">
             <p className="">
-              “Using Umy was the best decision I made for our video coursewebsite. It saved hundreds of design and dev
-              hours – and it looks amazing.”
+              Sử dụng Umy là quyết định đúng đắn nhất mà tôi đã đưa ra cho trang web khóa học video của mình. Nó đã tiết
+              kiệm hàng trăm giờ thiết kế và phát triển – và nó trông thật tuyệt vời.
             </p>
             <div className="pt-4">
               <h2 className="font-bold">Sam Juliens</h2>
@@ -49,8 +49,8 @@ export const FeedbackPage = () => {
 
           <div className="text-start text-lg leading-snug font-light">
             <p className="">
-              “Using Umy was the best decision I made for our video coursewebsite. It saved hundreds of design and dev
-              hours – and it looks amazing.”
+              Sử dụng Umy là quyết định đúng đắn nhất mà tôi đã đưa ra cho trang web khóa học video của mình. Nó đã tiết
+              kiệm hàng trăm giờ thiết kế và phát triển – và nó trông thật tuyệt vời.
             </p>
             <div className="pt-4">
               <h2 className="font-bold">Sam Juliens</h2>
@@ -67,8 +67,8 @@ export const FeedbackPage = () => {
 
           <div className="text-start text-lg leading-snug font-light">
             <p className="">
-              “Using Umy was the best decision I made for our video coursewebsite. It saved hundreds of design and dev
-              hours – and it looks amazing.”
+              Sử dụng Umy là quyết định đúng đắn nhất mà tôi đã đưa ra cho trang web khóa học video của mình. Nó đã tiết
+              kiệm hàng trăm giờ thiết kế và phát triển – và nó trông thật tuyệt vời.
             </p>
             <div className="pt-4">
               <h2 className="font-bold">Sam Juliens</h2>

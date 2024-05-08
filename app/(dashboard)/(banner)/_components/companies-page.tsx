@@ -30,7 +30,7 @@ export const CompaniesPages = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 items-center ">
       <h1 className=" text-center font-bold text-[22.5px] sm:text-[26px] md:text-[44px] md:text-start  text-[#e66bba] ">
-        Used by top companies around the world
+        Được sử dụng bởi các công ty hàng đầu trên thế giới
       </h1>
       <div className="grid grid-cols-3 items-center justify-between">
         {companyList.map((item) => (

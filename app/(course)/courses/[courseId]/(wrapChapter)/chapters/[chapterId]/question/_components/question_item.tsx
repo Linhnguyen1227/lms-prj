@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
 
 interface QuestionItemProps {
   index: number;
@@ -23,10 +23,6 @@ const FormSchema = z.object({
   answer: z.string(),
 });
 
-const onSubmit = (values: any) => {
-  console.log(values);
-};
-
 const QuestionItem = ({
   index,
   question,
@@ -39,23 +35,25 @@ const QuestionItem = ({
   handleAnswerChange,
   handleRemoveAnswer,
 }: QuestionItemProps) => {
-  const [message, setMessage] = useState('');
-  const [answers, setAnswers] = useState<boolean>();
+  /*   const [message, setMessage] = useState('');
+  const [answers, setAnswers] = useState<boolean>(); */
   const formRef = useRef(null);
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
 
+  const onSubmit = (values: any) => {
+    console.log(values);
+  };
+
   const handleRadioButtonChange = (value: string) => {
     form.setValue('answer', value); // Update form state with selected value
     if (value === answer) {
       handleAnswerChange(value, answer);
-      setMessage('Correct answer');
-      setAnswers(true);
+      /*    setAnswers(true); */
     } else {
-      setMessage('Wrong answer');
-      setAnswers(false);
+      /*   setAnswers(false); */
       handleRemoveAnswer(value, answer);
     }
   };
@@ -63,7 +61,7 @@ const QuestionItem = ({
     <>
       <div className="mb-4 ">
         <label className="flex text-gray-700 text-sm font-bold mb-2 items-center" htmlFor="question">
-          Question {index}: <p className="text-sm font-normal">{question}</p>
+          Câu {index} : <p className="text-sm font-normal">{question}</p>
         </label>
         <Form {...form}>
           <form className="w-2/3 space-y-6" ref={formRef} onSubmit={form.handleSubmit(onSubmit)}>
@@ -105,11 +103,6 @@ const QuestionItem = ({
                     </RadioGroup>
                   </FormControl>
                   <FormMessage />
-                  {
-                    <p className={cn('text-sm italic ', { 'text-rose-600': !answers, 'text-lime-700': answers })}>
-                      {message}
-                    </p>
-                  }
                 </FormItem>
               )}
             />

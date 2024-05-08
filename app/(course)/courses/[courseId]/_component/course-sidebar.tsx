@@ -5,6 +5,7 @@ import { db } from '@/lib/db';
 import { CourseSidebarItem } from './course-sidebar-item';
 import { CourseProgress } from '@/components/course-progress';
 import { currentProfile } from '@/lib/current-profile';
+import { getChapter } from '@/actions/get-chapters';
 
 interface CourseSidebarProps {
   course: Course & {
@@ -32,24 +33,35 @@ export const CourseSidebar = async ({ course, progressCount }: CourseSidebarProp
   });
 
   return (
-    <div className="h-full border-r flex flex-col overflow-y-auto shadow-sm">
+    <div className="h-full border-r flex flex-col overflow-y-auto shadow-sm bg-white">
       <div className="p-8 flex flex-col border-b gap-y-4">
         <h1 className="font-semibold">{course.title}</h1>
         <CourseProgress value={progressCount} variant={progressCount == 100 ? 'success' : 'default'} size="default" />
         {/* Check purchase and add progress */}
       </div>
       <div className="flex flex-col w-full">
-        {course.chapters.map((chapter) => (
-          <CourseSidebarItem
-            profileId={profile.id}
-            key={chapter.id}
-            id={chapter.id}
-            label={chapter.title}
-            isCompleted={!!chapter.userProgress?.[0]?.isCompleted}
-            courseId={course.id}
-            isLocked={!chapter.isFree && !purchase}
-          />
-        ))}
+        {course.chapters.map(async (chapter) => {
+          const { nextChapter } = await getChapter({
+            chapterId: chapter.id,
+            courseId: course.id,
+            profileId: profile.id,
+          });
+
+          return (
+            <CourseSidebarItem
+              chapter={chapter}
+              position={chapter.position}
+              nextChapter={nextChapter!}
+              profileId={profile.id}
+              key={chapter.id}
+              id={chapter.id}
+              label={chapter.title}
+              isCompleted={!!chapter.userProgress?.[0]?.isCompleted}
+              courseId={course.id}
+              isLocked={!chapter.isFree && !purchase}
+            />
+          );
+        })}
       </div>
     </div>
   );

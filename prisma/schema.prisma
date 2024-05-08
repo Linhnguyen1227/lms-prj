@@ -33,6 +33,7 @@ model Profile {
   updatedAt DateTime   @updatedAt
 
   // @@index([courseId])
+  @@fulltext([username])
 }
 
 model Course {
@@ -88,6 +89,7 @@ model Chapter {
   userProgress UserProgress[]
   comment      Comment[]
   question     Question[]
+  isLock       Boolean        @default(true)
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
 

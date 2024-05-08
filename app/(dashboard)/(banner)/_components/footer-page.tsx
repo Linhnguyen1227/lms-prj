@@ -32,27 +32,27 @@ export const FooterPage = () => {
   const router = [
     {
       id: 1,
-      title: 'Home',
+      title: 'Trang chủ',
     },
     {
       id: 2,
-      title: 'Pages',
+      title: 'Trang',
     },
     {
       id: 3,
-      title: 'Sections',
+      title: 'Các phần',
     },
     {
       id: 4,
-      title: 'Themes',
+      title: 'Chủ đề',
     },
     {
       id: 5,
-      title: 'Style Guide',
+      title: 'Thiết kế',
     },
     {
       id: 6,
-      title: 'Buy Now',
+      title: 'Mua ngay',
     },
   ];
   return (

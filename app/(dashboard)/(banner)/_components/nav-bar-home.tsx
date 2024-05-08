@@ -14,17 +14,17 @@ export const NavbarHome = ({ userId }: NavbarHomeProps) => {
   const routerIntroducing = [
     {
       id: 1,
-      label: 'Home',
+      label: 'Trang chủ',
       href: '/home',
     },
     {
       id: 2,
-      label: 'Courses',
+      label: 'Khóa học',
       href: '/search',
     },
     {
       id: 3,
-      label: 'Pricing',
+      label: 'Giá',
       href: '/search',
     },
     {
@@ -34,7 +34,7 @@ export const NavbarHome = ({ userId }: NavbarHomeProps) => {
     },
     {
       id: 5,
-      label: 'Contact',
+      label: 'Kết nối',
       href: '/',
     },
   ];

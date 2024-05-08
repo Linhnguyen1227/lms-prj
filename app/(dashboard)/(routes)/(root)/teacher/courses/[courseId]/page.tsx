@@ -69,12 +69,12 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
   return (
     <>
       {' '}
-      {!isPublished && <Banner label="This course is unpublished. It will not be visible to the students." />}
+      {!isPublished && <Banner label="Khóa học này chưa được xuất bản. Nó sẽ không được nhìn thấy bởi các học viên." />}
       <div className="p-6">
         <div className="flex items-center justify-between">
           <div className="flex flex-col gap-y-2">
-            <h1 className="text-2xl font-medium">Course setup</h1>
-            <span className="text-sm text-slate-700">Complete all fields {completionText}</span>
+            <h1 className="text-2xl font-medium">Thiết lập khóa học</h1>
+            <span className="text-sm text-slate-700">Hoàn thành tất cả các trường {completionText}</span>
           </div>
           <Actions disabled={!isCompleted} courseId={params.courseId} isPublished={course.isPublished} />
         </div>
@@ -82,7 +82,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
           <div>
             <div className="flex items-center gap-x-2">
               <IconBadge icon={LayoutDashboard} />
-              <h2 className="text-xl">Customize your course</h2>
+              <h2 className="text-xl">Tùy chỉnh khóa học của bạn</h2>
             </div>
             <TitleForm initialData={course} courseId={course.id} />
             <DescriptionForm initialData={course} courseId={course.id} />
@@ -101,13 +101,13 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
             <div>
               <div className="flex items-center gap-x-2">
                 <IconBadge icon={CircleDollarSign} />
-                <h2 className="text-xl">Sell your course</h2>
+                <h2 className="text-xl">Bán khóa học của bạn</h2>
               </div>
               <PriceForm initialData={course} courseId={course.id} />
               <AttachmentForm initialData={course} courseId={course.id} />
               <div className=" pt-4 flex items-center gap-x-2">
                 <IconBadge icon={ListChecks} />
-                <h2 className="text-xl">Course chapters</h2>
+                <h2 className="text-xl">Các bài học của khóa học</h2>
               </div>
               <ChaptersForm initialData={course} courseId={course.id} />
             </div>

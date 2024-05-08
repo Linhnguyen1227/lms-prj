@@ -16,7 +16,7 @@ export const InfoCard = ({ variant, icon: Icon, numberOfItems, label, sublabel }
       <div>
         <p className="font-medium">{label}</p>
         <p className="text-gray-500 text-sm">
-          {numberOfItems} {numberOfItems <= 1 ? `${sublabel}` : `${sublabel}s`}
+          {numberOfItems} {sublabel}
         </p>
       </div>
     </div>

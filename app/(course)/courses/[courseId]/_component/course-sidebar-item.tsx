@@ -2,9 +2,11 @@
 
 import { CheckCircle, Lock, PlayCircle } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
-import { getChapter } from '@/actions/get-chapters';
 
+import { Chapter } from '@prisma/client';
 import { cn } from '@/lib/utils';
+import { useStore } from '@/hooks/use-store';
+import axios from 'axios';
 
 interface CourseSidebarItemProps {
   label: string;
@@ -13,6 +15,9 @@ interface CourseSidebarItemProps {
   courseId: string;
   isLocked: boolean;
   profileId: string;
+  nextChapter: Chapter;
+  position: number;
+  chapter: Chapter;
 }
 
 export const CourseSidebarItem = ({
@@ -22,15 +27,37 @@ export const CourseSidebarItem = ({
   courseId,
   isLocked,
   profileId,
+  nextChapter,
+  chapter,
+  position,
 }: CourseSidebarItemProps) => {
   const pathname = usePathname();
   const router = useRouter();
+  const { progressVideo } = useStore();
 
-  const Icon = isLocked ? Lock : isCompleted ? CheckCircle : PlayCircle;
+  let disabled = true;
+  if (chapter?.isLock) {
+    disabled = true;
+  } else {
+    disabled = false;
+  }
+
+  if (position === 0) {
+    disabled = false;
+  }
+  if (progressVideo >= 80) {
+    disabled = false;
+  }
+
+  const Icon = isLocked || disabled ? Lock : isCompleted ? CheckCircle : PlayCircle;
   const isActive = pathname?.includes(id);
 
   const onClick = () => {
-    router.push(`/courses/${courseId}/chapters/${id}`);
+    if (!disabled) {
+      router.push(`/courses/${courseId}/chapters/${id}`);
+    } else if (disabled && isCompleted) {
+      router.push(`/courses/${courseId}/chapters/${id}`);
+    }
   };
 
   return (
@@ -39,8 +66,10 @@ export const CourseSidebarItem = ({
       type="button"
       className={cn(
         'flex items-center gap-x-2 text-slate-500 text-sm font-[500] pl-6 transition-all hover:text-slate-600 hover:bg-slate-300/20',
+        disabled && 'cursor-default hover:bg-transparent hover:text-slate-500',
         isActive && 'text-slate-700 bg-slate-200/20 hover:bg-slate-200/20 hover:text-slate-700',
         isCompleted && 'text-emerald-700 hover:text-emerald-700',
+        isCompleted && disabled && 'text-emerald-700 hover:text-emerald-700',
         isCompleted && isActive && 'bg-emerald-200/20',
       )}
     >

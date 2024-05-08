@@ -5,8 +5,8 @@ import { db } from '@/lib/db';
 import Loading from '@/app/loading';
 import { getProgress } from '@/actions/get-progress';
 import { currentProfile } from '@/lib/current-profile';
-import { CourseNavbar } from './_component/course-navbar';
-import { CourseSidebar } from './_component/course-sidebar';
+import { CourseNavbar } from '../_component/course-navbar';
+import { CourseSidebar } from '../_component/course-sidebar';
 
 const CourseLayout = async ({ children, params }: { children: React.ReactNode; params: { courseId: string } }) => {
   const profile = await currentProfile();
@@ -51,7 +51,7 @@ const CourseLayout = async ({ children, params }: { children: React.ReactNode; p
       <div className="hidden md:flex h-full w-80 flex-col fixed inset-y-0 z-50">
         <CourseSidebar course={course} progressCount={progressCount} />
       </div>
-      <main className="md:pl-80 pt-[80px] h-full">
+      <main className="md:pl-80 h-full">
         <Suspense fallback={<Loading />}>{children}</Suspense>
       </main>
     </div>

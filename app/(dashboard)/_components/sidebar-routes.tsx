@@ -1,6 +1,6 @@
 'use client';
 
-import { BarChart, Compass, HelpCircle, Layout, List } from 'lucide-react';
+import { BarChart, Compass, HelpCircle, Layout, List, Users } from 'lucide-react';
 
 import { SidebarItem } from './sidebar-item';
 import { usePathname } from 'next/navigation';
@@ -8,17 +8,22 @@ import { usePathname } from 'next/navigation';
 const guestRoutes = [
   {
     icon: Layout,
-    label: 'Dashboard',
+    label: 'Trang chủ',
     href: '/home',
   },
   {
     icon: Compass,
-    label: 'Browse',
+    label: 'Tìm kiếm',
     href: '/search',
   },
   {
+    icon: Users,
+    label: 'Kết nối',
+    href: '/contact',
+  },
+  {
     icon: HelpCircle,
-    label: 'Community',
+    label: 'Cộng đồng',
     href: '/community',
   },
 ];
@@ -26,12 +31,12 @@ const guestRoutes = [
 const teacherRoutes = [
   {
     icon: List,
-    label: 'Courses',
+    label: 'Khóa học',
     href: '/teacher/courses',
   },
   {
     icon: BarChart,
-    label: 'Analytics',
+    label: 'Phân tích',
     href: '/teacher/analytics',
   },
 ];

@@ -5,23 +5,23 @@ export const DesignPage = () => {
   const data = [
     {
       id: 1,
-      title: 'Actionable exercises',
-      des: 'Duis semper ultrices aliquam nisl vulputate. Pellentesque convallis urna leo egestas iaculis pulvinar.',
+      title: 'Bài tập khả thi',
+      des: 'Xây dựng các bài tập sau mỗi bài học.',
     },
     {
       id: 2,
-      title: 'Step by step teaching',
-      des: 'Duis semper ultrices aliquam nisl vulputate. Pellentesque convallis urna leo egestas iaculis pulvinar.',
+      title: 'Dạy học từng bước',
+      des: 'Phương pháp sư phạm hiệu quả giúp học sinh tiếp thu kiến thức một cách dễ dàng và hiệu quả hơn',
     },
     {
       id: 3,
-      title: 'Community and instructor support',
-      des: 'Duis semper ultrices aliquam nisl vulputate. Pellentesque convallis urna leo egestas iaculis pulvinar.',
+      title: 'Cộng đồng hỗ trợ',
+      des: 'Trang web có cộng đông hỗ trợ lớn giúp sinh viên giải đáp thắc mắc khi học.',
     },
     {
       id: 4,
-      title: 'Trusted by the best',
-      des: 'Duis semper ultrices aliquam nisl vulputate. Pellentesque convallis urna leo egestas iaculis pulvinar.',
+      title: 'Được tin cậy bởi những người tốt nhất',
+      des: 'Được tin cậy bởi những giáo viên hàng đầu với những bài học chất lượng.',
     },
   ];
   return (
@@ -41,7 +41,7 @@ export const DesignPage = () => {
       </div>
       <div className="space-y-8">
         <div className="text-white text-[44px] font-bold leading-tight pt-10 md:pt-6 ">
-          Courses designed to get you from point A to&nbsp;point&nbsp;B
+          Các khóa học được thiết kế để giúp bạn đi từ người mới bắt đầu đến chuyên gia
         </div>
         <div className="flex flex-col space-y-8">
           {data.map((item) => (

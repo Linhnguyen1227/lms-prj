@@ -72,7 +72,7 @@ const ModalQuestion = () => {
     <Dialog open={isOpenModal} onOpenChange={handleClose}>
       <DialogContent className=" max-w-2xl max-h-full overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-xl font-bold">Add a question</DialogTitle>
+          <DialogTitle className="text-xl font-bold">Thêm câu hỏi</DialogTitle>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
@@ -82,9 +82,9 @@ const ModalQuestion = () => {
                 name="question"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Question</FormLabel>
+                    <FormLabel>Câu hỏi</FormLabel>
                     <FormControl>
-                      <Textarea {...field} placeholder="Enter question" disabled={isLoading} />
+                      <Textarea {...field} placeholder="Nhập câu hỏi" disabled={isLoading} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -96,9 +96,9 @@ const ModalQuestion = () => {
                   name="option_a"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Answer A</FormLabel>
+                      <FormLabel>Đáp án A</FormLabel>
                       <FormControl>
-                        <Textarea disabled={isLoading} placeholder="Enter a answer A" {...field} />
+                        <Textarea disabled={isLoading} placeholder="Nhập đáp án A " {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -109,9 +109,9 @@ const ModalQuestion = () => {
                   name="option_b"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Answer B</FormLabel>
+                      <FormLabel>Đáp án B</FormLabel>
                       <FormControl>
-                        <Textarea disabled={isLoading} placeholder="Enter a answer B" {...field} />
+                        <Textarea disabled={isLoading} placeholder="Nhập đáp án B" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -122,9 +122,9 @@ const ModalQuestion = () => {
                   name="option_c"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Answer C</FormLabel>
+                      <FormLabel>Đáp án C</FormLabel>
                       <FormControl>
-                        <Textarea disabled={isLoading} placeholder="Enter a answer C" {...field} />
+                        <Textarea disabled={isLoading} placeholder="Nhập đáp án C" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -135,9 +135,9 @@ const ModalQuestion = () => {
                   name="option_d"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Answer D</FormLabel>
+                      <FormLabel>Đáp án D</FormLabel>
                       <FormControl>
-                        <Textarea className="h-4" disabled={isLoading} placeholder="Enter a answer D" {...field} />
+                        <Textarea className="h-4" disabled={isLoading} placeholder="Nhập đáp án D" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -153,25 +153,25 @@ const ModalQuestion = () => {
                       <FormControl>
                         <RadioGroup onValueChange={field.onChange} defaultValue={field.value}>
                           <FormItem className="flex items-center space-x-3 space-y-0">
-                            <FormLabel className="font-normal accent-primary ">Answer A</FormLabel>
+                            <FormLabel className="font-normal accent-primary ">Đáp án A</FormLabel>
                             <FormControl>
                               <RadioGroupItem value={form.getValues('option_a')} />
                             </FormControl>
                           </FormItem>
                           <FormItem className="flex items-center space-x-3 space-y-0">
-                            <FormLabel className="font-normal">Answer B</FormLabel>
+                            <FormLabel className="font-normal">Đáp án B</FormLabel>
                             <FormControl>
                               <RadioGroupItem value={form.getValues('option_b')} />
                             </FormControl>
                           </FormItem>
                           <FormItem className="flex items-center space-x-3 space-y-0">
-                            <FormLabel className="font-normal">Answer C</FormLabel>
+                            <FormLabel className="font-normal">Đáp án C</FormLabel>
                             <FormControl>
                               <RadioGroupItem value={form.getValues('option_c')} />
                             </FormControl>
                           </FormItem>
                           <FormItem className="flex items-center space-x-3 space-y-0">
-                            <FormLabel className="font-normal">Answer D</FormLabel>
+                            <FormLabel className="font-normal">Đáp án D</FormLabel>
                             <FormControl>
                               <RadioGroupItem value={form.getValues('option_d')} />
                             </FormControl>
@@ -186,7 +186,7 @@ const ModalQuestion = () => {
             </div>
             <DialogFooter className="pt-4">
               <Button variant="primary" disabled={isLoading}>
-                Save
+                Lưu
               </Button>
             </DialogFooter>
           </form>

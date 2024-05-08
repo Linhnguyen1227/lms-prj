@@ -27,15 +27,15 @@ export const Actions = ({ disabled, courseId, isPublished }: ActionsProps) => {
 
       if (isPublished) {
         await axios.patch(`/api/courses/${courseId}/unpublish`);
-        toast.success('Course unpublished');
+        toast.success('Đã hủy xuất bản khóa học');
       } else {
         await axios.patch(`/api/courses/${courseId}/publish`);
-        toast.success('Course published');
+        toast.success('Xuất bản khóa học thành công');
         confetti.onOpen();
       }
       router.refresh();
     } catch {
-      toast.error('Something went wrong');
+      toast.error('Đã có lỗi xảy ra');
     } finally {
       setIsLoading(false);
     }
@@ -60,7 +60,7 @@ export const Actions = ({ disabled, courseId, isPublished }: ActionsProps) => {
   return (
     <div className="flex items-center gap-x-2">
       <Button onClick={onClick} disabled={disabled || isLoading} variant="outline" size="sm">
-        {isPublished ? 'Unpublish' : 'Publish'}
+        {isPublished ? 'Hủy xuất bản' : 'Xuất bản'}
       </Button>
       <ConfirmModal onConfirm={onDelete}>
         <Button size="sm" disabled={isLoading}>

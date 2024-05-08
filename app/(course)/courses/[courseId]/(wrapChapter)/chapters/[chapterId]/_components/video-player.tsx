@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 
 import axios from 'axios';
@@ -6,10 +7,10 @@ import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import { Loader2, Lock } from 'lucide-react';
 
-// import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils';
 import { useConfettiStore } from '@/hooks/use-confetti-store';
-// import ReactPlayer from 'react-player';
-import YouTubePlayer from 'react-player/youtube';
+import ReactPlayer from 'react-player';
+import { useStore } from '@/hooks/use-store';
 
 interface VideoPlayerProps {
   videoUrl?: string;
@@ -18,6 +19,7 @@ interface VideoPlayerProps {
   nextChapterId?: string;
   isLocked?: boolean;
   completeOnEnd?: boolean;
+  onVideoProgressUpdate?: (progress: number) => void;
 }
 
 export const VideoPlayer = ({
@@ -28,11 +30,13 @@ export const VideoPlayer = ({
   isLocked,
   completeOnEnd,
 }: VideoPlayerProps) => {
+  const [videoProgress, setVideoProgress] = useState(0);
+  const { progressVideo, setProgressVideo } = useStore();
   const [isReady, setIsReady] = useState(false);
   const [client, setClient] = useState(false);
   const router = useRouter();
   const confetti = useConfettiStore();
-  // const videoRef = useRef<ReactPlayer>(null);
+  const videoRef = useRef<ReactPlayer>(null);
 
   const onEnd = async () => {
     try {
@@ -61,6 +65,10 @@ export const VideoPlayer = ({
     setClient(true);
   }, []);
 
+  useEffect(() => {
+    setProgressVideo(videoProgress);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [videoProgress]);
   return (
     <div className="relative aspect-video">
       {!isReady && !isLocked && (
@@ -75,12 +83,13 @@ export const VideoPlayer = ({
         </div>
       )}
       {!isLocked && client && (
-        <YouTubePlayer
+        <ReactPlayer
+          onProgress={({ played }) => setVideoProgress(Number(played.toFixed(2)) * 100)}
           width={'100%'}
           height={'100%'}
-          // ref={videoRef}
+          ref={videoRef}
           url={videoUrl}
-          // className={cn(!isReady && 'hidden')}
+          /* className={cn(!isReady && 'hidden')} */
           controls
           onReady={() => setIsReady(true)}
           onEnded={onEnd}

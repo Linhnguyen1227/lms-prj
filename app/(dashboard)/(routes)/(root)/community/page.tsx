@@ -74,7 +74,7 @@ export default function CommunityPage() {
       </div>
       <div className="bg-[#070a3f] text-white px-6">
         <div className="flex justify-end h-16 items-center space-x-8">
-          <p className="font-semibold cursor-pointer select-none">Follow us </p>
+          <p className="font-semibold cursor-pointer select-none">Theo dõi chúng tôi </p>
           <div className="flex space-x-6 cursor-pointer">
             <img src="https://about.udemy.com/wp-content/themes/wp-about-v4/assets/images/in_icon.svg" alt="#" />
             <img src="https://about.udemy.com/wp-content/themes/wp-about-v4/assets/images/fb_icon.svg" alt="#" />
@@ -86,25 +86,25 @@ export default function CommunityPage() {
         <div className="grid grid-cols-2 py-4">
           <div className="grid grid-cols-3 font-normal text-[14px]  ">
             <div className="space-y-2 ">
-              <p className="hover:underline cursor-pointer">Udemy Business</p>
-              <p className="hover:underline cursor-pointer">Teach on Udemy</p>
-              <p className="hover:underline cursor-pointer">Get the app</p>
-              <p className="hover:underline cursor-pointer">About us</p>
-              <p className="hover:underline cursor-pointer">Cookie settings</p>
+              <p className="hover:underline cursor-pointer">Kinh doanh trên Umy</p>
+              <p className="hover:underline cursor-pointer">Dạy trên Umy</p>
+              <p className="hover:underline cursor-pointer">Tải ứng dụng</p>
+              <p className="hover:underline cursor-pointer">Về chúng tôi</p>
+              <p className="hover:underline cursor-pointer">Cài đặt Cookie</p>
             </div>
             <div className="space-y-2">
               <p className="hover:underline cursor-pointer">Blog</p>
-              <p className="hover:underline cursor-pointer">Help</p>
-              <p className="hover:underline cursor-pointer">Affiliate</p>
-              <p className="hover:underline cursor-pointer">Accessibility statement</p>
-              <p className="hover:underline cursor-pointer">Investors</p>
+              <p className="hover:underline cursor-pointer">Giúp</p>
+              <p className="hover:underline cursor-pointer">Liên Kết</p>
+              <p className="hover:underline cursor-pointer">Khả năng truy cập</p>
+              <p className="hover:underline cursor-pointer">Các nhà đầu tư</p>
             </div>
             <div className="space-y-2">
-              <p className="hover:underline cursor-pointer">Terms</p>
-              <p className="hover:underline cursor-pointer">Teach on Udemy</p>
-              <p className="hover:underline cursor-pointer">Contact us</p>
-              <p className="hover:underline cursor-pointer">Sitemap</p>
-              <p className="hover:underline cursor-pointer">Featured topics</p>
+              <p className="hover:underline cursor-pointer">Điều khoản</p>
+              <p className="hover:underline cursor-pointer">Dạy trên Umy</p>
+              <p className="hover:underline cursor-pointer">Về chúng tôi</p>
+              <p className="hover:underline cursor-pointer">Sơ đồ</p>
+              <p className="hover:underline cursor-pointer">Chủ đề nổi bật</p>
             </div>
           </div>
           <div className="flex justify-end items-center">

@@ -14,7 +14,6 @@ import { CourseProgressButton } from './_components/course-progress-button';
 import { CommentInput } from './_components/comment-input';
 import { CommentList } from './_components/comment-list';
 import { ExamButton } from './question/_components/exam-button';
-
 const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId: string } }) => {
   const profile = await currentProfile();
 
@@ -37,8 +36,8 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
 
   return (
     <div>
-      {userProgress?.isCompleted && <Banner variant="success" label="You already completed this chapter." />}
-      {isLocked && <Banner variant="warning" label="You need to purchase this course to watch this chapter." />}
+      {userProgress?.isCompleted && <Banner variant="success" label="Chúc mừng bạn đã hoàn thành chương này." />}
+      {isLocked && <Banner variant="warning" label="Bạn cần mua khóa học này để xem chương này." />}
       <div className="flex flex-col max-w-4xl mx-auto pb-20">
         <div className="p-4">
           <VideoPlayer
@@ -62,7 +61,11 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
                 isQuestions={isQuestions}
               />
             ) : purchase && isQuestions ? (
-              <ExamButton chapterId={params.chapterId} courseId={params.courseId} />
+              <ExamButton
+                chapterId={params.chapterId}
+                courseId={params.courseId}
+                isCompleted={!!userProgress?.isCompleted}
+              />
             ) : (
               // price! chuyển đổi giá trị price từ null hoặc undefined sang chuỗi rỗng
               <CourseEnrollButton courseId={params.courseId} price={course.price!} />
@@ -92,7 +95,7 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
           )}
           <Separator />
           <div className="p-3 space-y-3">
-            <h1 className="text-xl font-bold">Comments</h1>
+            <h1 className="text-xl font-bold">Bình luận</h1>
             <div className="  border border-slate-300 rounded h-[600px]">
               <div>
                 <CommentInput query={{ chapterId: params.chapterId }} apiUrl="/api/socket/comments" />

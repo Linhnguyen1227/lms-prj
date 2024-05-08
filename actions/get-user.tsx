@@ -1,9 +1,16 @@
 import { db } from '@/lib/db';
-import { Profile, Purchase } from '@prisma/client';
+import { Profile, Purchase, Course, Category } from '@prisma/client';
 
+type CourseProps = Course & {
+  category: Category;
+};
+type TeacherWithCourse = Profile & {
+  courses: CourseProps[];
+};
 type User = {
   users: Profile[];
   userPurchase: Purchase[];
+  ListTeacher: TeacherWithCourse[];
 };
 
 export const getUser = async (): Promise<User> => {
@@ -19,9 +26,25 @@ export const getUser = async (): Promise<User> => {
         createdAt: 'desc',
       },
     });
-    return { users, userPurchase };
+
+    const ListTeacher = await db.profile.findMany({
+      where: {
+        courses: {
+          some: {},
+        },
+      },
+      include: {
+        courses: {
+          include: {
+            category: true,
+          },
+        },
+      },
+    });
+
+    return { users, userPurchase, ListTeacher };
   } catch (error) {
     console.log('Error: ', error);
-    return { users: [], userPurchase: [] };
+    return { users: [], userPurchase: [], ListTeacher: [] };
   }
 };
