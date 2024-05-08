@@ -1,14 +1,14 @@
-import { getAllCourses } from '@/actions/get-all-courses';
-
-import { getUser } from '@/actions/get-user';
-
-import { InfoCard } from '@/components/infor-card';
-import { currentProfile } from '@/lib/current-profile';
-import { BookOpen, BookOpenCheck, User, UserRoundCheck } from 'lucide-react';
 import { redirect } from 'next/navigation';
+import { BookOpen, BookOpenCheck, User, UserRoundCheck } from 'lucide-react';
+
+import { getAllCourses } from '@/actions/get-all-courses';
+import { getUser } from '@/actions/get-user';
+import { currentProfile } from '@/lib/current-profile';
+import { getAnalyticsAll } from '@/actions/get-analytics-all';
+import { InfoCard } from '@/components/infor-card';
+
 import { DataCard } from './_components/data-card';
 import { Chart } from './_components/chart';
-import { getAnalyticsAll } from '@/actions/get-analytics-all';
 
 const AnalyticsAdminPage = async () => {
   const profile = await currentProfile();

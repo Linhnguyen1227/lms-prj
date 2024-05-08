@@ -6,7 +6,6 @@ import { usePathname, useRouter } from 'next/navigation';
 import { Chapter } from '@prisma/client';
 import { cn } from '@/lib/utils';
 import { useStore } from '@/hooks/use-store';
-import axios from 'axios';
 
 interface CourseSidebarItemProps {
   label: string;
@@ -42,12 +41,12 @@ export const CourseSidebarItem = ({
     disabled = false;
   }
 
-  if (position === 0) {
+  if (position === 1) {
     disabled = false;
   }
-  if (progressVideo >= 80) {
+  /*   if (progressVideo >= 80 ) {
     disabled = false;
-  }
+  } */
 
   const Icon = isLocked || disabled ? Lock : isCompleted ? CheckCircle : PlayCircle;
   const isActive = pathname?.includes(id);

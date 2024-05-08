@@ -90,9 +90,9 @@ export const ChaptersList = ({ items, onReorder, onEdit }: ChaptersListProps) =>
                     </div>
                     {chapter.title}
                     <div className="ml-auto pr-2 flex items-center gap-x-2">
-                      {chapter.isFree && <Badge>Free</Badge>}
+                      {chapter.isFree && <Badge>Miễn phí</Badge>}
                       <Badge className={cn('bg-slate-500', chapter.isPublished && 'bg-sky-700')}>
-                        {chapter.isPublished ? 'Published' : 'Draft'}
+                        {chapter.isPublished ? 'Đã xuất bản' : 'Chưa xuất bản'}
                       </Badge>
                       <Pencil
                         onClick={() => onEdit(chapter.id)}

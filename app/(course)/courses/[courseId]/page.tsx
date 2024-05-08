@@ -1,14 +1,12 @@
 import { redirect } from 'next/navigation';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { db } from '@/lib/db';
+import { currentProfile } from '@/lib/current-profile';
 import { UserAvatar } from '@/components/user-avatar';
 import { Categories } from '@/components/categories';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
-import { CourseNavbar } from './_component/course-navbar';
-import { currentProfile } from '@/lib/current-profile';
-import { getProgress } from '@/actions/get-progress';
+import { ButtonChapter } from './_component/button-chapter';
 
 const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
   const profile = await currentProfile();
@@ -52,7 +50,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
             alt="course_image"
             width={800}
             height={800}
-            className="rounded"
+            className="rounded aspect-video object-cover"
             loading="lazy"
           />
         </div>
@@ -67,11 +65,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
             <Categories items={[course.category!]} />
           </div>
           <div className="w-full">
-            <Link href={`/courses/${course.id}/chapters/${course.chapters[0].id}`}>
-              <Button className="w-full md:w-[50%]" variant={'primary'}>
-                Chuyển đến trang bài học
-              </Button>
-            </Link>
+            <ButtonChapter courseId={course.id} chapterId={course.chapters[0].id} />
           </div>
         </div>
       </div>

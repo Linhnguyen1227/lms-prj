@@ -20,10 +20,14 @@ type CourseTeacherProps = {
 export const CourseTeacher: React.FC<CourseTeacherProps> = ({ items, ListCategory }) => {
   const [loading, setIsLoading] = useState(false);
   const router = useRouter();
-  const onClick = () => {
+  const onClick = async (id: string) => {
     try {
+      setIsLoading(true);
+      router.push(`/courses/${id}`);
     } catch (error) {
       toast.error('Có lỗi xảy ra');
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
@@ -35,7 +39,9 @@ export const CourseTeacher: React.FC<CourseTeacherProps> = ({ items, ListCategor
             <div key={course.id} className="pb-2">
               <div>
                 <Button
-                  onClick={onClick}
+                  variant={'outline'}
+                  disabled={loading}
+                  onClick={() => onClick(course.id)}
                   className="py-2 px-3 text-sm border border-slate-200 rounded-full flex items-center gap-x-1 hover:border-sky-700 transition"
                 >
                   {course.title}

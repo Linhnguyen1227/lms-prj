@@ -84,7 +84,9 @@ export const ColumnsCoursesPage: ColumnDef<DataCourseProps>[] = [
     cell: ({ row }) => {
       const isPublished = row.getValue('isPublished') || false;
       return (
-        <Badge className={cn('bg-slate-500', isPublished && 'bg-sky-700')}>{isPublished ? 'Published' : 'Draft'}</Badge>
+        <Badge className={cn('bg-slate-500', isPublished && 'bg-sky-700')}>
+          {isPublished ? 'Đã xuất bản' : 'Chưa xuất bản'}
+        </Badge>
       );
     },
   },
