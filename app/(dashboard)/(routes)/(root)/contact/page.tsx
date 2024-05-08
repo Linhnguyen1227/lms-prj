@@ -7,19 +7,28 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { UserAvatar } from '@/components/user-avatar';
 import { CourseTeacher } from '@/components/course-teacher';
 
-async function ContactPage() {
+interface SearchPageProps {
+  searchParams: {
+    username: string;
+  };
+}
+
+async function ContactPage({ searchParams }: SearchPageProps) {
   const profile = await currentProfile();
   if (!profile) {
     return redirect('/');
   }
 
-  const { ListTeacher } = await getUser();
+  const { ListTeacher } = await getUser({
+    ...searchParams,
+  });
 
   return (
     <div className="p-6 space-y-4">
       <Accordion type="single" collapsible className="w-full">
         {ListTeacher.map((item, index) => {
-          const ListCate = item.courses.map((course) => course.category);
+          const ListCate = item?.courses?.map((course) => course.category);
+          if (!ListCate) return null;
           return (
             <AccordionItem key={index} value={`item-${index}`}>
               <AccordionTrigger>

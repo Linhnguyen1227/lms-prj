@@ -13,12 +13,12 @@ const guestRoutes = [
   },
   {
     icon: Compass,
-    label: 'Tìm kiếm',
+    label: 'Tìm kiếm khóa học',
     href: '/search',
   },
   {
     icon: Users,
-    label: 'Kết nối',
+    label: 'Tìm kiếm giáo viên',
     href: '/contact',
   },
   {

@@ -4,6 +4,7 @@ import { Profile, Purchase, Course, Category } from '@prisma/client';
 type CourseProps = Course & {
   category: Category;
 };
+
 type TeacherWithCourse = Profile & {
   courses: CourseProps[];
 };
@@ -12,8 +13,11 @@ type User = {
   userPurchase: Purchase[];
   ListTeacher: TeacherWithCourse[];
 };
+interface getUserProps {
+  username?: string;
+}
 
-export const getUser = async (): Promise<User> => {
+export const getUser = async ({ username }: getUserProps): Promise<User> => {
   try {
     const users = await db.profile.findMany({
       orderBy: {
@@ -29,6 +33,10 @@ export const getUser = async (): Promise<User> => {
 
     const ListTeacher = await db.profile.findMany({
       where: {
+        username: {
+          contains: username,
+        },
+
         courses: {
           some: {},
         },
@@ -42,7 +50,7 @@ export const getUser = async (): Promise<User> => {
       },
     });
 
-    return { users, userPurchase, ListTeacher };
+    return { users, userPurchase, ListTeacher: ListTeacher as TeacherWithCourse[] };
   } catch (error) {
     console.log('Error: ', error);
     return { users: [], userPurchase: [], ListTeacher: [] };

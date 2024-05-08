@@ -22,7 +22,7 @@ export const SearchTeacherInput = () => {
       {
         url: pathname as string,
         query: {
-          title: debouncedValue,
+          username: debouncedValue,
         },
       },
       { skipEmptyString: true, skipNull: true },
