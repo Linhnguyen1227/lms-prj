@@ -18,7 +18,7 @@ const AnalyticsAdminPage = async () => {
   }
 
   const { allCourses, coursePublished } = await getAllCourses();
-  const { users, userPurchase } = await getUser();
+  const { users, userPurchase } = await getUser({ username: '' });
   const { data, totalRevenue, totalSales, dataUsers, totalCourses, totalUsers } = await getAnalyticsAll();
 
   return (

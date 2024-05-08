@@ -13,11 +13,8 @@ type User = {
   userPurchase: Purchase[];
   ListTeacher: TeacherWithCourse[];
 };
-interface getUserProps {
-  username?: string;
-}
 
-export const getUser = async ({ username }: getUserProps): Promise<User> => {
+export const getUser = async ({ username }: { username: string }): Promise<User> => {
   try {
     const users = await db.profile.findMany({
       orderBy: {
