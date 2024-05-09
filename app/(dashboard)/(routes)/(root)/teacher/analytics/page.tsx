@@ -1,4 +1,3 @@
-import { auth } from '@clerk/nextjs';
 import { redirect } from 'next/navigation';
 
 import { getAnalytics } from '@/actions/get-analytics';
@@ -6,6 +5,7 @@ import { getAnalytics } from '@/actions/get-analytics';
 import { DataCard } from './_components/data-card';
 import { Chart } from './_components/chart';
 import { currentProfile } from '@/lib/current-profile';
+import { getCourses } from '@/actions/get-courses';
 
 const AnalyticsPage = async () => {
   const profile = await currentProfile();
@@ -15,6 +15,14 @@ const AnalyticsPage = async () => {
   }
 
   const { data, totalRevenue, totalSales } = await getAnalytics(profile?.id);
+  const courses = await getCourses({
+    profileId: profile?.id,
+  });
+  console.log(
+    courses.map((item) => {
+      return item.chapters;
+    }),
+  );
 
   return (
     <div className="p-6">

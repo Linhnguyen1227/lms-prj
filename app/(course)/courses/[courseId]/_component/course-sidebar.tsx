@@ -1,4 +1,4 @@
-import { Chapter, Course, UserProgress } from '@prisma/client';
+import { Chapter, Course, UserProgress, LockChapter } from '@prisma/client';
 import { redirect } from 'next/navigation';
 
 import { db } from '@/lib/db';
@@ -10,6 +10,7 @@ import { getChapter } from '@/actions/get-chapters';
 interface CourseSidebarProps {
   course: Course & {
     chapters: (Chapter & {
+      LockChapter: LockChapter[];
       userProgress: UserProgress[] | null;
     })[];
   };
@@ -41,22 +42,34 @@ export const CourseSidebar = async ({ course, progressCount }: CourseSidebarProp
       </div>
       <div className="flex flex-col w-full">
         {course.chapters.map(async (chapter) => {
-          const { nextChapter } = await getChapter({
+          let userProgressPrevious = null;
+          const { nextChapter, previousChapter, lockChapter } = await getChapter({
             chapterId: chapter.id,
             courseId: course.id,
             profileId: profile.id,
           });
+          if (previousChapter?.id) {
+            userProgressPrevious = await db.userProgress.findUnique({
+              where: {
+                profileId_chapterId: {
+                  chapterId: previousChapter?.id!,
+                  profileId: profile.id,
+                },
+              },
+            });
+          }
 
           return (
             <CourseSidebarItem
               chapter={chapter}
+              lockChapter={lockChapter!}
               position={chapter.position}
               nextChapter={nextChapter!}
-              profileId={profile.id}
               key={chapter.id}
               id={chapter.id}
               label={chapter.title}
-              isCompleted={!!chapter.userProgress?.[0]?.isCompleted}
+              isChapterNowCompleted={!!chapter.userProgress?.[0]?.isCompleted}
+              userProgressPrevious={userProgressPrevious!}
               courseId={course.id}
               isLocked={!chapter.isFree && !purchase}
             />

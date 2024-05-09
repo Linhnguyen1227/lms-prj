@@ -2,6 +2,9 @@
 
 import { useState } from 'react';
 import axios from 'axios';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
+
 import {
   Dialog,
   DialogContent,
@@ -13,8 +16,6 @@ import {
 import { useModal } from '@/hooks/use-modal-store';
 import { Button } from '@/components/ui/button';
 import { useConfettiStore } from '@/hooks/use-confetti-store';
-import { useRouter } from 'next/navigation';
-import toast from 'react-hot-toast';
 
 export const CheckAnswerModal = () => {
   const { isOpen, onClose, type, data } = useModal();
@@ -22,7 +23,7 @@ export const CheckAnswerModal = () => {
   const confetti = useConfettiStore();
 
   const isModalOpen = isOpen && type === 'checkAnswer';
-  const { courseId, chapterId, isCompleted, nextChapterId, isQuestions, isAllAnswersCorrect } = data;
+  const { courseId, chapterId, profileId, isCompleted, nextChapterId, isQuestions, isAllAnswersCorrect } = data;
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -35,6 +36,7 @@ export const CheckAnswerModal = () => {
         if (!isCompleted && nextChapterId) {
           await axios.put(`/api/courses/${courseId}/chapters/${chapterId}/lock`, {
             nextChapterId: nextChapterId,
+            profileId: profileId,
           });
         }
 
@@ -97,22 +99,6 @@ export const CheckAnswerModal = () => {
   };
   return (
     <>
-      {/*      <AlertDialog>
-      <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>Bạn chưa hoàn thành bài trắc nghiệm.</AlertDialogTitle>
-          <AlertDialogDescription>Hãy quay lại khóa học để ôn lại kiến thức nhé.</AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel>Hủy</AlertDialogCancel>
-          <AlertDialogAction onClick={onConfirm} className="bg-red-600 hover:bg-red-600/90">
-            Quay lại
-          </AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog> */}
-
       <Dialog open={isModalOpen} onOpenChange={onClose}>
         <DialogContent className="bg-white text-black p-0 overflow-hidden">
           <DialogHeader className="pt-8 px-6">

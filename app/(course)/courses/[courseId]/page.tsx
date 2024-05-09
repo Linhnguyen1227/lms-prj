@@ -1,6 +1,5 @@
 import { redirect } from 'next/navigation';
 import Image from 'next/image';
-import Link from 'next/link';
 
 import { db } from '@/lib/db';
 import { currentProfile } from '@/lib/current-profile';

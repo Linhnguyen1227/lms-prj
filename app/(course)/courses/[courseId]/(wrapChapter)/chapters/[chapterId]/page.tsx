@@ -14,6 +14,7 @@ import { CourseProgressButton } from './_components/course-progress-button';
 import { CommentInput } from './_components/comment-input';
 import { CommentList } from './_components/comment-list';
 import { ExamButton } from './question/_components/exam-button';
+import { db } from '@/lib/db';
 const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId: string } }) => {
   const profile = await currentProfile();
 
@@ -21,15 +22,15 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
     return redirect('/');
   }
 
-  const { chapter, course, attachments, nextChapter, userProgress, purchase, questions } = await getChapter({
-    profileId: profile.id,
-    chapterId: params.chapterId,
-    courseId: params.courseId,
-  });
+  const { chapter, course, attachments, nextChapter, userProgress, purchase, questions, previousChapter } =
+    await getChapter({
+      profileId: profile.id,
+      chapterId: params.chapterId,
+      courseId: params.courseId,
+    });
   if (!chapter || !course) {
     return redirect('/');
   }
-
   const isLocked = !chapter.isFree && !purchase;
   const completeOnEnd = !!purchase && !userProgress?.isCompleted;
   const isQuestions = !!questions.length;
@@ -54,6 +55,7 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
             <h2 className="text-2xl font-semibold mb-2 ">{chapter.title}</h2>
             {purchase && !isQuestions ? (
               <CourseProgressButton
+                profileId={profile.id}
                 chapterId={params.chapterId}
                 courseId={params.courseId}
                 nextChapterId={nextChapter?.id}

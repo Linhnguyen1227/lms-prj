@@ -8,6 +8,7 @@ import QuestionItem from './question_item';
 interface QuestionItemProps {
   questions: Question[];
   chapterId: string;
+  profileId: string;
   courseId: string;
   isCompleted?: boolean;
   nextChapterId?: string;
@@ -18,6 +19,7 @@ export default function ListQuestionPage({
   questions,
   courseId,
   chapterId,
+  profileId,
   nextChapterId,
   isCompleted,
   isQuestions,
@@ -72,6 +74,7 @@ export default function ListQuestionPage({
         <CourseProgressButton
           isAllAnswersCorrect={isAllAnswersCorrect}
           chapterId={chapterId}
+          profileId={profileId}
           courseId={courseId}
           nextChapterId={nextChapterId}
           isCompleted={isCompleted}

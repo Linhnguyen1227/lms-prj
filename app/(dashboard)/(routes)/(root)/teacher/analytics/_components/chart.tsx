@@ -18,7 +18,7 @@ export const Chart = ({ data }: ChartProps) => {
         <BarChart data={data}>
           <XAxis dataKey="name" stroke="#88888" fontSize={12} tickLine={false} axisLine={false} />
           <YAxis
-            stroke="#888888"
+            stroke="#cccccc"
             fontSize={12}
             tickLine={false}
             axisLine={false}

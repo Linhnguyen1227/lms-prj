@@ -29,6 +29,7 @@ const CourseLayout = async ({ children, params }: { children: React.ReactNode; p
               profileId: profile.id,
             },
           },
+          LockChapter: true,
         },
         orderBy: {
           position: 'asc',

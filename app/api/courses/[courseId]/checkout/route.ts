@@ -5,6 +5,8 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { stripe } from "@/lib/stripe";
 import { currentProfile } from "@/lib/current-profile";
+import { getChapter } from "@/actions/get-chapters";
+import { Chapter } from "@prisma/client";
 
 export async function POST(
   req: Request,
@@ -60,7 +62,30 @@ export async function POST(
         }
       }
     ];
-
+    const chapters = await db.chapter.findMany({
+      where:{
+        courseId: params.courseId,
+      }
+    })
+    if(chapters.length > 0) {
+      for (const chapter of chapters) {
+        
+        await db.lockChapter.upsert({
+          where: {
+            id:`${chapter.id}${profile.id}`,
+          },
+          update:{
+            isLocked: true,
+          },
+          create:{
+            id:`${chapter.id}${profile.id}`,
+            isLocked: true,
+            chapterId: chapter.id
+        }
+        })
+      }
+    }
+    
     let stripeCustomer = await db.stripeCustomer.findUnique({
       where: {
         profileId: profile.id,

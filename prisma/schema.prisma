@@ -89,11 +89,20 @@ model Chapter {
   userProgress UserProgress[]
   comment      Comment[]
   question     Question[]
-  isLock       Boolean        @default(true)
+  LockChapter  LockChapter[]
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
 
   @@index([courseId])
+}
+
+model LockChapter {
+  id        String  @id
+  isLocked  Boolean @default(true)
+  chapterId String
+  chapter   Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+
+  @@index([chapterId])
 }
 
 model UserProgress {

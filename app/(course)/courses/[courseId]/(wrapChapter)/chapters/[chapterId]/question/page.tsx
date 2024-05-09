@@ -39,6 +39,7 @@ const QuestionPage = async ({ params }: { params: { courseId: string; chapterId:
       <div>
         <div className="flex flex-col space-y-4 py-4 px-6">
           <ListQuestionPage
+            profileId={profile.id}
             questions={questions}
             chapterId={params.chapterId}
             courseId={params.courseId}

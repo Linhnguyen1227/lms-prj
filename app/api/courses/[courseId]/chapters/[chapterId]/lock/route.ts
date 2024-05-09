@@ -10,23 +10,24 @@ export async function PUT(
   try {
 
     const profile = await currentProfile()
-    const {nextChapterId} = await req.json()
+    const {nextChapterId,profileId} = await req.json()
 
     if (!profile) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
-    const nextChapter = await db.chapter.update({
-        where: {
-            id:nextChapterId,
-            courseId: params.courseId,
-        },
-        data: {
-            isLock: false,
-        }
+
+    const unLockedChapter = await db.lockChapter.update({
+      where: {
+        id: `${nextChapterId}${profileId}`,
+        chapterId:nextChapterId,
+      },
+      data: {
+        isLocked: false,
+      }
     })
  
 
-    return NextResponse.json(nextChapter);
+    return NextResponse.json(unLockedChapter);
   } catch (error) {
     console.log("[CHAPTER_LOCKED]", error);
     return new NextResponse("Internal Error", { status: 500 }); 

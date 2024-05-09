@@ -26,10 +26,10 @@ export const ChapterActions = ({ disabled, courseId, chapterId, isPublished }: C
 
       if (isPublished) {
         await axios.patch(`/api/courses/${courseId}/chapters/${chapterId}/unpublish`);
-        toast.success('Chapter unpublished');
+        toast.success('Chương chưa được xuất bản');
       } else {
         await axios.patch(`/api/courses/${courseId}/chapters/${chapterId}/publish`);
-        toast.success('Chapter published');
+        toast.success('Chương đã xuất bản');
       }
 
       router.refresh();

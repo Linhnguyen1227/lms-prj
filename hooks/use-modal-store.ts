@@ -24,6 +24,7 @@ interface ModalData {
   apiUrl?: string;
   courseId?:string,
   chapterId?:string,
+  profileId?:string,
   initialData?: Question[],
   question?:string,
   option_a?:string,

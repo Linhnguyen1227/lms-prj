@@ -15,12 +15,14 @@ interface CourseProgressButtonProps {
   chapterId: string;
   courseId: string;
   isCompleted?: boolean;
+  profileId?: string;
   nextChapterId?: string;
   isQuestions?: boolean;
   isAllAnswersCorrect?: boolean | 'undefined';
 }
 
 export const CourseProgressButton = ({
+  profileId,
   isAllAnswersCorrect,
   chapterId,
   courseId,
@@ -37,8 +39,6 @@ export const CourseProgressButton = ({
   const onClick = async () => {
     if (isQuestions) {
       if (isCompleted) {
-        console.log(123);
-
         await axios.put(`/api/courses/${courseId}/chapters/${chapterId}/progress`, {
           isCompleted: !isCompleted,
         });
@@ -46,6 +46,7 @@ export const CourseProgressButton = ({
       } else {
         onOpen('checkAnswer', {
           chapterId,
+          profileId,
           courseId,
           isCompleted,
           nextChapterId,
@@ -60,13 +61,17 @@ export const CourseProgressButton = ({
         await axios.put(`/api/courses/${courseId}/chapters/${chapterId}/progress`, {
           isCompleted: !isCompleted,
         });
-
+        if (!isCompleted && nextChapterId) {
+          await axios.put(`/api/courses/${courseId}/chapters/${chapterId}/lock`, {
+            nextChapterId: nextChapterId,
+            profileId: profileId,
+          });
+        }
         if (!isCompleted && !nextChapterId && !isQuestions) {
           confetti.onOpen();
         } else if (!isCompleted && !nextChapterId && isQuestions) {
           router.push(`/courses/${courseId}/chapters/${chapterId}`);
         }
-
         if (!isCompleted && !isQuestions && nextChapterId) {
           router.push(`/courses/${courseId}/chapters/${nextChapterId}`);
         }
@@ -100,7 +105,7 @@ export const CourseProgressButton = ({
           variant={isCompleted ? 'outline' : 'success'}
           className="w-full md:w-auto"
         >
-          {isCompleted ? 'Chưa hoàn thành' : 'Đánh dấu là hoàn thành'}
+          {isCompleted ? 'Đánh dấu chưa hoàn thành' : 'Đánh dấu là hoàn thành'}
           <Icon className="h-4 w-4 ml-2" />
         </Button>
       ) : (

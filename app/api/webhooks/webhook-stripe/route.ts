@@ -48,6 +48,7 @@ export async function POST(req: Request) {
         profileId:profileId,
       }
     });
+    
   } else {
     return new NextResponse(`Webhook Error: Unhandled event type ${event.type}`, { status: 200 })
   }

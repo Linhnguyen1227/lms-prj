@@ -1,11 +1,15 @@
 import { db } from '@/lib/db';
-import { Attachment, Chapter } from '@prisma/client';
+import { Attachment, Chapter, LockChapter } from '@prisma/client';
 
 interface GetChapterProps {
   profileId: string;
   courseId: string;
   chapterId: string;
 }
+
+type ChapterWithLockChapter = Chapter & {
+  LockChapter: LockChapter[];
+};
 
 export const getChapter = async ({ profileId, courseId, chapterId }: GetChapterProps) => {
   try {
@@ -40,7 +44,8 @@ export const getChapter = async ({ profileId, courseId, chapterId }: GetChapterP
     }
 
     let attachments: Attachment[] = [];
-    let nextChapter: Chapter | null = null;
+    let nextChapter: ChapterWithLockChapter | null = null;
+    let previousChapter: ChapterWithLockChapter | null = null;
 
     if (purchase) {
       attachments = await db.attachment.findMany({
@@ -58,11 +63,37 @@ export const getChapter = async ({ profileId, courseId, chapterId }: GetChapterP
             gt: chapter?.position,
           },
         },
+        include: {
+          LockChapter: true,
+        },
         orderBy: {
           position: 'asc',
         },
       });
+
+      if (purchase) {
+        previousChapter = await db.chapter.findFirst({
+          where: {
+            courseId: courseId,
+            isPublished: true,
+            position: {
+              lt: chapter?.position,
+            },
+          },
+          include: {
+            LockChapter: true,
+          },
+          orderBy: {
+            position: 'desc',
+          },
+        });
+      }
     }
+    const lockChapter = await db.lockChapter.findFirst({
+      where: {
+        id: `${chapterId}${profileId}`,
+      },
+    });
 
     const userProgress = await db.userProgress.findUnique({
       where: {
@@ -88,6 +119,8 @@ export const getChapter = async ({ profileId, courseId, chapterId }: GetChapterP
       nextChapter,
       userProgress,
       purchase,
+      previousChapter,
+      lockChapter,
     };
   } catch (error) {
     console.log('[GET_CHAPTER]', error);
@@ -98,7 +131,9 @@ export const getChapter = async ({ profileId, courseId, chapterId }: GetChapterP
       attachments: [],
       nextChapter: null,
       userProgress: null,
+      userProgressPrevious: null,
       purchase: null,
+      lockChapter: null,
     };
   }
 };
