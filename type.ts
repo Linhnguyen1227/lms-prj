@@ -2,7 +2,7 @@ import { Server as NetServer, Socket } from "net";
 import { NextApiResponse } from "next";
 import { Server as SocketIOServer } from "socket.io";
 
-import { Chapter, Profile } from "@prisma/client";
+import { Chapter, Course, LockChapter, Profile, UserProgress } from "@prisma/client";
 
 export type ChaptersWithProfiles = Chapter & {
   profile: Profile[];
@@ -15,3 +15,13 @@ export type NextApiResponseServerIo = NextApiResponse & {
     };
   };
 };
+
+export type CourseWithChapter = {
+  course: Course & {
+    chapters: (Chapter & {
+      LockChapter: LockChapter[];
+      userProgress: UserProgress[] | null;
+    })[];
+  };
+  progressCount: number;
+}
