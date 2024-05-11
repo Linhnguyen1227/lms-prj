@@ -9,6 +9,7 @@ type CourseWithProgressWithCategory = Course & {
   progress: number | null;
 };
 
+
 type DashboardCourses = {
   completedCourses: CourseWithProgressWithCategory[];
   coursesInProgress: CourseWithProgressWithCategory[];
@@ -33,6 +34,8 @@ export const getDashboardCourses = async (profileId: string): Promise<DashboardC
         }
       }
     });
+
+  
 
     const courses = purchasedCourses.map((purchase) => purchase.course) as CourseWithProgressWithCategory[];
 

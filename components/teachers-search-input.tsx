@@ -14,10 +14,17 @@ export const SearchTeacherInput = () => {
   const debouncedValue = useDebounce(value);
 
   const searchParams = useSearchParams();
+  const username = searchParams?.get('username');
+
   const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
+    if (searchParams) {
+      setValue(searchParams?.get('username')!);
+      return;
+    }
+
     const url = qs.stringifyUrl(
       {
         url: pathname as string,
@@ -28,7 +35,7 @@ export const SearchTeacherInput = () => {
       { skipEmptyString: true, skipNull: true },
     );
     router.push(url);
-  }, [debouncedValue, router, pathname]);
+  }, [debouncedValue, router, pathname, searchParams]);
 
   return (
     <div className="relative">

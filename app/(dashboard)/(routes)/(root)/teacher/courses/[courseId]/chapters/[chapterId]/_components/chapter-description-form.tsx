@@ -45,11 +45,11 @@ export const ChapterDescriptionForm = ({ initialData, courseId, chapterId }: Cha
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       await axios.patch(`/api/courses/${courseId}/chapters/${chapterId}`, values);
-      toast.success('Chapter updated');
+      toast.success('Đã cập nhật bài học');
       toggleEdit();
       router.refresh();
     } catch {
-      toast.error('Something went wrong');
+      toast.error('Có lỗi đã xảy ra');
     }
   };
 
@@ -70,7 +70,7 @@ export const ChapterDescriptionForm = ({ initialData, courseId, chapterId }: Cha
       </div>
       {!isEditing && (
         <div className={cn('text-sm mt-2', !initialData.description && 'text-slate-500 italic')}>
-          {!initialData.description && 'No description'}
+          {!initialData.description && 'Không có mô tả cho bài học này.'}
           {initialData.description && <Preview value={initialData.description} />}
         </div>
       )}

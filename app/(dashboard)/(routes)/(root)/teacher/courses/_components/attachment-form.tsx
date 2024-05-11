@@ -33,11 +33,11 @@ export const AttachmentForm = ({ initialData, courseId }: AttachmentFormProps) =
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       await axios.post(`/api/courses/${courseId}/attachments`, values);
-      toast.success('Course updated');
+      toast.success('Đã cập nhật khóa học');
       toggleEdit();
       router.refresh();
     } catch {
-      toast.error('Something went wrong');
+      toast.error('Có lỗi đã xảy ra');
     }
   };
 
@@ -45,10 +45,10 @@ export const AttachmentForm = ({ initialData, courseId }: AttachmentFormProps) =
     try {
       setDeletingId(id);
       await axios.delete(`/api/courses/${courseId}/attachments/${id}`);
-      toast.success('Attachment deleted');
+      toast.success('Đã cập nhật tệp đính kèm ');
       router.refresh();
     } catch {
-      toast.error('Something went wrong');
+      toast.error('Có lỗi đã xảy ra');
     } finally {
       setDeletingId(null);
     }
@@ -109,7 +109,7 @@ export const AttachmentForm = ({ initialData, courseId }: AttachmentFormProps) =
             }}
           />
           <div className="text-xs text-muted-foreground mt-4">
-            Add anything your students might need to complete the course.
+            Thêm bất cứ điều gì học viên của bạn có thể cần để hoàn thành khóa học.
           </div>
         </div>
       )}

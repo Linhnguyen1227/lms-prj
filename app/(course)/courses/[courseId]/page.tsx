@@ -6,6 +6,7 @@ import { currentProfile } from '@/lib/current-profile';
 import { UserAvatar } from '@/components/user-avatar';
 import { Categories } from '@/components/categories';
 import { ButtonChapter } from './_component/button-chapter';
+import Link from 'next/link';
 
 const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
   const profile = await currentProfile();
@@ -56,7 +57,9 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
         <div className=" flex flex-col justify-between space-y-4">
           <div className="space-y-4">
             <h2 className="text-xl font-semibold">Tác giả: {courseAuthor?.username}</h2>
-            <UserAvatar src={courseAuthor?.imageUrl} />
+            <Link href={`/contact?username=${courseAuthor?.username}`}>
+              <UserAvatar src={courseAuthor?.imageUrl} />
+            </Link>
             <p className="font-bold">Mô tả khóa học:</p>
             <p>{course.description}</p>
           </div>

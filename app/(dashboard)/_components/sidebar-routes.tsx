@@ -1,6 +1,6 @@
 'use client';
 
-import { BarChart, Compass, HelpCircle, Layout, List, Users } from 'lucide-react';
+import { BarChart, Compass, HelpCircle, Layout, List, Sheet, Users } from 'lucide-react';
 
 import { SidebarItem } from './sidebar-item';
 import { usePathname } from 'next/navigation';
@@ -38,6 +38,11 @@ const teacherRoutes = [
     icon: BarChart,
     label: 'Phân tích',
     href: '/teacher/analytics',
+  },
+  {
+    icon: Sheet,
+    label: 'Thống kê khóa học',
+    href: '/teacher/statistics',
   },
 ];
 

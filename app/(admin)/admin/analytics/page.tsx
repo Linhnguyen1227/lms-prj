@@ -24,19 +24,24 @@ const AnalyticsAdminPage = async () => {
   return (
     <div className="p-6 space-y-6">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <InfoCard icon={BookOpen} label="All Courses" numberOfItems={coursePublished.length} sublabel="Course" />
-        <InfoCard icon={UserRoundCheck} label="Users Purchase" numberOfItems={userPurchase.length} sublabel="User" />
+        <InfoCard icon={BookOpen} label="Tất cả khóa học" numberOfItems={coursePublished.length} sublabel="Khóa học" />
+        <InfoCard
+          icon={UserRoundCheck}
+          label="Tổng số học viên"
+          numberOfItems={userPurchase.length}
+          sublabel="Học viên"
+        />
         <InfoCard
           icon={BookOpenCheck}
-          label="Courses Published"
+          label="Khóa học đã xuất bản"
           numberOfItems={allCourses.length}
           variant="success"
-          sublabel="Course"
+          sublabel="Khóa học"
         />
-        <InfoCard icon={User} label="All Users" numberOfItems={users.length} sublabel="User" />
+        <InfoCard icon={User} label="Tổng số người dùng" numberOfItems={users.length} sublabel="Người dùng" />
       </div>
       <div>
-        <h1 className="text-xl font-bold mb-4"> Courses</h1>
+        <h1 className="text-xl font-bold mb-4"> Khóa học</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <DataCard label="Tổng doanh thu" value={totalRevenue} shouldFormat />
           <DataCard label="Tổng các khóa học đã bán " value={totalSales} />
@@ -46,12 +51,15 @@ const AnalyticsAdminPage = async () => {
         </div>
       </div>
       <div>
-        <h1 className="text-xl font-bold mb-4"> Users chart</h1>
+        <h1 className="text-xl font-bold mb-4"> Biểu đồ người dùng</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <DataCard label="Tổng số người dùng" value={totalUsers} />
           <DataCard label="Tổng số các khóa học" value={totalCourses} />
         </div>
         <Chart data={dataUsers} />
+      </div>
+      <div>
+        <h1 className="text-2xl font-bold"> </h1>
       </div>
     </div>
   );

@@ -53,7 +53,7 @@ export const columns: ColumnDef<Course>[] = [
     header: ({ column }) => {
       return (
         <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-          Xuất bản
+          Trạng thái
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );

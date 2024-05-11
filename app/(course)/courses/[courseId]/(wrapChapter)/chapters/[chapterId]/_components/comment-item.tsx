@@ -94,13 +94,13 @@ export const CommentItem = ({
       });
 
       await axios.patch(url, values);
-      toast.success('Edit comments successfully');
+      toast.success('Chỉnh sửa hoàn tất');
       router.refresh();
       form.reset();
       setIsEditing(false);
     } catch (error) {
       console.log(error);
-      toast.error('Edit error');
+      toast.error('Chỉnh sửa lỗi');
     }
   };
 

@@ -39,9 +39,9 @@ const CreatePage = () => {
   return (
     <div className="max-w-5xl mx-auto flex md:items-center md:justify-center h-full p-6">
       <div>
-        <h1 className="text-2xl">Name your course</h1>
+        <h1 className="text-2xl">Tên khóa học của bạn</h1>
         <p className="text-sm text-slate-600">
-          What would you like to name your course? Don&apos;t worry, you can change this later.
+          Bạn muốn đặt tên khóa học của mình là gì? Đừng lo lắng, bạn có thể thay đổi điều này sau.
         </p>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 mt-8">
@@ -50,11 +50,11 @@ const CreatePage = () => {
               name="title"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Course title</FormLabel>
+                  <FormLabel>Tiêu đề khóa học</FormLabel>
                   <FormControl>
-                    <Input disabled={isSubmitting} placeholder="e.g. 'Advanced web development'" {...field} />
+                    <Input disabled={isSubmitting} placeholder="Nhập tiêu đề khóa học của bạn !" {...field} />
                   </FormControl>
-                  <FormDescription>What will you teach in this course?</FormDescription>
+                  <FormDescription>Bạn sẽ có những bài học nào?</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -62,11 +62,11 @@ const CreatePage = () => {
             <div className="flex items-center gap-x-2">
               <Link href="/teacher/courses">
                 <Button type="button" variant="ghost">
-                  Cancel
+                  Hủy
                 </Button>
               </Link>
               <Button type="submit" disabled={!isValid || isSubmitting}>
-                Continue
+                Tiếp tục
               </Button>
             </div>
           </form>

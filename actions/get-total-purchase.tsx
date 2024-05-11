@@ -7,11 +7,20 @@ export const getTotalPurchase = async (id: string) => {
         courseId: id,
       },
     });
+    const detailPurchaserList = await db.purchase.findMany({
+      where: {
+        courseId: id,
+      },
+      select: {
+        profile: true,
+      },
+    });
     const totalPurchaseAll = await db.purchase.count({});
 
     return {
       totalPurchase,
       totalPurchaseAll,
+      detailPurchaserList,
     };
   } catch (error) {
     console.log('[GET_PURCHASE_COURSE]', error);

@@ -33,7 +33,7 @@ export const columnsAdminPage: ColumnDef<DataTablesProps>[] = [
     header: ({ column }) => {
       return (
         <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-          Full Name
+          Tên người dùng
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -55,7 +55,7 @@ export const columnsAdminPage: ColumnDef<DataTablesProps>[] = [
     header: ({ column }) => {
       return (
         <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-          Role
+          Vai trò
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -106,16 +106,16 @@ export const columnsAdminPage: ColumnDef<DataTablesProps>[] = [
                   }}
                 >
                   <Pencil className="h-4 w-4 mr-2" />
-                  Edit
+                  Chỉnh sửa
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={handleDelete}>
                   <Trash className="h-4 w-4 mr-2" />
-                  Delete
+                  Xóa
                 </DropdownMenuItem>
                 <Link href={`admin/user/${userId}/courses`}>
                   <DropdownMenuItem>
                     <BookOpen className="h-4 w-4 mr-2" />
-                    Courses
+                    Khóa học
                   </DropdownMenuItem>
                 </Link>
               </DropdownMenuContent>

@@ -16,15 +16,15 @@ const handleAuth = async () => {
 export const ourFileRouter = {
   courseImage: f({ image: { maxFileSize: "4MB", maxFileCount: 1 } })
     .middleware(() => handleAuth())
-    .onUploadComplete((data) => {console.log('Upload complete',data);
+    .onUploadComplete((data) => {console.log('Tải lên thành công',data);
     }),
   courseAttachment: f(["text", "image", "video", "audio", "pdf",'blob'])
     .middleware(() => handleAuth())
-    .onUploadComplete(() => {console.log('Upload complete');}),
+    .onUploadComplete(() => {console.log('Tải lên thành công');}),
     
   chapterVideo: f({ video: { maxFileCount: 1, maxFileSize: "512GB" } })
     .middleware(() => handleAuth())
-    .onUploadComplete(() => {console.log('Upload complete');})
+    .onUploadComplete(() => {console.log('Tải lên thành công');})
 
 } satisfies FileRouter;
  

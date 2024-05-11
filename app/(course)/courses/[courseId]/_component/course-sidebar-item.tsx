@@ -42,12 +42,12 @@ export const CourseSidebarItem = ({
   const pathname = usePathname();
   const isActive = pathname?.includes(id);
   const router = useRouter();
-  const firstChapter = lockChapter.isLocked && position !== 1;
-  /*   console.log('lockChapter.isLocked', lockChapter.isLocked, chapter.title); */
+  const firstChapter = lockChapter?.isLocked && position !== 1;
+  /*   console.log('lockChapter?.isLocked', lockChapter?.isLocked, chapter.title); */
   console.log('lockChapter', lockChapter);
 
   const onClick = () => {
-    if (lockChapter.isLocked === false) {
+    if (lockChapter?.isLocked === false) {
       console.log(123);
 
       router.push(`/courses/${courseId}/chapters/${id}`);
@@ -71,7 +71,7 @@ export const CourseSidebarItem = ({
       className={cn(
         'flex items-center gap-x-2 text-slate-500 text-sm font-[500] pl-6 transition-all hover:text-slate-600 hover:bg-slate-300/20',
         firstChapter && 'cursor-default hover:bg-transparent hover:text-slate-500',
-        lockChapter.isLocked && 'cursor-default hover:bg-transparent hover:text-slate-500',
+        lockChapter?.isLocked && 'cursor-default hover:bg-transparent hover:text-slate-500',
         isActive && 'text-slate-700 bg-slate-200/20 hover:bg-slate-200/20 hover:text-slate-700',
         isChapterNowCompleted && 'text-emerald-700 hover:text-emerald-700',
         isChapterNowCompleted && 'text-emerald-700 hover:text-emerald-700',

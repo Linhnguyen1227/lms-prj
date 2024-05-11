@@ -42,11 +42,11 @@ export const ChapterTitleForm = ({ initialData, courseId, chapterId }: ChapterTi
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       await axios.patch(`/api/courses/${courseId}/chapters/${chapterId}`, values);
-      toast.success('Chapter updated');
+      toast.success('Đã cập nhật bài học');
       toggleEdit();
       router.refresh();
     } catch {
-      toast.error('Something went wrong');
+      toast.error('Có lỗi đã xảy ra');
     }
   };
 
@@ -75,7 +75,7 @@ export const ChapterTitleForm = ({ initialData, courseId, chapterId }: ChapterTi
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input disabled={isSubmitting} placeholder="e.g. 'Introduction to the course'" {...field} />
+                    <Input disabled={isSubmitting} placeholder="Nhập tiêu đề bài học" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

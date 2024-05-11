@@ -52,12 +52,12 @@ const ModalEditCourse = () => {
   const onSubmit = async (values: any) => {
     try {
       await axios.patch(`/api/courses/${id}`, values);
-      toast.success('Course updated');
+      toast.success('Cập nhật thành công');
       handleClose();
       router.refresh();
     } catch (error) {
       console.log('error', error);
-      toast.error('Course updated failed');
+      toast.error('Đã có lỗi xảy ra');
     }
   };
 
@@ -65,7 +65,7 @@ const ModalEditCourse = () => {
     <Dialog open={isOpenModal} onOpenChange={handleClose}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle className="text-xl font-bold">Edit course {title}</DialogTitle>
+          <DialogTitle className="text-xl font-bold">Chỉnh sửa khóa học {title}</DialogTitle>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -75,7 +75,7 @@ const ModalEditCourse = () => {
                 name="title"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Title</FormLabel>
+                    <FormLabel>Tiêu đề</FormLabel>
                     <FormControl>
                       <Input {...field} placeholder="Enter title" disabled={isLoading} />
                     </FormControl>
@@ -88,13 +88,13 @@ const ModalEditCourse = () => {
                 name="price"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Price</FormLabel>
+                    <FormLabel>Giá</FormLabel>
                     <FormControl>
                       <Input
                         type="number"
                         step="0.01"
                         disabled={isLoading}
-                        placeholder="Set a price for your course"
+                        placeholder="Đặt giá cho khóa học của bạn"
                         {...field}
                       />
                     </FormControl>
@@ -107,9 +107,9 @@ const ModalEditCourse = () => {
                 name="description"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Description</FormLabel>
+                    <FormLabel>Mô tả</FormLabel>
                     <FormControl>
-                      <Textarea disabled={isLoading} placeholder="e.g. 'This course is about...'" {...field} />
+                      <Textarea disabled={isLoading} placeholder="Nhập mô tả..." {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -118,7 +118,7 @@ const ModalEditCourse = () => {
             </div>
             <DialogFooter>
               <Button variant="primary" disabled={isLoading}>
-                Save
+                Lưu
               </Button>
             </DialogFooter>
           </form>

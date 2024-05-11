@@ -104,7 +104,6 @@ export const ColumnsCoursesPage: ColumnDef<DataCourseProps>[] = [
       const handleDelete = () => {
         try {
           axios.delete(`/api/courses/${data.id}`);
-          toast.success('Course deleted');
           router.refresh();
         } catch (error) {
           console.error(error);
@@ -123,11 +122,11 @@ export const ColumnsCoursesPage: ColumnDef<DataCourseProps>[] = [
             <DropdownMenuContent align="center">
               <DropdownMenuItem onClick={() => onOpen('openEditCourse', data)}>
                 <Pencil className="h-4 w-4 mr-2" />
-                Edit
+                Chỉnh sửa
               </DropdownMenuItem>
               <DropdownMenuItem onClick={handleDelete}>
                 <Trash2 className="h-4 w-4 mr-2" />
-                Delete
+                Xóa
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

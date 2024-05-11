@@ -64,7 +64,7 @@ export function DataTableAdmin<TData, TValue>({ columns, data }: DataTableProps<
             <RotateCw className="h-4 w-4 " />
           </Button>
           <Button onClick={() => onOpen('openUserCreate')}>
-            <PlusCircle className="h-4 w-4 mr-2" /> Create user
+            <PlusCircle className="h-4 w-4 mr-2" /> Tạo người dùng
           </Button>
         </div>
       </div>

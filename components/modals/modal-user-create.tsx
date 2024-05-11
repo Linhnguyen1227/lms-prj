@@ -68,7 +68,7 @@ const ModalUserCreate = () => {
     <Dialog open={isOpenModal} onOpenChange={handleClose}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle className="text-xl font-bold">Create user</DialogTitle>
+          <DialogTitle className="text-xl font-bold">Tạo người dùng</DialogTitle>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -78,7 +78,7 @@ const ModalUserCreate = () => {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Username</FormLabel>
+                    <FormLabel>Tên người dùng</FormLabel>
                     <FormControl>
                       <Input disabled={isLoading} placeholder="Enter name" {...field} />
                     </FormControl>
@@ -104,7 +104,7 @@ const ModalUserCreate = () => {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Password</FormLabel>
+                    <FormLabel>Mật khẩu</FormLabel>
                     <FormControl>
                       <Input disabled={isLoading} type="password" placeholder="Enter password" {...field} />
                     </FormControl>
@@ -115,7 +115,7 @@ const ModalUserCreate = () => {
             </div>
             <DialogFooter>
               <Button variant="primary" disabled={isLoading}>
-                Save
+                Lưu
               </Button>
             </DialogFooter>
           </form>

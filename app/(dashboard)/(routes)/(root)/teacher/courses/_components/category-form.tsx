@@ -44,11 +44,11 @@ export const CategoryForm = ({ initialData, courseId, options }: CategoryFormPro
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       await axios.patch(`/api/courses/${courseId}`, values);
-      toast.success('Course updated');
+      toast.success('Đã cập nhật khóa học');
       toggleEdit();
       router.refresh();
     } catch {
-      toast.error('Something went wrong');
+      toast.error('Có lỗi đã xảy ra');
     }
   };
 
