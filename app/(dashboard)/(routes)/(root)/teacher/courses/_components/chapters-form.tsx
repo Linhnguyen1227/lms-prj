@@ -125,7 +125,6 @@ export const ChaptersForm = ({
                 </FormItem>
               )}
             />
-
             <Button disabled={!isValid || isSubmitting} type="submit">
               Tạo
             </Button>
@@ -141,7 +140,7 @@ export const ChaptersForm = ({
             !initialData.chapters.length && 'text-slate-500 italic',
           )}
         >
-          {!initialData.chapters.length && 'No chapters'}
+          {!initialData.chapters.length && 'Không có bài học'}
 
           {/* TODO: Add a list of chapters */}
           <ChaptersList onEdit={onEdit} onReorder={onReorder} items={initialData.chapters || []} />

@@ -14,6 +14,8 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { Textarea } from '@/components/ui/textarea';
 import { Course } from '@prisma/client';
+import { Editor } from '@/components/editor';
+import { Preview } from '@/components/preview';
 
 interface DescriptionFormProps {
   initialData: Course;
@@ -70,11 +72,12 @@ export const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps)
       </div>
       {!isEditing && (
         <p className={cn('text-sm mt-2', !initialData.description && 'text-slate-500 italic')}>
-          {initialData.description || 'Không có mô tả'}
+          {!initialData.description && 'Không có mô tả cho bài học này.'}
+          {initialData.description && <Preview value={initialData.description} />}
         </p>
       )}
       {isEditing && (
-        <Form {...form}>
+        /*   <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 mt-4">
             <FormField
               control={form.control}
@@ -83,6 +86,27 @@ export const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps)
                 <FormItem>
                   <FormControl>
                     <Textarea disabled={isSubmitting} placeholder="e.g. 'This course is about...'" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <div className="flex items-center gap-x-2">
+              <Button disabled={!isValid || isSubmitting} type="submit">
+                Lưu
+              </Button>
+            </div>
+          </form>
+        </Form> */
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 mt-4">
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Editor {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

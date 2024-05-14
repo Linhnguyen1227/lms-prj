@@ -33,7 +33,6 @@ export const getUser = async ({ username }: { username: string }): Promise<User>
         username: {
           contains: username,
         },
-
         courses: {
           some: {},
         },

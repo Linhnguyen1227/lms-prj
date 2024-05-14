@@ -48,6 +48,33 @@ export async function POST(req: Request) {
         profileId:profileId,
       }
     });
+
+    const chapters = await db.chapter.findMany({
+      where:{
+        courseId
+      }
+    })
+
+    chapters.map(async(chapter) =>{
+      return await db.userProgress.upsert({
+        where:{
+          profileId_chapterId: {
+            profileId,
+            chapterId: chapter.id,
+          },
+        },
+        update:{
+          isCompleted: false,
+        },
+        create: {
+          chapterId: chapter.id,
+          profileId: profileId,
+          isCompleted: false,
+        }
+      })
+    })
+
+    
     
   } else {
     return new NextResponse(`Webhook Error: Unhandled event type ${event.type}`, { status: 200 })

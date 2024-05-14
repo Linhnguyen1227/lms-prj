@@ -14,7 +14,7 @@ import { CourseProgressButton } from './_components/course-progress-button';
 import { CommentInput } from './_components/comment-input';
 import { CommentList } from './_components/comment-list';
 import { ExamButton } from './question/_components/exam-button';
-import { db } from '@/lib/db';
+
 const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId: string } }) => {
   const profile = await currentProfile();
 
@@ -52,7 +52,7 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
         </div>
         <div>
           <div className="p-4 text-center md:flex justify-between items-center group">
-            <h2 className="text-2xl font-semibold mb-2 ">{chapter.title}</h2>
+            <h2 className="text-2xl font-semibold mb-2 text-left ">{chapter.title}</h2>
             {purchase && !isQuestions ? (
               <CourseProgressButton
                 profileId={profile.id}

@@ -7,12 +7,16 @@ import { UserAvatar } from '@/components/user-avatar';
 import { Categories } from '@/components/categories';
 import { ButtonChapter } from './_component/button-chapter';
 import Link from 'next/link';
+import { Preview } from '@/components/preview';
+import { getTotalPurchase } from '@/actions/get-total-purchase';
 
 const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
   const profile = await currentProfile();
   if (!profile) {
     return redirect('/');
   }
+
+  /*   const { totalPurchase } = await getTotalPurchase({ id:params.courseId }); */
   const course = await db.course.findUnique({
     where: {
       id: params.courseId,
@@ -57,11 +61,13 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
         <div className=" flex flex-col justify-between space-y-4">
           <div className="space-y-4">
             <h2 className="text-xl font-semibold">Tác giả: {courseAuthor?.username}</h2>
-            <Link href={`/contact?username=${courseAuthor?.username}`}>
+            {/* <Link href={`/contact?username=${courseAuthor?.username}`}>
               <UserAvatar src={courseAuthor?.imageUrl} />
-            </Link>
+            </Link> */}
+
+            <UserAvatar src={courseAuthor?.imageUrl} />
             <p className="font-bold">Mô tả khóa học:</p>
-            <p>{course.description}</p>
+            <Preview value={course.description!} />
           </div>
           <div>
             <Categories items={[course.category!]} />

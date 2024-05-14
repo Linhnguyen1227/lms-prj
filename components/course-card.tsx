@@ -27,7 +27,7 @@ export const CourseCard = async ({
   progress,
   category,
 }: CourseCardProps) => {
-  const { totalPurchase } = await getTotalPurchase(id);
+  const { totalPurchase } = await getTotalPurchase({ id });
 
   return (
     <Link href={`/courses/${id}`}>

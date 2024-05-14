@@ -51,6 +51,7 @@
     "next-themes": "^0.2.1",
     "ngrok": "^5.0.0-beta.2",
     "query-string": "^8.1.0",
+    "randomcolor": "^0.6.2",
     "react": "^18",
     "react-confetti": "^6.1.0",
     "react-day-picker": "^8.10.1",

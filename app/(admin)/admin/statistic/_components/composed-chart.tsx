@@ -10,9 +10,8 @@ const ComposedChartPage = ({ categories }: any) => {
   });
 
   return (
-    <ResponsiveContainer width="80%" height={550}>
+    <ResponsiveContainer width="100%" height={550}>
       <ComposedChart
-        layout="vertical"
         width={500}
         height={400}
         data={courses}
@@ -24,11 +23,11 @@ const ComposedChartPage = ({ categories }: any) => {
         }}
       >
         <CartesianGrid stroke="#f5f5f5" />
-        <XAxis type="number" />
-        <YAxis dataKey="name" type="category" scale="band" />
+        <XAxis dataKey="name" scale="band" />
+        <YAxis type="number" />
         <Tooltip />
         <Legend />
-        <Bar className="pr-4" dataKey="Tổng số khóa học" barSize={30} fill="#f59e0b" />
+        <Bar dataKey="Tổng số khóa học" barSize={30} fill="#f59e0b" />
       </ComposedChart>
     </ResponsiveContainer>
   );

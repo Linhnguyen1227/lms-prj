@@ -29,7 +29,7 @@ export const CoursesList = ({ items }: CoursesListProps) => {
         ))}
       </div>
       {items.length === 0 && (
-        <div className="text-center text-sm text-muted-foreground mt-10">Bạn chưa có khóa học nào </div>
+        <div className="text-center text-sm text-muted-foreground mt-10">Không có khóa học nào </div>
       )}
     </div>
   );

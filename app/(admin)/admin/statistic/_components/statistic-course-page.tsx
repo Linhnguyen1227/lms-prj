@@ -9,7 +9,6 @@ import CourseChart from './course-chart';
 const StatisticCoursePage = () => {
   const { categories, coursePurchase } = useStore();
   const [client, setClient] = useState(false);
-  console.log('coursePurchase', coursePurchase);
 
   useEffect(() => {
     setClient(true);
@@ -22,7 +21,7 @@ const StatisticCoursePage = () => {
     <div className="flex flex-col space-y-4">
       <span className="text-lg font-medium">Thống kê theo danh mục:</span>
       <ComposedChartPage categories={categories} />
-      <span className="text-lg font-medium">Thống kê theo khóa học:</span>
+      <span className="text-lg font-medium mb-4">Thống kê theo khóa học:</span>
       <CourseChart coursePurchase={coursePurchase} />
     </div>
   );

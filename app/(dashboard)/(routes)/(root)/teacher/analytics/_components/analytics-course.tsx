@@ -1,4 +1,5 @@
 import { getTotalPurchase } from '@/actions/get-total-purchase';
+import { getUser } from '@/actions/get-user';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
@@ -8,15 +9,20 @@ import { cn } from '@/lib/utils';
 import { Course } from '@prisma/client';
 interface AnalyticsCoursesProps {
   courses: Course[];
+  searchParams: {
+    username: string;
+  };
 }
 
-export const AnalyticsCourses = ({ courses }: AnalyticsCoursesProps) => {
+export const AnalyticsCourses = async ({ courses, searchParams }: AnalyticsCoursesProps) => {
+  console.log('searchParams', searchParams);
+
   let index = 0;
   return (
     <>
       <div className="p-6 space-y-4">
         {courses.map(async (course) => {
-          const { totalPurchase, detailPurchaserList } = await getTotalPurchase(course.id);
+          const { totalPurchase, detailPurchaserList } = await getTotalPurchase({ id: course.id, ...searchParams });
 
           return (
             <Accordion key={course.id} type="multiple" className="w-full" defaultValue={[`item-${course.id}`]}>
@@ -27,7 +33,6 @@ export const AnalyticsCourses = ({ courses }: AnalyticsCoursesProps) => {
                       <p>Tên khóa học:</p>
                       <p className="flex gap-x-4 items-center ">{course.title}</p>
                     </div>
-
                     <p className="font-normal text-sm">{totalPurchase} Học viên</p>
                   </div>
                 </AccordionTrigger>
@@ -46,6 +51,9 @@ export const AnalyticsCourses = ({ courses }: AnalyticsCoursesProps) => {
                         chapter: true,
                       },
                     });
+                    // lọc ra các chapter của tường chương
+                    const newListAnalytics = progressList.filter((item) => item.chapter.courseId === course.id);
+                    /*       console.log('newListAnalytics', newListAnalytics); */
 
                     return (
                       <Accordion
@@ -66,7 +74,7 @@ export const AnalyticsCourses = ({ courses }: AnalyticsCoursesProps) => {
                             <div>
                               <p className="text-sm font-medium py-4">Tiến độ bài học</p>
                               <div className="space-y-4">
-                                {progressList.map((item) => {
+                                {newListAnalytics.map((item) => {
                                   return (
                                     <div key={item.id} className="flex justify-between pl-4">
                                       <p className="text-sm font-medium">{item.chapter.title}</p>

@@ -17,6 +17,9 @@ export async function GET(req: Request) {
     const coursePurchase = await db.course.findMany({
       where: {
         isPublished: true,
+        purchases: {
+          some: {},
+        },
       },
       include: {
         purchases: {

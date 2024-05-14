@@ -46,7 +46,7 @@ export const ChapterAccessForm = ({ initialData, courseId, chapterId }: ChapterA
     try {
       //
       await axios.patch(`/api/courses/${courseId}/chapters/${chapterId}`, values);
-      toast.success('Chapter updated');
+      toast.success('Cập nhật chương thành công!');
       toggleEdit();
       router.refresh();
     } catch {

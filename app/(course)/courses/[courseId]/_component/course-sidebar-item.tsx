@@ -18,12 +18,12 @@ interface CourseSidebarItemProps {
   label: string;
   id: string;
   isChapterNowCompleted: boolean;
-  userProgressPrevious: UserProgress;
+  /*   userProgressPrevious: UserProgress; */
   courseId: string;
   isLocked: boolean;
-  nextChapter: NextChapterWithLockChapter;
+  /*   nextChapter: NextChapterWithLockChapter; */
   position: number;
-  chapter: ChapterWithLockChapter;
+  /*   chapter: ChapterWithLockChapter; */
   lockChapter: LockChapter;
 }
 
@@ -31,12 +31,12 @@ export const CourseSidebarItem = ({
   label,
   id,
   isChapterNowCompleted,
-  userProgressPrevious,
+  /*   userProgressPrevious, */
   courseId,
   isLocked,
-  nextChapter,
+  /*   nextChapter, */
   lockChapter,
-  chapter,
+  /*   chapter, */
   position,
 }: CourseSidebarItemProps) => {
   const pathname = usePathname();
@@ -63,6 +63,7 @@ export const CourseSidebarItem = ({
   };
 
   const Icon = isLocked || firstChapter ? Lock : isChapterNowCompleted ? CheckCircle : PlayCircle;
+  console.log('renderDone');
 
   return (
     <button
@@ -78,12 +79,16 @@ export const CourseSidebarItem = ({
         isChapterNowCompleted && isActive && 'bg-emerald-200/20',
       )}
     >
-      <div className="flex items-center gap-x-2 py-4">
+      <div className="flex items-center  gap-x-2 py-4">
         <Icon
           size={22}
-          className={cn('text-slate-500', isActive && 'text-slate-700', isChapterNowCompleted && 'text-emerald-700')}
+          className={cn(
+            'text-slate-500 min-w-[22px] min-h-[22px]',
+            isActive && 'text-slate-700',
+            isChapterNowCompleted && 'text-emerald-700',
+          )}
         />
-        {label}
+        <div className="text-left">{label}</div>
       </div>
       <div
         className={cn(

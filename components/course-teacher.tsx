@@ -19,6 +19,7 @@ type CourseTeacherProps = {
 
 export const CourseTeacher: React.FC<CourseTeacherProps> = ({ items, ListCategory }) => {
   const [loading, setIsLoading] = useState(false);
+  const renderedNames = new Set();
   const router = useRouter();
   const onClick = async (id: string) => {
     try {
@@ -54,6 +55,12 @@ export const CourseTeacher: React.FC<CourseTeacherProps> = ({ items, ListCategor
       <span className="text-sm font-bold">Danh mục</span>
       <div className="mt-2">
         {ListCategory.map((item) => {
+          if (renderedNames.has(item.name)) {
+            // Nếu tên đã được render, bỏ qua item này
+            return null;
+          }
+          // Thêm tên vào set của các tên đã được render
+          renderedNames.add(item.name);
           return (
             <div key={item.id} className="flex items-center">
               <Categories items={[item]} />

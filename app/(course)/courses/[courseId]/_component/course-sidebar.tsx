@@ -32,44 +32,38 @@ export const CourseSidebar = async ({ course, progressCount }: CourseSidebarProp
       },
     },
   });
+  console.log('renderDone');
+  const chaptersWithDetails = await Promise.all(
+    course.chapters.map(async (chapter) => {
+      const { nextChapter, previousChapter, lockChapter } = await getChapter({
+        chapterId: chapter.id,
+        courseId: course.id,
+        profileId: profile.id,
+      });
+      return { ...chapter, nextChapter, previousChapter, lockChapter };
+    }),
+  );
 
   return (
     <div className="h-full border-r flex flex-col overflow-y-auto shadow-sm bg-white">
       <div className="p-8 flex flex-col border-b gap-y-4">
         <h1 className="font-semibold">{course.title}</h1>
         <CourseProgress value={progressCount} variant={progressCount == 100 ? 'success' : 'default'} size="default" />
-        {/* Check purchase and add progress */}
       </div>
       <div className="flex flex-col w-full">
-        {course.chapters.map(async (chapter) => {
-          let userProgressPrevious = null;
-          const { nextChapter, previousChapter, lockChapter } = await getChapter({
-            chapterId: chapter.id,
-            courseId: course.id,
-            profileId: profile.id,
-          });
-          if (previousChapter?.id) {
-            userProgressPrevious = await db.userProgress.findUnique({
-              where: {
-                profileId_chapterId: {
-                  chapterId: previousChapter?.id!,
-                  profileId: profile.id,
-                },
-              },
-            });
-          }
-
+        {chaptersWithDetails.map((chapter) => {
+          const { lockChapter } = chapter;
           return (
             <CourseSidebarItem
-              chapter={chapter}
+              /*           chapter={chapter} */
               lockChapter={lockChapter!}
               position={chapter.position}
-              nextChapter={nextChapter!}
+              /*              nextChapter={nextChapter!} */
               key={chapter.id}
               id={chapter.id}
               label={chapter.title}
               isChapterNowCompleted={!!chapter.userProgress?.[0]?.isCompleted}
-              userProgressPrevious={userProgressPrevious!}
+              /*          userProgressPrevious={userProgressPrevious!} */
               courseId={course.id}
               isLocked={!chapter.isFree && !purchase}
             />

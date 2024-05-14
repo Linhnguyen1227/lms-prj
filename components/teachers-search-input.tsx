@@ -8,23 +8,23 @@ import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { Input } from '@/components/ui/input';
 import { useDebounce } from '@/hooks/use-debounce';
 
-export const SearchTeacherInput = () => {
+interface SearchTeacherInputProps {
+  isStatisticsPage: boolean;
+  isContactPage: boolean;
+}
+
+export const SearchTeacherInput = ({ isStatisticsPage, isContactPage }: SearchTeacherInputProps) => {
   const [value, setValue] = useState('');
-
-  const debouncedValue = useDebounce(value);
-
   const searchParams = useSearchParams();
   const username = searchParams?.get('username');
+
+  const debouncedValue = useDebounce(value);
+  /*   const debouncedValue = useDebounce(value || username); */
 
   const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
-    if (searchParams) {
-      setValue(searchParams?.get('username')!);
-      return;
-    }
-
     const url = qs.stringifyUrl(
       {
         url: pathname as string,
@@ -35,7 +35,7 @@ export const SearchTeacherInput = () => {
       { skipEmptyString: true, skipNull: true },
     );
     router.push(url);
-  }, [debouncedValue, router, pathname, searchParams]);
+  }, [debouncedValue, router, pathname]);
 
   return (
     <div className="relative">
@@ -44,7 +44,7 @@ export const SearchTeacherInput = () => {
         onChange={(e) => setValue(e.target.value)}
         value={value}
         className="w-full md:w-[300px] pl-9 rounded-full bg-slate-100 focus-visible:ring-slate-200"
-        placeholder="Tìm kiếm giáo viên"
+        placeholder={isContactPage ? 'Tìm kiếm giáo viên' : 'Tìm kiếm học viên'}
       />
     </div>
   );

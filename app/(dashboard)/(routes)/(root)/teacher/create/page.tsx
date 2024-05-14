@@ -29,7 +29,7 @@ const CreatePage = () => {
     try {
       const response = await axios.post('/api/courses', values);
       router.push(`/teacher/courses/${response.data.id}`);
-      toast.success('Create courses success !');
+      toast.success('Tạo khóa học thành công !');
       // console.log(response.data.id);
     } catch {
       toast.error('Something went wrong');

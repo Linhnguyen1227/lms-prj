@@ -16,6 +16,7 @@ export const NavbarRoutes = () => {
   const isCoursePage = pathname?.includes('/courses');
   const isSearchPage = pathname === '/search';
   const isContactPage = pathname?.includes('/contact');
+  const isStatisticsPage = pathname?.includes('teacher/statistics');
 
   return (
     <>
@@ -24,9 +25,9 @@ export const NavbarRoutes = () => {
           <SearchInput />
         </div>
       )}
-      {isContactPage && (
+      {(isContactPage || isStatisticsPage) && (
         <div className="hidden md:block">
-          <SearchTeacherInput />
+          <SearchTeacherInput isContactPage={isContactPage!} isStatisticsPage={isStatisticsPage!} />
         </div>
       )}
       <div className="flex gap-x-2 ml-auto">
