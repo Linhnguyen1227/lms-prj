@@ -8,7 +8,7 @@ type CourseWithProgressWithCategory = Course & {
   chapters: Chapter[];
   progress: number | null;
 };
-export const maxDuration = 100;
+export const maxDuration = 60;
 
 type DashboardCourses = {
   completedCourses: CourseWithProgressWithCategory[];

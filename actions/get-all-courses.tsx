@@ -4,7 +4,7 @@ type CourseProps = {
   allCourses: Course[];
   coursePublished: Course[];
 };
-export const maxDuration = 100;
+export const maxDuration = 60;
 
 export const getAllCourses = async (): Promise<CourseProps> => {
   try {

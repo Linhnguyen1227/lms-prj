@@ -2,7 +2,7 @@ import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
 
-export const maxDuration = 100;
+export const maxDuration = 60;
 
 export async function POST(
     req: Request,
