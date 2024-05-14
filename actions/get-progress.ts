@@ -1,6 +1,6 @@
 import { db } from "@/lib/db";
 
-
+export const maxDuration = 300;
 export const getProgress = async (
   profileId: string,
   courseId: string,

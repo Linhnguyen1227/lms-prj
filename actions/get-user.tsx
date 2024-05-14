@@ -13,6 +13,7 @@ type User = {
   userPurchase: Purchase[];
   ListTeacher: TeacherWithCourse[];
 };
+export const maxDuration = 300;
 
 export const getUser = async ({ username }: { username: string }): Promise<User> => {
   try {
