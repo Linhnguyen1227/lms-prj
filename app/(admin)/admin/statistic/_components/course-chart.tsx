@@ -77,12 +77,14 @@ const CourseChart = ({ coursePurchase }: any) => {
             outerRadius={200}
             fill="#8884d8"
             dataKey="Tổng số người học"
+            valueKey={'Tổng số người học'}
+            nameKey={'name'}
           >
             {data.map((entry: { color: string | undefined }, index: any) => (
               <Cell key={`cell-${index}`} fill={entry.color} />
             ))}
           </Pie>
-          <Tooltip />
+          <Tooltip payload={data} />
         </PieChart>
       </ResponsiveContainer>
       <div className="flex  flex-wrap space-x-2">

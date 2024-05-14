@@ -23,11 +23,11 @@ const ComposedChartPage = ({ categories }: any) => {
         }}
       >
         <CartesianGrid stroke="#f5f5f5" />
-        <XAxis dataKey="name" scale="band" />
+        <XAxis dataKey="name" fontSize={12} padding={{ left: 20 }} />
         <YAxis type="number" />
         <Tooltip />
         <Legend />
-        <Bar dataKey="Tổng số khóa học" barSize={30} fill="#f59e0b" />
+        <Bar dataKey="Tổng số khóa học" barSize={60} fill="#f59e0b" />
       </ComposedChart>
     </ResponsiveContainer>
   );

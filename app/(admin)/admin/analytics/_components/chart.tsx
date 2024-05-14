@@ -1,6 +1,6 @@
 'use client';
 
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
 import { Card } from '@/components/ui/card';
 
@@ -22,12 +22,13 @@ export const Chart: React.FC<ChartProps> = ({ data, isPrice }: ChartProps) => {
             stroke="#888888"
             allowDecimals={false}
             fontSize={12}
-            tickLine={false}
-            axisLine={false}
+            tickLine={true}
+            axisLine={true}
             tickFormatter={(value) => {
               return isPrice ? `$${value}` : value;
             }}
           />
+          <Tooltip />
           <Bar dataKey="total" fill="#0369a1" radius={[4, 4, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
