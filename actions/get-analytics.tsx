@@ -5,7 +5,7 @@ type PurchaseWithCourse = Purchase & {
   course: Course;
 };
 
-export const maxDuration = 300;
+export const maxDuration = 100;
 
 const groupByCourse = (purchases: PurchaseWithCourse[]) => {
   const grouped: { [courseTitle: string]: number } = {};
