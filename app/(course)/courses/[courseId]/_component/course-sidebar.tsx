@@ -24,7 +24,7 @@ export const CourseSidebar = async ({ course, progressCount }: CourseSidebarProp
     return redirect('/');
   }
 
-  const purchase = await db.purchase.findUnique({
+  const purchase = db.purchase.findUnique({
     where: {
       profileId_courseId: {
         profileId: profile.id,
