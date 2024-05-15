@@ -20,9 +20,7 @@ const CourseLayout = async ({ children, params }: { children: React.ReactNode; p
         </div>
         <Separator />
       </div>
-      <main className=" h-full pt-[80px]">
-        <Suspense fallback={<Loading />}>{children}</Suspense>
-      </main>
+      <main className=" h-full pt-[80px]">{children}</main>
     </div>
   );
 };
