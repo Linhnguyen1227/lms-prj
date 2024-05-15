@@ -11,7 +11,6 @@ type ChapterWithLockChapter = Chapter & {
   LockChapter: LockChapter[];
 };
 
-export const maxDuration = 60;
 export const getChapter = async ({ profileId, courseId, chapterId }: GetChapterProps) => {
   try {
     const purchase = await db.purchase.findUnique({

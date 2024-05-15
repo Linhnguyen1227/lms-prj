@@ -22,12 +22,11 @@ const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId
     return redirect('/');
   }
 
-  const { chapter, course, attachments, nextChapter, userProgress, purchase, questions, previousChapter } =
-    await getChapter({
-      profileId: profile.id,
-      chapterId: params.chapterId,
-      courseId: params.courseId,
-    });
+  const { chapter, course, attachments, nextChapter, userProgress, purchase, questions } = await getChapter({
+    profileId: profile.id,
+    chapterId: params.chapterId,
+    courseId: params.courseId,
+  });
   if (!chapter || !course) {
     return redirect('/');
   }

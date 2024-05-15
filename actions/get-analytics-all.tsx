@@ -8,8 +8,6 @@ type UserWithCourse = Profile & {
   course: Course;
 };
 
-export const maxDuration = 60;
-
 const groupByCourse = (purchases: PurchaseWithCourse[]) => {
   const grouped: { [courseTitle: string]: number } = {};
 

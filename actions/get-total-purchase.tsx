@@ -4,7 +4,6 @@ interface getTotalPurchaseProps {
   id: string;
   username?: string;
 }
-export const maxDuration = 60;
 export const getTotalPurchase = async ({ id, username }: getTotalPurchaseProps) => {
   try {
     const totalPurchase = await db.purchase.count({

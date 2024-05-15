@@ -24,7 +24,7 @@ export const CourseSidebar = async ({ course, progressCount }: CourseSidebarProp
     return redirect('/');
   }
 
-  const purchase = db.purchase.findUnique({
+  const purchase = await db.purchase.findUnique({
     where: {
       profileId_courseId: {
         profileId: profile.id,
@@ -55,15 +55,12 @@ export const CourseSidebar = async ({ course, progressCount }: CourseSidebarProp
           const { lockChapter } = chapter;
           return (
             <CourseSidebarItem
-              /*           chapter={chapter} */
               lockChapter={lockChapter!}
               position={chapter.position}
-              /*              nextChapter={nextChapter!} */
               key={chapter.id}
               id={chapter.id}
               label={chapter.title}
               isChapterNowCompleted={!!chapter.userProgress?.[0]?.isCompleted}
-              /*          userProgressPrevious={userProgressPrevious!} */
               courseId={course.id}
               isLocked={!chapter.isFree && !purchase}
             />

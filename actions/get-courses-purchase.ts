@@ -14,7 +14,6 @@ type GetCourses = {
   title?: string;
   categoryId?: string;
 };
-export const maxDuration = 60;
 
 export const getCoursesPurchase = async ({
   profileId,
