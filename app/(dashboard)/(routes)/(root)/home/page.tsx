@@ -11,6 +11,9 @@ export default async function Dashboard() {
   const profile = await currentProfile();
 
   if (!profile) {
+    return false;
+  }
+  if (!profile) {
     return redirect('/');
   }
 
