@@ -28,7 +28,7 @@ export default async function Dashboard() {
           sublabel="khóa học"
         />
       </div>
-      <CoursesList items={[...coursesInProgress, ...completedCourses]} />
+      {/*       <CoursesList items={[...coursesInProgress, ...completedCourses]} /> */}
     </div>
   );
 }
