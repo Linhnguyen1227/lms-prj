@@ -32,7 +32,7 @@ const Dashboard = async () => {
           sublabel="khóa học"
         />
       </div>
-      <CoursesList items={courses} />
+      <CoursesList items={[...completedCourses, ...coursesInProgress]} />
     </div>
   );
 };
