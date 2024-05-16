@@ -5,8 +5,6 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { stripe } from "@/lib/stripe";
 import { currentProfile } from "@/lib/current-profile";
-import { getChapter } from "@/actions/get-chapters";
-import { Chapter } from "@prisma/client";
 
 export async function POST(
   req: Request,

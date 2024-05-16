@@ -11,7 +11,7 @@ type ChapterWithLockChapter = Chapter & {
   LockChapter: LockChapter[];
 };
 
-export const getChapter = async ({ profileId, courseId, chapterId }: GetChapterProps) => {
+/* export const getChapter = async ({ profileId, courseId, chapterId }: GetChapterProps) => {
   try {
     const purchase = await db.purchase.findUnique({
       where: {
@@ -110,6 +110,134 @@ export const getChapter = async ({ profileId, courseId, chapterId }: GetChapterP
         courseId: courseId,
       },
     });
+
+    return {
+      questions,
+      chapter,
+      course,
+      attachments,
+      nextChapter,
+      userProgress,
+      purchase,
+      previousChapter,
+      lockChapter,
+    };
+  } catch (error) {
+    console.log('[GET_CHAPTER]', error);
+    return {
+      questions: null,
+      chapter: null,
+      course: null,
+      attachments: [],
+      nextChapter: null,
+      userProgress: null,
+      userProgressPrevious: null,
+      purchase: null,
+      lockChapter: null,
+    };
+  }
+}; */
+
+export const getChapter = async ({ profileId, courseId, chapterId }: GetChapterProps) => {
+  try {
+    const [purchase, course, chapter] = await Promise.all([
+      db.purchase.findUnique({
+        where: {
+          profileId_courseId: {
+            profileId,
+            courseId,
+          },
+        },
+      }),
+      db.course.findUnique({
+        where: {
+          isPublished: true,
+          id: courseId,
+        },
+        select: {
+          price: true,
+        },
+      }),
+      db.chapter.findUnique({
+        where: {
+          id: chapterId,
+          isPublished: true,
+        },
+      }),
+    ]);
+
+    if (!chapter || !course) {
+      throw new Error('Chapter or course not found');
+    }
+
+    let attachments: Attachment[] = [];
+    let nextChapter: ChapterWithLockChapter | null = null;
+    let previousChapter: ChapterWithLockChapter | null = null;
+
+    if (purchase) {
+      [attachments, previousChapter] = await Promise.all([
+        db.attachment.findMany({
+          where: {
+            courseId: courseId,
+          },
+        }),
+        db.chapter.findFirst({
+          where: {
+            courseId: courseId,
+            isPublished: true,
+            position: {
+              lt: chapter?.position,
+            },
+          },
+          include: {
+            LockChapter: true,
+          },
+          orderBy: {
+            position: 'desc',
+          },
+        }),
+      ]);
+    }
+
+    if (chapter.isFree || purchase) {
+      nextChapter = await db.chapter.findFirst({
+        where: {
+          courseId: courseId,
+          isPublished: true,
+          position: {
+            gt: chapter?.position,
+          },
+        },
+        include: {
+          LockChapter: true,
+        },
+        orderBy: {
+          position: 'asc',
+        },
+      });
+    }
+
+    const [lockChapter, userProgress, questions] = await Promise.all([
+      db.lockChapter.findFirst({
+        where: {
+          id: `${chapterId}${profileId}`,
+        },
+      }),
+      db.userProgress.findUnique({
+        where: {
+          profileId_chapterId: {
+            profileId,
+            chapterId,
+          },
+        },
+      }),
+      db.question.findMany({
+        where: {
+          chapterId: chapterId,
+          courseId: courseId,
+        },
+      }),
+    ]);
 
     return {
       questions,

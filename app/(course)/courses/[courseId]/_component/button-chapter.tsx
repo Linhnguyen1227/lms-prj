@@ -20,7 +20,6 @@ export const ButtonChapter = ({ courseId, chapterId }: ButtonChapterProps) => {
     try {
       router.push(`/courses/${courseId}/chapters/${chapterId}`);
       setIsLoading(true);
-      console.log('loading', loading);
     } catch (error) {
       toast.error('Không thể chuyển đến trang bài học');
       setIsLoading(false);

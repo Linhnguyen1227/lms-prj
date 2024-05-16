@@ -15,7 +15,7 @@ const QuestionPage = async ({ params }: { params: { courseId: string; chapterId:
     return redirect('/');
   }
 
-  const { chapter, course, nextChapter, userProgress, purchase, questions } = await getChapter({
+  const { chapter, course, nextChapter, userProgress, questions } = await getChapter({
     profileId: profile.id,
     chapterId: params.chapterId,
     courseId: params.courseId,
@@ -24,8 +24,6 @@ const QuestionPage = async ({ params }: { params: { courseId: string; chapterId:
     return redirect('/');
   }
 
-  const isLocked = !chapter.isFree && !purchase;
-  const completeOnEnd = !!purchase && !userProgress?.isCompleted;
   const isQuestions = !!questions;
 
   return (
