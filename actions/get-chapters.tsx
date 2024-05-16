@@ -172,31 +172,13 @@ export const getChapter = async ({ profileId, courseId, chapterId }: GetChapterP
 
     let attachments: Attachment[] = [];
     let nextChapter: ChapterWithLockChapter | null = null;
-    let previousChapter: ChapterWithLockChapter | null = null;
 
     if (purchase) {
-      [attachments, previousChapter] = await Promise.all([
-        db.attachment.findMany({
-          where: {
-            courseId: courseId,
-          },
-        }),
-        db.chapter.findFirst({
-          where: {
-            courseId: courseId,
-            isPublished: true,
-            position: {
-              lt: chapter?.position,
-            },
-          },
-          include: {
-            LockChapter: true,
-          },
-          orderBy: {
-            position: 'desc',
-          },
-        }),
-      ]);
+      attachments = await db.attachment.findMany({
+        where: {
+          courseId: courseId,
+        },
+      });
     }
 
     if (chapter.isFree || purchase) {
@@ -247,7 +229,6 @@ export const getChapter = async ({ profileId, courseId, chapterId }: GetChapterP
       nextChapter,
       userProgress,
       purchase,
-      previousChapter,
       lockChapter,
     };
   } catch (error) {

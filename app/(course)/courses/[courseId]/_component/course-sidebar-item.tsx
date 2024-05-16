@@ -18,12 +18,9 @@ interface CourseSidebarItemProps {
   label: string;
   id: string;
   isChapterNowCompleted: boolean;
-  /*   userProgressPrevious: UserProgress; */
   courseId: string;
   isLocked: boolean;
-  /*   nextChapter: NextChapterWithLockChapter; */
   position: number;
-  /*   chapter: ChapterWithLockChapter; */
   lockChapter: LockChapter;
 }
 
@@ -31,19 +28,15 @@ export const CourseSidebarItem = ({
   label,
   id,
   isChapterNowCompleted,
-  /*   userProgressPrevious, */
   courseId,
   isLocked,
-  /*   nextChapter, */
   lockChapter,
-  /*   chapter, */
   position,
 }: CourseSidebarItemProps) => {
   const pathname = usePathname();
   const isActive = pathname?.includes(id);
   const router = useRouter();
   const firstChapter = lockChapter?.isLocked && position !== 1;
-  /*   console.log('lockChapter?.isLocked', lockChapter?.isLocked, chapter.title); */
   console.log('lockChapter', lockChapter);
 
   const onClick = () => {

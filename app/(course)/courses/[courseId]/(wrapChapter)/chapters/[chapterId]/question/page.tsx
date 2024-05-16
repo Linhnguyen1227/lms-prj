@@ -4,8 +4,6 @@ import { getChapter } from '@/actions/get-chapters';
 import { currentProfile } from '@/lib/current-profile';
 
 import { Separator } from '@/components/ui/separator';
-import { Banner } from '@/components/banner';
-import { CourseProgressButton } from '../_components/course-progress-button';
 import ListQuestionPage from './_components/list_question';
 
 const QuestionPage = async ({ params }: { params: { courseId: string; chapterId: string } }) => {

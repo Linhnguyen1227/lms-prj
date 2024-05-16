@@ -35,12 +35,12 @@ export const CourseSidebar = async ({ course, progressCount }: CourseSidebarProp
   console.log('renderDone');
   const chaptersWithDetails = await Promise.all(
     course.chapters.map(async (chapter) => {
-      const { nextChapter, previousChapter, lockChapter } = await getChapter({
+      const { nextChapter, lockChapter } = await getChapter({
         chapterId: chapter.id,
         courseId: course.id,
         profileId: profile.id,
       });
-      return { ...chapter, nextChapter, previousChapter, lockChapter };
+      return { ...chapter, nextChapter, lockChapter };
     }),
   );
 
