@@ -6,18 +6,19 @@ import { CoursesList } from '@/components/courses-list';
 
 import { currentProfile } from '@/lib/current-profile';
 import { InfoCard } from '@/components/infor-card';
+import { getCourses } from '@/actions/get-courses';
 
-export default async function Dashboard() {
+const Dashboard = async () => {
   const profile = await currentProfile();
 
-  if (!profile) {
-    return false;
-  }
   if (!profile) {
     return redirect('/');
   }
 
   const { completedCourses, coursesInProgress } = await getDashboardCourses(profile.id);
+  const courses = await getCourses({
+    profileId: profile?.id,
+  });
 
   return (
     <div className="p-6 space-y-4">
@@ -31,7 +32,9 @@ export default async function Dashboard() {
           sublabel="khóa học"
         />
       </div>
-      <CoursesList items={[...coursesInProgress, ...completedCourses]} />
+      <CoursesList items={courses} />
     </div>
   );
-}
+};
+
+export default Dashboard;
