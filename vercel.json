@@ -3,7 +3,7 @@
       "app/api/**/*": {
         "maxDuration": 30
       },
-      "actions/*": {
+      "actions/*/.js": {
         "maxDuration": 30
       }
     }
