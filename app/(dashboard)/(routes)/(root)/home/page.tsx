@@ -7,6 +7,7 @@ import { CoursesList } from '@/components/courses-list';
 import { currentProfile } from '@/lib/current-profile';
 import { InfoCard } from '@/components/infor-card';
 import { getCourses } from '@/actions/get-courses';
+import axios from 'axios';
 
 const Dashboard = async () => {
   const profile = await currentProfile();
@@ -19,7 +20,6 @@ const Dashboard = async () => {
   const courses = await getCourses({
     profileId: profile?.id,
   });
-
   return (
     <div className="p-6 space-y-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

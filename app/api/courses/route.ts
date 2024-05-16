@@ -69,9 +69,6 @@ export async function GET( req: Request) {
         }
       }
     });
-
-  
-
     const courses = purchasedCourses.map((purchase) => purchase.course) as CourseWithProgressWithCategory[];
 
     for (let course of courses) {
@@ -82,7 +79,7 @@ export async function GET( req: Request) {
     const completedCourses = courses.filter((course) => course.progress === 100);
     const coursesInProgress = courses.filter((course) => (course.progress ?? 0) < 100);
     return NextResponse.json({ completedCourses,
-      coursesInProgress,});
+      coursesInProgress});
   } catch (error) {
     console.log("[COURSES]", error);
     return new NextResponse("Internal Error", { status: 500 });
