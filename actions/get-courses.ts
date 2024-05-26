@@ -1,4 +1,5 @@
 import { Category, Chapter, Course, Purchase } from "@prisma/client";
+import useSWR from 'swr'
 
 import { getProgress } from "@/actions/get-progress";
 import { db } from "@/lib/db";

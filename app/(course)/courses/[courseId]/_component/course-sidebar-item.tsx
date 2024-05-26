@@ -41,15 +41,13 @@ export const CourseSidebarItem = ({
 
   const onClick = () => {
     if (lockChapter?.isLocked === false) {
-      console.log(123);
-
+      console.log('lockChapterLocked === false');
       router.push(`/courses/${courseId}/chapters/${id}`);
     } else if (isChapterNowCompleted) {
-      console.log(456);
-
+      console.log('isChapterNowCompleted');
       router.push(`/courses/${courseId}/chapters/${id}`);
     } else {
-      console.log(789);
+      console.log('no-click');
 
       return false;
     }
