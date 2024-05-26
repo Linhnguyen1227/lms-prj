@@ -5,6 +5,7 @@ import Loading from '@/app/loading';
 import { currentProfile } from '@/lib/current-profile';
 import { NavbarRoutes } from '@/components/navbar-routes';
 import { Separator } from '@/components/ui/separator';
+export const maxDuration = 30;
 
 const CourseLayout = async ({ children, params }: { children: React.ReactNode; params: { courseId: string } }) => {
   const profile = await currentProfile();

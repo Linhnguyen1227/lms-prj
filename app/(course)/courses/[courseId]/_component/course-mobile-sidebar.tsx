@@ -4,6 +4,7 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
 import { CourseSidebar } from './course-sidebar';
 import { CourseWithChapter } from '@/type';
+export const maxDuration = 30;
 
 export const CourseMobileSidebar = ({ course, progressCount }: CourseWithChapter) => {
   return (

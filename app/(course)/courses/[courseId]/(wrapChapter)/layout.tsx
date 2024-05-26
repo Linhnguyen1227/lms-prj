@@ -7,6 +7,7 @@ import { getProgress } from '@/actions/get-progress';
 import { currentProfile } from '@/lib/current-profile';
 import { CourseNavbar } from '../_component/course-navbar';
 import { CourseSidebar } from '../_component/course-sidebar';
+export const maxDuration = 30;
 
 const CourseLayout = async ({ children, params }: { children: React.ReactNode; params: { courseId: string } }) => {
   const profile = await currentProfile();

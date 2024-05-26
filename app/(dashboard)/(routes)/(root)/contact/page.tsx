@@ -25,7 +25,7 @@ async function ContactPage({ searchParams }: SearchPageProps) {
 
   return (
     <div className="p-6 space-y-4">
-      <Accordion type="single" collapsible className="w-full">
+      <Accordion type="multiple" className="w-full">
         {ListTeacher.map((item, index) => {
           const ListCate = item?.courses?.map((course) => course.category);
           if (!ListCate) return null;
