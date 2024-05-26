@@ -5,6 +5,7 @@ import { currentProfile } from '@/lib/current-profile';
 
 import { ColumnsCoursesPage } from './_components/columns-courses';
 import { DataTableCourses } from './_components/data-table-courses';
+export const maxDuration = 30;
 
 const CoursesPage = async ({ params }: { params: { userId: string } }) => {
   const profile = await currentProfile();

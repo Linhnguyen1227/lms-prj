@@ -9,6 +9,7 @@ import { ButtonChapter } from './_component/button-chapter';
 import Link from 'next/link';
 import { Preview } from '@/components/preview';
 import { getTotalPurchase } from '@/actions/get-total-purchase';
+export const maxDuration = 30;
 
 const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
   const profile = await currentProfile();

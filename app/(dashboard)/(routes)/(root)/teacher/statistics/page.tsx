@@ -2,6 +2,7 @@ import { currentProfile } from '@/lib/current-profile';
 import { AnalyticsCourses } from '../analytics/_components/analytics-course';
 import { redirect } from 'next/navigation';
 import { getCoursesPurchase } from '@/actions/get-courses-purchase';
+export const maxDuration = 30;
 
 interface courseStatisticsPageProps {
   searchParams: {

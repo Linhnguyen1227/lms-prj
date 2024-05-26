@@ -3,6 +3,7 @@ import { Suspense } from 'react';
 import Loading from '@/app/loading';
 import { Navbar } from '../../_components/navbar';
 import { Sidebar } from '../../_components/sidebar';
+export const maxDuration = 30;
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (

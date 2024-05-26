@@ -7,6 +7,7 @@ import { Chart } from './_components/chart';
 import { currentProfile } from '@/lib/current-profile';
 import { getCourses } from '@/actions/get-courses';
 import { AnalyticsCourses } from './_components/analytics-course';
+export const maxDuration = 30;
 
 const AnalyticsPage = async () => {
   const profile = await currentProfile();

@@ -15,6 +15,7 @@ import { ChaptersForm } from '../_components/chapters-form';
 import { Banner } from '@/components/banner';
 import { Actions } from '../_components/actions';
 import { currentProfile } from '@/lib/current-profile';
+export const maxDuration = 30;
 
 const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
   const profile = await currentProfile();

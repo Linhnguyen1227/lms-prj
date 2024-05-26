@@ -10,6 +10,7 @@ import { DataCard } from './_components/data-card';
 import { Chart } from './_components/chart';
 import { getAllCourses } from '@/actions/get-all-courses';
 import { getAnalyticsAll } from '@/actions/get-analytics-all';
+export const maxDuration = 30;
 
 const AnalyticsAdminPage = async () => {
   const profile = await currentProfile();

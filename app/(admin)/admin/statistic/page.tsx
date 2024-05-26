@@ -4,6 +4,7 @@ import { currentProfile } from '@/lib/current-profile';
 
 import { DatePickerWithRange } from './_components/data-picker';
 import StatisticCoursePage from './_components/statistic-course-page';
+export const maxDuration = 30;
 
 const StatisticPage = async () => {
   const profile = await currentProfile();

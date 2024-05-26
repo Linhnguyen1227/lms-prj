@@ -3,6 +3,7 @@ import { Suspense } from 'react';
 import Loading from '@/app/loading';
 import { SidebarAdmin } from './(dashboard)/_components/sidebar-admin';
 import { NavbarAdminPage } from './(dashboard)/_components/navbar-admin';
+export const maxDuration = 30;
 
 const AdminPage = ({ children }: { children: React.ReactNode }) => {
   return (

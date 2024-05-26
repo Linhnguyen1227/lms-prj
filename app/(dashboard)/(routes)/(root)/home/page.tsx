@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { redirect } from 'next/navigation';
 import { CheckCircle, Clock } from 'lucide-react';
 
@@ -7,7 +8,7 @@ import { CoursesList } from '@/components/courses-list';
 import { currentProfile } from '@/lib/current-profile';
 import { InfoCard } from '@/components/infor-card';
 import { getCourses } from '@/actions/get-courses';
-import axios from 'axios';
+export const maxDuration = 30;
 
 const Dashboard = async () => {
   const profile = await currentProfile();

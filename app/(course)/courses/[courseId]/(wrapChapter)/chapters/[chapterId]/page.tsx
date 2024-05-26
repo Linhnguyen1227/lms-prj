@@ -14,6 +14,7 @@ import { CommentInput } from './_components/comment-input';
 import { CommentList } from './_components/comment-list';
 import { ExamButton } from './question/_components/exam-button';
 import { getChapter } from '@/actions/get-chapters';
+export const maxDuration = 30;
 
 const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId: string } }) => {
   const profile = await currentProfile();

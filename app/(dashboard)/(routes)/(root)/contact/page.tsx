@@ -6,7 +6,7 @@ import { currentProfile } from '@/lib/current-profile';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { UserAvatar } from '@/components/user-avatar';
 import { CourseTeacher } from '@/components/course-teacher';
-
+export const maxDuration = 30;
 interface SearchPageProps {
   searchParams: {
     username: string;

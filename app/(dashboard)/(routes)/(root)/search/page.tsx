@@ -8,6 +8,7 @@ import { getCourses } from '@/actions/get-courses';
 
 import { currentProfile } from '@/lib/current-profile';
 import { Categories } from '@/components/categories';
+export const maxDuration = 30;
 
 interface SearchPageProps {
   searchParams: {
