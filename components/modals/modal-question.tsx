@@ -58,13 +58,13 @@ const ModalQuestion = () => {
     try {
       await axios.post(`/api/courses/${data?.query?.courseId}/chapters/${data?.query?.chapterId}/question`, values);
       console.log(values);
-      toast.success('Create question successfully');
+      toast.success('Tạo câu hỏi thành công!');
       router.refresh();
       form.reset();
       handleClose();
     } catch (error) {
       console.log('Error: ' + error);
-      toast.error('Create question failed');
+      toast.error('Tạo câu hỏi thất bại!');
     }
   };
 

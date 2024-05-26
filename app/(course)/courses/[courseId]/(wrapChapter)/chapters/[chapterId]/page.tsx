@@ -1,7 +1,6 @@
 import { File } from 'lucide-react';
 import { redirect } from 'next/navigation';
 
-import { getChapter } from '@/actions/get-chapters';
 import { currentProfile } from '@/lib/current-profile';
 
 import { Separator } from '@/components/ui/separator';
@@ -14,6 +13,7 @@ import { CourseProgressButton } from './_components/course-progress-button';
 import { CommentInput } from './_components/comment-input';
 import { CommentList } from './_components/comment-list';
 import { ExamButton } from './question/_components/exam-button';
+import { getChapter } from '@/actions/get-chapters';
 
 const ChapterIdPage = async ({ params }: { params: { courseId: string; chapterId: string } }) => {
   const profile = await currentProfile();

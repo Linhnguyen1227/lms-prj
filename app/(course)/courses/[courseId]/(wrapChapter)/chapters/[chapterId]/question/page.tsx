@@ -1,10 +1,10 @@
 import { redirect } from 'next/navigation';
 
-import { getChapter } from '@/actions/get-chapters';
 import { currentProfile } from '@/lib/current-profile';
 
 import { Separator } from '@/components/ui/separator';
 import ListQuestionPage from './_components/list_question';
+import { getChapter } from '@/actions/get-chapters';
 
 const QuestionPage = async ({ params }: { params: { courseId: string; chapterId: string } }) => {
   const profile = await currentProfile();

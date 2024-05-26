@@ -15,7 +15,7 @@ const CourseLayout = async ({ children, params }: { children: React.ReactNode; p
   return (
     <div className="h-full">
       <div className="h-[80px] fixed inset-y-0 w-full z-50 text-right px-4">
-        <div className="flex justify-end items-center h-full ">
+        <div className="flex justify-end items-center h-full  bg-white">
           <NavbarRoutes />
         </div>
         <Separator />

@@ -17,9 +17,7 @@ const Dashboard = async () => {
   }
 
   const { completedCourses, coursesInProgress } = await getDashboardCourses(profile.id);
-  const courses = await getCourses({
-    profileId: profile?.id,
-  });
+
   return (
     <div className="p-6 space-y-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

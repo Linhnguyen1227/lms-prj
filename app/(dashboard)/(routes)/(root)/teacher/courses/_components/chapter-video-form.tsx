@@ -60,7 +60,7 @@ export const ChapterVideoForm = ({ initialData, courseId, chapterId }: ChapterVi
       <div className="font-medium flex items-center justify-between">
         Video bài học
         <Button onClick={toggleEdit} variant="ghost">
-          {isEditing && <>Cancel</>}
+          {isEditing && <>Hủy</>}
           {!isEditing && !initialData.videoUrl && (
             <>
               <PlusCircle className="h-4 w-4 mr-2" />
