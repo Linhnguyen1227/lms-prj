@@ -25,40 +25,42 @@ async function ContactPage({ searchParams }: SearchPageProps) {
 
   return (
     <div className="p-6 space-y-4">
-      <Accordion type="multiple" className="w-full">
-        {ListTeacher.map((item, index) => {
-          const ListCate = item?.courses?.map((course) => course.category);
-          if (!ListCate) return null;
-          return (
-            <AccordionItem key={index} value={`item-${index}`}>
-              <AccordionTrigger>
-                <div className="flex gap-x-4 justify-between items-center w-full">
-                  <div className="flex gap-x-4 items-center">
-                    <UserAvatar src={item.imageUrl} />
-                    {item.username}
+      {ListTeacher.map((item) => {
+        const ListCate = item?.courses?.map((course) => course.category);
+        if (!ListCate) return null;
+        return (
+          <div key={item.id}>
+            <Accordion type="multiple" className="w-full" defaultValue={[item.id]}>
+              <AccordionItem value={item.id}>
+                <AccordionTrigger>
+                  <div className="flex gap-x-4 justify-between items-center w-full">
+                    <div className="flex gap-x-4 items-center">
+                      <UserAvatar src={item.imageUrl} />
+                      {item.username}
+                    </div>
+                    <p className="font-normal text-sm">{item.courses.length} Khóa học</p>
                   </div>
-                  <p className="font-normal text-sm">{item.courses.length} Khóa học</p>
-                </div>
-              </AccordionTrigger>
-              <AccordionContent className="space-y-4">
-                <div className="space-y-2">
-                  <span className="font-medium flex">
-                    Tên:
-                    <p className="font-normal ml-2">{item.username}</p>
-                  </span>
-                  <span className="font-medium flex">
-                    Email:
-                    <p className="font-normal ml-2">{item.email}</p>
-                  </span>
-                </div>
-                <div className=" gap-4">
-                  <CourseTeacher items={item.courses} ListCategory={ListCate} />
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-          );
-        })}
-      </Accordion>
+                </AccordionTrigger>
+                <AccordionContent className="space-y-4">
+                  <div className="space-y-2">
+                    <span className="font-medium flex">
+                      Tên:
+                      <p className="font-normal ml-2">{item.username}</p>
+                    </span>
+                    <span className="font-medium flex">
+                      Email:
+                      <p className="font-normal ml-2">{item.email}</p>
+                    </span>
+                  </div>
+                  <div className=" gap-4">
+                    <CourseTeacher items={item.courses} ListCategory={ListCate} />
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </div>
+        );
+      })}
     </div>
   );
 }

@@ -73,6 +73,8 @@ export async function POST(req: Request) {
         }
       })
     })
+    console.log("đã mua khóa học");
+    
   } else {
     return new NextResponse(`Webhook Error: Unhandled event type ${event.type}`, { status: 200 })
   }

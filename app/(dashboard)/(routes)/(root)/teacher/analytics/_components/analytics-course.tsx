@@ -45,7 +45,8 @@ export const AnalyticsCourses = async ({ courses, searchParams }: AnalyticsCours
                         profileId: item.profile.id,
                       },
                       orderBy: {
-                        createdAt: 'asc',
+                        isCompleted: 'desc',
+                        /* createdAt: 'asc', */
                       },
                       include: {
                         chapter: true,

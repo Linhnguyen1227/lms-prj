@@ -46,7 +46,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
   /* 
   return redirect(`/courses/${course.id}/chapters/${course.chapters[0].id}`); */
   return (
-    <div className="space-y-2 px-8">
+    <div className="space-y-2 p-6">
       <h1 className="text-2xl font-bold pb-4">{course.title}</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 md:space-x-4 space-y-4 gap-x-2">
         <div className="aspect-video">
