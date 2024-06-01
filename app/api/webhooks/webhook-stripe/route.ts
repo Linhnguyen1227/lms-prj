@@ -56,6 +56,7 @@ export async function POST(req: Request) {
     })
 
     chapters.map(async(chapter) =>{
+      console.log('tạo các trang thái hoàn thành cho từng chương')
       return await db.userProgress.upsert({
         where:{
           profileId_chapterId: {
