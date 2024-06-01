@@ -67,10 +67,7 @@ export const getCoursesPurchase = async ({
       })
     );
 
-    return courses.map(course => ({
-      ...course,
-      progress: null,
-    }));
+    return coursesWithProgress
   } catch (error) {
     console.log("[GET_COURSES]", error);
     return [];

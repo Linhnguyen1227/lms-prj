@@ -41,6 +41,9 @@ export async function POST(req: Request) {
     if (!profileId || !courseId) {
       return new NextResponse(`Webhook Error: Missing metadata`, { status: 400 });
     }
+    console.log("profileId",profileId);
+    console.log("courseId",courseId);
+    
 
     await db.purchase.create({
       data: {

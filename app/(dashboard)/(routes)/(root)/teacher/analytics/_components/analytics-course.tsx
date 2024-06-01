@@ -54,7 +54,7 @@ export const AnalyticsCourses = async ({ courses, searchParams }: AnalyticsCours
                     });
                     // lọc ra các chapter của tường chương
                     const newListAnalytics = progressList.filter((item) => item.chapter.courseId === course.id);
-                    /*       console.log('newListAnalytics', newListAnalytics); */
+                    console.log('newListAnalytics', newListAnalytics);
 
                     return (
                       <Accordion
