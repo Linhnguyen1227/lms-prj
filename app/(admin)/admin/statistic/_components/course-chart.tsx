@@ -48,18 +48,36 @@ const renderCustomizedLabel = ({
   );
 };
 
+interface TooltipProps {
+  name: string;
+  price: string;
+  total: string;
+  color: string;
+}
+
 const CourseChart = ({ coursePurchase }: any) => {
   const data = coursePurchase.map((item: any) => {
     const color = randomColor();
     return {
       name: item.title,
       price: item.price,
-      'Tổng số người học': item.purchases.length,
+      total: item.purchases.length,
       color: color,
     };
   });
 
   console.log('courses', data);
+  const CustomTooltip = (playload: any) => {
+    if (playload) {
+      return (
+        <div className="bg-white p-4 shadow-lg rounded-lg">
+          <p className="text-lg font-semibold">{playload.payload[0]?.name}</p>
+          <p className="text-sm">Tổng số người học: {playload.payload[0]?.value}</p>
+        </div>
+      );
+    }
+    return null;
+  };
 
   return (
     <>
@@ -71,20 +89,20 @@ const CourseChart = ({ coursePurchase }: any) => {
             width="100%"
             cx="50%"
             cy="50%"
-            paddingAngle={3}
+            paddingAngle={1}
             labelLine={false}
             label={renderCustomizedLabel}
             outerRadius={200}
             fill="#8884d8"
-            dataKey="Tổng số người học"
-            valueKey={'Tổng số người học'}
+            dataKey={'total'}
+            valueKey={'total'}
             nameKey={'name'}
           >
             {data.map((entry: { color: string | undefined }, index: any) => (
               <Cell key={`cell-${index}`} fill={entry.color} />
             ))}
           </Pie>
-          <Tooltip payload={data} />
+          <Tooltip content={<CustomTooltip />} />
         </PieChart>
       </ResponsiveContainer>
       <div className="flex  flex-wrap space-x-2">

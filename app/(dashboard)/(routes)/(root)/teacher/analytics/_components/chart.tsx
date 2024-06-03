@@ -1,6 +1,6 @@
 'use client';
 
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
 import { Card } from '@/components/ui/card';
 
@@ -24,6 +24,7 @@ export const Chart = ({ data }: ChartProps) => {
             axisLine={false}
             tickFormatter={(value) => `$${value}`}
           />
+          <Tooltip />
           <Bar dataKey="total" fill="#0369a1" radius={[4, 4, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
